@@ -1,0 +1,22 @@
+{
+  "name": "bera-frontend",
+  "version": "0.0.1",
+  "description": "Frontend service for Bera App, a Kanban-like daily task management app for developers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pzij/bera-frontend.git"
+  },
+  "keywords": [
+    "management"
+  ],
+  "author": "Johnny Pan (pzij)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pzij/bera-frontend/issues"
+  },
+  "homepage": "https://github.com/pzij/bera-frontend#readme"
+}
