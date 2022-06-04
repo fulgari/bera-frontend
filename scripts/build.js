@@ -4,12 +4,13 @@ const inlineImage = require("esbuild-plugin-inline-image");
 
 esbuild
   .build({
-    entryPoints: ["./src/app.jsx"],
+    entryPoints: ["./src/app.tsx"],
     outfile: "./public/js/app.js",
     minify: true,
     bundle: true,
     loader: {
       ".js": "jsx",
+      ".tsx": "tsx",
     },
     plugins: [inlineImage()],
   })

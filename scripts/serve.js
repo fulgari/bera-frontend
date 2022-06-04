@@ -7,14 +7,24 @@ esbuild
       port: 9004,
       host: "localhost",
       servedir: "public",
+      onRequest: (args) => {
+        console.log("[serve] onRequest:", args);
+      },
     },
     {
-      entryPoints: ["./src/app.jsx"],
+      entryPoints: ["./src/app.tsx"],
       outfile: "./public/js/app.js",
       minify: true,
       bundle: true,
+      // watch: {
+      //   onRebuild(error, result) {
+      //     if (error) console.error("watch build failed:", error);
+      //     else console.log("watch build succeeded:", result);
+      //   },
+      // },
       loader: {
         ".js": "jsx",
+        ".tsx": "tsx",
       },
       // plugins: [inlineImage()],
     }
