@@ -1,0 +1,11 @@
+.cardWrap {
+  width: 100px;
+  height: 100px;
+  background-color: aqua;
+}
+
+.card {
+  width: 10px;
+  height: 10px;
+  background-color: wheat;
+}
