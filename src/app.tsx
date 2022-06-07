@@ -1,18 +1,28 @@
-import * as React from "react";
+import React from "react";
 import * as Server from "react-dom/server";
 import * as ReactDOM from "react-dom";
-import List from "./layout/List";
+import List from "./layout/List/List";
 import Card from "./components/Card/Card";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Home } from "./pages/Home/Home";
+import { Kanban } from "./pages/Kanban/Kanban";
 
-let h: string = 'esbuild';
 let App = () => {
   return (
     <List>
-      <li>{h}</li>
-      <li>{h}</li>
       <Card />
     </List>
   )
 };
+
 // console.log(Server.renderToString(<Greet />))
-ReactDOM.render(<App />, document.body);
+ReactDOM.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+      <Route path="home" element={<Home />} />
+      <Route path="kanban" element={<Kanban />} />
+    </Routes>
+  </BrowserRouter>
+  , document.body);
