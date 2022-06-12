@@ -1,0 +1,15 @@
+.entry {
+  margin: 0 auto;
+  max-width: 60vw;
+  padding: 1rem;
+  position: relative;
+}
+
+.canvas {
+  width: 500px;
+  max-width: 60vw;
+  height: 60vh;
+  background-color: lavender;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+}

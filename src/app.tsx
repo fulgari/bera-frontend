@@ -7,14 +7,25 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { Home } from "./pages/Home/Home";
 import { Kanban } from "./pages/Kanban/Kanban";
+import Basic from "./layout/Basic/Basic";
+import styles from "./styles/app.module.css";
 
 let App = () => {
   return (
-    <List>
-      <Card />
-    </List>
+    <Basic>
+      {/* <Card /> */}
+      <Entry />
+    </Basic>
   )
 };
+
+const Entry = () => {
+  return (
+    <div className={styles.entry}>
+      <div className={styles.canvas}></div>
+    </div>
+  )
+}
 
 // console.log(Server.renderToString(<Greet />))
 ReactDOM.render(

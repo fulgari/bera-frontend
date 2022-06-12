@@ -8,10 +8,6 @@ type ListLayoutProps = {
 export default function (props: ListLayoutProps) {
   const { children } = props;
   return (<div className={styles.listWrap}>
-    <nav className={styles.nav} >
-      <Link to="/">Home</Link>
-      <Link to="/kanban">Kanban</Link>
-    </nav>
     {children}
   </div>)
 }
