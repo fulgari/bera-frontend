@@ -9,6 +9,8 @@ import { Home } from "./pages/Home/Home";
 import { Kanban } from "./pages/Kanban/Kanban";
 import Basic from "./layout/Basic/Basic";
 import styles from "./styles/app.module.css";
+import Entry from "./components/Entry/Entry";
+import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
 let App = () => {
   return (
@@ -19,21 +21,17 @@ let App = () => {
   )
 };
 
-const Entry = () => {
-  return (
-    <div className={styles.entry}>
-      <div className={styles.canvas}></div>
-    </div>
-  )
-}
+const queryClient = new QueryClient();
 
 // console.log(Server.renderToString(<Greet />))
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="home" element={<Home />} />
-      <Route path="kanban" element={<Kanban />} />
-    </Routes>
-  </BrowserRouter>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="home" element={<Home />} />
+        <Route path="kanban" element={<Kanban />} />
+      </Routes>
+    </BrowserRouter>
+  </QueryClientProvider>
   , document.body);
