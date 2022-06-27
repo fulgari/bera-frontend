@@ -1,8 +1,11 @@
 .entry {
   margin: 0 auto;
-  max-width: 60vw;
-  padding: 1rem;
+  padding: 1rem 0;
   position: relative;
+  height: 100%;
+  overflow: auto;
+  width: 100%;
+  margin-top: 50px;
 }
 
 .canvas {
@@ -11,4 +14,5 @@
   background-color: lavender;
   border: 1px solid #ccc;
   margin: 0 auto;
+  height: 100vh;
 }

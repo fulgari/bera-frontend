@@ -8,9 +8,9 @@ import { useEffect } from "react";
 import { Home } from "./pages/Home/Home";
 import { Kanban } from "./pages/Kanban/Kanban";
 import Basic from "./layout/Basic/Basic";
-import styles from "./styles/app.module.css";
 import Entry from "./components/Entry/Entry";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import "./styles/app.module.css";
 
 let App = () => {
   return (
