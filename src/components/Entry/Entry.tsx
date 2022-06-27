@@ -21,11 +21,18 @@ export default function (props: EntryProps) {
 
   if (error) return "An error has occurred: " + (error as any).message;
 
-  console.log("data", data)
   return (<div className={styles.entry}>
     <div className={styles.canvas}>
-      {`$$$$$$$$$$`}
-      {JSON.stringify(data)}
+      {users.map(user => (
+        <li style={{ listStyle: "none" }}>
+          <div>
+            {user.username}
+          </div>
+          <div>
+            {user.email}
+          </div>
+        </li>
+      ))}
     </div>
   </div>)
 }
