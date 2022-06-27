@@ -4,7 +4,7 @@
   "description": "Frontend service for Bera App, a Kanban-like daily task management app for developers.",
   "main": "index.js",
   "scripts": {
-    "build_cli": ".\\node_modules\\.bin\\esbuild ./src/app.jsx --bundle --outfile=public/js/out.js",
+    "build_cli": ".\\node_modules\\.bin\\esbuild ./src/app.jsx --bundle --outdir=public/",
     "build": "ts-node ./scripts/build.ts",
     "start": "ts-node ./scripts/serve.ts",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -11,7 +11,7 @@ import { lessLoader } from "esbuild-plugin-less";
 esbuild
   .build({
     entryPoints: ["./src/app.tsx"],
-    outfile: "./public/js/app.js",
+    outdir: "./public/",
     minify: true,
     bundle: true,
     loader: {

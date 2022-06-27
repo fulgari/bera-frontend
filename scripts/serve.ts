@@ -20,7 +20,8 @@ liveServer.start({
 esbuild
   .build({
     entryPoints: ["./src/app.tsx"],
-    outfile: "./public/js/app.js",
+    // outfile: "./public/js/app.js",
+    outdir: "./public",
     minify: true,
     bundle: true,
     watch: true,
@@ -28,6 +29,7 @@ esbuild
       ".js": "jsx",
       ".tsx": "tsx",
       ".css": "css",
+      ".jpg": "file",
     },
     plugins: [inlineImage(), cssModulesPlugin(), lessLoader()],
   })
