@@ -27,16 +27,29 @@ export default function (props: EntryProps) {
 
   return (<div className={styles.entry}>
     <div className={styles.canvas}>
-      {todos.map(todo => (
+      <div className={styles.colLeft}>
+        {todos.map(todo => (
+          <li style={{ listStyle: "none", display: 'flex' }}>
+            <div style={{ marginRight: "1em" }}>
+              {todo.title}
+            </div>
+          </li>
+        ))}
+      </div>
+      <div className={styles.colCenter}>{todos.map(todo => (
         <li style={{ listStyle: "none", display: 'flex' }}>
           <div style={{ marginRight: "1em" }}>
             {todo.title}
           </div>
-          <div>
-            {todo.description}
+        </li>
+      ))}</div>
+      <div className={styles.colRight}>{todos.map(todo => (
+        <li style={{ listStyle: "none", display: 'flex' }}>
+          <div style={{ marginRight: "1em" }}>
+            {todo.title}
           </div>
         </li>
-      ))}
+      ))}</div>
     </div>
   </div>)
 }

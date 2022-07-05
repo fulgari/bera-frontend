@@ -9,10 +9,18 @@
 }
 
 .canvas {
-  width: 500px;
-  max-width: 60vw;
   background-color: lavender;
   border: 1px solid #ccc;
-  margin: 0 auto;
+  margin: 0 2em;
   height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.colLeft,
+.colCenter,
+.colRight {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 16px;
 }
