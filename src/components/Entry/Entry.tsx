@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import styles from './Entry.module.css';
+import UpcomingDays from './UpcomingDays';
 
 type EntryProps = {};
 
@@ -21,20 +22,19 @@ export default function (props: EntryProps) {
   const today = new Date();
   const futureTodos = todos && todos.filter(todo => todo.dueDate);
 
-  if (isLoading) return "Loading...";
 
-  if (error) return "An error has occurred: " + (error as any).message;
+  // if (error) return "An error has occurred: " + (error as any).message;
 
-  return (<div className={styles.entry}>
+  return isLoading ? <div>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" style={{ margin: "auto", background: "#fff", display: 'block' }} width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <circle cx="50" cy="50" fill="none" stroke="#fee6e9" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+      </circle>
+    </svg>
+  </div> : (<div className={styles.entry}>
     <div className={styles.canvas}>
       <div className={styles.colLeft}>
-        {todos.map(todo => (
-          <li style={{ listStyle: "none", display: 'flex' }}>
-            <div style={{ marginRight: "1em" }}>
-              {todo.title}
-            </div>
-          </li>
-        ))}
+        <UpcomingDays />
       </div>
       <div className={styles.colCenter}>{todos.map(todo => (
         <li style={{ listStyle: "none", display: 'flex' }}>
