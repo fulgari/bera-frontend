@@ -11,8 +11,8 @@ export default function UpcomingDays(props: any) {
       Array.from({ length: UPCOMING_NUMBER }).map((_, i) => {
 
         return (
-          <div key={i}>
-            {substract(today(), i)}
+          <div key={UPCOMING_NUMBER - i}>
+            {substract(today(), UPCOMING_NUMBER - i)}
           </div>
         )
       }

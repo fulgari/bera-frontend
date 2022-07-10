@@ -11,6 +11,8 @@ import Basic from "./layout/Basic/Basic";
 import Entry from "./components/Entry/Entry";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import "./styles/app.module.css";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 let App = () => {
   return (
@@ -25,13 +27,15 @@ const queryClient = new QueryClient();
 
 // console.log(Server.renderToString(<Greet />))
 ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="home" element={<Home />} />
-        <Route path="kanban" element={<Kanban />} />
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="home" element={<Home />} />
+          <Route path="kanban" element={<Kanban />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
+  </Provider>
   , document.body);

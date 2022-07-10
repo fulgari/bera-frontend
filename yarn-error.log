@@ -1,0 +1,67 @@
+Arguments: 
+  D:\apps\nodejs\node.exe D:\apps\nvm\node_global\node_modules\yarn\bin\yarn.js add @blueprintjs/core
+
+PATH: 
+  D:\apps\python3\Scripts\;D:\apps\python3\;C:\Python27\;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;D:\apps\JDK\jdk-15.0.1\bin;D:\apps\JDK\jdk-15.0.1\jre\bin;D:\apps\AndroidSDK\platform-tools;node_global;D:\apps\VSCode\Microsoft VS Code\bin;D:\apps\nvm;D:\apps\nvm;D:\apps\nodejs;C:\Windows\system32\config\systemprofile\AppData\Roaming\npm;D:\apps\nvm\node_global;C:\Users\swanf\.cargo\bin;D:\apps\JDK\jdk-15.0.1\bin;D:\apps\JDK\jdk-15.0.1\jre\bin;node_global;D:\apps\hyper\resources\bin;D:\apps\Fiddler;D:\apps\nvm;D:\apps\nodejs;D:\apps\flutter3\flutter\bin;D:\Tencent\QQGameTempest\Hall.57795\
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  17.9.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, unlink 'D:\CODE\www\bera\bera-frontend\node_modules\@parcel\css-win32-x64-msvc\parcel-css.win32-x64-msvc.node'
+
+npm manifest: 
+  {
+    "name": "bera-frontend",
+    "version": "0.0.1",
+    "description": "Frontend service for Bera App, a Kanban-like daily task management app for developers.",
+    "main": "index.js",
+    "scripts": {
+      "build_cli": ".\\node_modules\\.bin\\esbuild ./src/app.jsx --bundle --outdir=public/",
+      "build": "ts-node ./scripts/build.ts",
+      "start": "ts-node ./scripts/serve.ts",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/pzij/bera-frontend.git"
+    },
+    "keywords": [
+      "management"
+    ],
+    "author": "Johnny Pan (pzij)",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/pzij/bera-frontend/issues"
+    },
+    "homepage": "https://github.com/pzij/bera-frontend#readme",
+    "dependencies": {
+      "@reduxjs/toolkit": "^1.8.2",
+      "esbuild": "^0.14.42",
+      "react": "^18.1.0",
+      "react-dom": "^18.1.0",
+      "react-query": "^3.39.1",
+      "react-redux": "^8.0.2",
+      "react-router-dom": "^6.3.0",
+      "redux": "^4.2.0"
+    },
+    "devDependencies": {
+      "@compodoc/live-server": "^1.2.3",
+      "esbuild-css-modules-plugin": "^2.2.16",
+      "esbuild-plugin-inline-image": "^0.0.8",
+      "esbuild-plugin-less": "^1.1.7",
+      "ts-node": "^10.8.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

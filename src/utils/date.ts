@@ -9,21 +9,23 @@ function getToday(): string {
 }
 
 function substract(dt: Date, value: number, unit: "d" | "m" | "y" = "d"): string {
+  const time = dt.getTime();
   switch (unit) {
     case "d":
-      dt.setDate(dt.getDate() - value);
+      dt.setTime(time - value * 24 * 60 * 60 * 1000);
       break;
     case "m":
-      dt.setMonth(dt.getMonth() - value);
+      dt.setTime(time - value * 30 * 24 * 60 * 60 * 1000);
       break;
     case "y":
-      dt.setFullYear(dt.getFullYear() - value);
+      dt.setTime(time - value * 365 * 24 * 60 * 60 * 1000);
+      // dt.setFullYear(dt.getFullYear() - value);
       break;
     default:
-      dt.setDate(dt.getDate() - value);
+      dt.setTime(time - value * 24 * 60 * 60 * 1000);
       break;
   }
-  const day = dt.getDay();
+  const day = dt.getDate();
   const month = new String(dt.getMonth() + 1).padStart(2, "0");
   const year = dt.getFullYear();
   return `${year}-${month}-${day}`;

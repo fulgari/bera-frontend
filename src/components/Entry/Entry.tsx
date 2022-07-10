@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import styles from './Entry.module.css';
+import PresentDay from '../PresentDay/PresentDay';
 import UpcomingDays from './UpcomingDays';
 
 type EntryProps = {};
@@ -36,13 +37,7 @@ export default function (props: EntryProps) {
       <div className={styles.colLeft}>
         <UpcomingDays />
       </div>
-      <div className={styles.colCenter}>{todos.map(todo => (
-        <li style={{ listStyle: "none", display: 'flex' }}>
-          <div style={{ marginRight: "1em" }}>
-            {todo.title}
-          </div>
-        </li>
-      ))}</div>
+      <div className={styles.colCenter}><PresentDay /></div>
       <div className={styles.colRight}>{todos.map(todo => (
         <li style={{ listStyle: "none", display: 'flex' }}>
           <div style={{ marginRight: "1em" }}>

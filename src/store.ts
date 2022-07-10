@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import presentDayReducer from "./components/PresentDay/PresentDaySlice";
 // ...
 
 export const store = configureStore({
   reducer: {
-    posts: postsReducer,
-    comments: commentsReducer,
-    users: usersReducer,
+    // todos: todoReducer,
+    presentDay: presentDayReducer,
   },
 });
 
