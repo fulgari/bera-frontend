@@ -1,4 +1,5 @@
 .entry {
+  background-color: #f7f7f7;
   margin: 0 auto;
   padding: 1rem 0;
   position: relative;
@@ -9,9 +10,7 @@
 }
 
 .canvas {
-  border: 1px solid #ccc;
-  margin: 0 2em;
-  height: 100vh;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }

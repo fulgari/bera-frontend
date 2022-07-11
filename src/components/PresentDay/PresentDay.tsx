@@ -11,7 +11,6 @@ export const PresentDay = (props) => {
   return (
     <div className={styles.presentDay}>
       <div className={styles.presentDayTitle}>
-        {JSON.stringify(store)}
         </div>
         <Button onClick={e=>{
           dispatch({type: 'presentDay/generate', payload: {
