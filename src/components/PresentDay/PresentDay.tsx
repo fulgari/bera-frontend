@@ -11,14 +11,17 @@ export const PresentDay = (props) => {
   return (
     <div className={styles.presentDay}>
       <div className={styles.presentDayTitle}>
-        </div>
-        <Button onClick={e=>{
-          dispatch({type: 'presentDay/generate', payload: {
-            title: "HI, "+ getToday(),
+        新建今日事项
+      </div>
+      <Button large={true} onClick={e => {
+        dispatch({
+          type: 'presentDay/generate', payload: {
+            title: "HI, " + getToday(),
             description: 'Win win is good',
             date: getToday()
-          } })
-        }}>{getToday()}</Button>
+          }
+        })
+      }}>{getToday()}</Button>
     </div>
   )
 }

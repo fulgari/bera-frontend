@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import styles from './Entry.module.css';
 import PresentDay from '../PresentDay/PresentDay';
-import UpcomingDays from './UpcomingDays';
+import UpcomingDays from '../UpcomingDays/UpcomingDays';
 
 type EntryProps = {};
 
