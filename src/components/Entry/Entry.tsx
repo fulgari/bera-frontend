@@ -64,19 +64,26 @@ export default function (props: EntryProps) {
     </div>
   ) : (
     <div className={styles.entry}>
-      <div
-        className={styles.canvas}
-        style={{
-          transform: showModal ? "translateY(-100%)" : undefined,
-        }}
-      >
-        <div className={styles.colLeft}>
+      <div className={styles.canvas}>
+        <div
+          className={styles.colLeft}
+          style={{
+            transform: showModal ? "translateY(-100%)" : undefined,
+            transition: "transform 0.3s ease-in",
+          }}
+        >
           <UpcomingDays />
         </div>
         <div className={styles.colCenter}>
           <PresentDay />
         </div>
-        <div className={styles.colRight}>
+        <div
+          className={styles.colRight}
+          style={{
+            transform: showModal ? "translateY(-100%)" : undefined,
+            transition: "transform 0.3s ease-in",
+          }}
+        >
           {todos.map((todo) => (
             <li style={{ listStyle: "none", display: "flex" }}>
               <div style={{ marginRight: "1em" }}>{todo.title}</div>
