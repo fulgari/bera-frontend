@@ -25,8 +25,8 @@ export default function (props: BasicLayoutProps) {
       <div className={styles.mainWrap}>
         <nav className={styles.nav} >
           <Link to="/">Bera</Link>
-          {/* <Link to="/home">Home</Link> */}
-          <Link to="/kanban">Kanban</Link>
+          {/* <Link to="/home">Home</Link>
+          <Link to="/kanban">Kanban</Link> */}
         </nav>
         {children}
       </div>

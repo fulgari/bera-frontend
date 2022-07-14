@@ -10,12 +10,11 @@ export default function UpcomingDays(props: any) {
     {
       Array.from({ length: UPCOMING_NUMBER }).map((_, i) => {
         return (
-          <div key={UPCOMING_NUMBER - i} className={styles.upcomingItem} style={{opacity: (i+2)/(UPCOMING_NUMBER + 10)}}>
+          <div key={UPCOMING_NUMBER - i} className={styles.upcomingItem} style={{ opacity: (i + 2) / (UPCOMING_NUMBER + 10) }}>
             {substract(today(), UPCOMING_NUMBER - i)}
           </div>
         )
       }
-
       )
     }
   </div>)

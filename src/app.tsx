@@ -32,8 +32,8 @@ ReactDOM.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="home" element={<Home />} />
-          <Route path="kanban" element={<Kanban />} />
+          {/* <Route path="home" element={<Home />} />
+          <Route path="kanban" element={<Kanban />} /> */}
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
