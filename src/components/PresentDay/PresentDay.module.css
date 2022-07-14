@@ -16,3 +16,12 @@
   padding-bottom: 36px;
   color: rgba(55, 53, 47, 0.7);
 }
+
+.animatedBtn {
+  transition: all 0.2s ease-in;
+}
+
+.animatedBtnActive {
+  transform: scale(5);
+  opacity: 0;
+}
