@@ -1,13 +1,13 @@
-import { Button } from '@blueprintjs/core';
-import React from 'react'
-import { connect, useDispatch, useSelector } from 'react-redux'
-import { getToday } from '../../utils/date';
-import styles from './PresentDay.module.css';
+import { Button } from "@blueprintjs/core";
+import React from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getToday } from "../../utils/date";
+import styles from "./PresentDay.module.css";
 
 export const PassDays = (props) => {
   const dispatch = useDispatch();
-  const store = useSelector(state => state);
-  console.log('PresentDay props', props, store)
+  const store = useSelector((state) => state);
+  console.log("PresentDay props", props, store);
   return (
     <div className={styles.presentDay}>
       {/* <div className={styles.presentDayTitle}>
@@ -21,8 +21,7 @@ export const PassDays = (props) => {
           } })
         }}>{getToday()}</Button> */}
     </div>
-  )
-}
-
+  );
+};
 
 export default PassDays;

@@ -20,7 +20,7 @@ let App = () => {
       {/* <Card /> */}
       <Entry />
     </Basic>
-  )
+  );
 };
 
 const queryClient = new QueryClient();
@@ -37,5 +37,6 @@ ReactDOM.render(
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
-  </Provider>
-  , document.body);
+  </Provider>,
+  document.body
+);

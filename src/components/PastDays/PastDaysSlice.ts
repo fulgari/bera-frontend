@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
- const passDaysSlice = createSlice({
+const passDaysSlice = createSlice({
   name: "passDays",
   initialState: [{ title: "", description: "", state: "", date: "", priority: "", dueDate: "" }],
   reducers: {
@@ -10,5 +10,5 @@ import { createSlice } from "@reduxjs/toolkit";
   },
 });
 
-export const { add } = passDaysSlice.actions
-export default passDaysSlice.reducer
+export const { add } = passDaysSlice.actions;
+export default passDaysSlice.reducer;
