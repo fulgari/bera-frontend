@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build_cli": ".\\node_modules\\.bin\\esbuild ./src/app.jsx --bundle --outdir=public/",
-    "build": "ts-node ./scripts/build.ts",
-    "start": "ts-node ./scripts/serve.ts",
+    "build:esbuild": "ts-node ./scripts/esbuild.build.ts",
+    "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
+    "start": "ts-node ./scripts/esbuild.serve.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/pzij/bera-frontend#readme",
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.8.2",
     "esbuild": "^0.14.42",
     "react": "^18.1.0",
@@ -37,6 +39,7 @@
     "esbuild-css-modules-plugin": "^2.2.16",
     "esbuild-plugin-inline-image": "^0.0.8",
     "esbuild-plugin-less": "^1.1.7",
+    "tailwindcss": "^3.1.6",
     "ts-node": "^10.8.1"
   }
 }
