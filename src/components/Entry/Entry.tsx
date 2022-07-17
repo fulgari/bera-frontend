@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import styles from "./Entry.module.css";
 import PresentDay from "../PresentDay/PresentDay";
 import UpcomingDays from "../UpcomingDays/UpcomingDays";
+import PassDays from "../PastDays/PassDays";
 
 type EntryProps = {};
 
@@ -25,9 +26,6 @@ export default function (props: EntryProps) {
         return res;
       })
   );
-
-  const today = new Date();
-  const futureTodos = todos && todos.filter((todo) => todo.dueDate);
 
   // if (error) return "An error has occurred: " + (error as any).message;
 
@@ -84,11 +82,12 @@ export default function (props: EntryProps) {
             transition: "transform 0.3s ease-in",
           }}
         >
-          {todos.map((todo) => (
+          {/* {todos.map((todo) => (
             <li style={{ listStyle: "none", display: "flex" }}>
               <div style={{ marginRight: "1em" }}>{todo.title}</div>
             </li>
-          ))}
+          ))} */}
+          <PassDays todos={todos}/>
         </div>
       </div>
     </div>

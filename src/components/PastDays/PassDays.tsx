@@ -1,26 +1,27 @@
-import { Button } from "@blueprintjs/core";
 import React from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { getToday } from "../../utils/date";
-import styles from "./PresentDay.module.css";
+import styles from "./passDays.module.css";
 
-export const PassDays = (props) => {
+type PassDaysProps = {
+  todos: any[];
+};
+export const PassDays = (props: PassDaysProps) => {
+  const { todos } = props;
   const dispatch = useDispatch();
   const store = useSelector((state) => state);
-  console.log("PresentDay props", props, store);
+  console.log("passDays props", props, store);
+
   return (
-    <div className={styles.presentDay}>
-      {/* <div className={styles.presentDayTitle}>
-        {JSON.stringify(store)}
-        </div>
-        <Button onClick={e=>{
-          dispatch({type: 'presentDay/generate', payload: {
-            title: "HI, "+ getToday(),
-            description: 'Win win is good',
-            date: getToday()
-          } })
-        }}>{getToday()}</Button> */}
-    </div>
+    <>
+      <div className={styles.passDays}>
+        {todos.map((todo) => (
+          <li className="flex rounded m-2 " style={{ listStyle: "none", display: "flex" }}>
+            <div style={{ marginRight: "1em" }}>{todo.title}</div>
+          </li>
+        ))}
+      </div>
+    </>
   );
 };
 
