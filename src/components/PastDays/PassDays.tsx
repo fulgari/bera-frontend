@@ -1,7 +1,6 @@
 import React from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { getToday } from "../../utils/date";
-import styles from "./passDays.module.css";
 
 type PassDaysProps = {
   todos: any[];
@@ -14,13 +13,11 @@ export const PassDays = (props: PassDaysProps) => {
 
   return (
     <>
-      <div className={styles.passDays}>
-        {todos.map((todo) => (
-          <li className="flex rounded m-2 " style={{ listStyle: "none", display: "flex" }}>
-            <div style={{ marginRight: "1em" }}>{todo.title}</div>
-          </li>
-        ))}
-      </div>
+      {todos.map((todo) => (
+        <li className="flex justify-center items-center rounded-md border-slate-200 border-2 mx-2 my-6 py-6 cursor-default">
+          <div>{todo.title}</div>
+        </li>
+      ))}
     </>
   );
 };
