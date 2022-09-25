@@ -5,6 +5,8 @@ import styles from "./Entry.module.css";
 import PresentDay from "../PresentDay/PresentDay";
 import UpcomingDays from "../UpcomingDays/UpcomingDays";
 import PassDays from "../PastDays/PassDays";
+import BasicDashboard from "../BasicDashboard/BasicDashboard";
+import BasicHeader from "../BasicHeader/BasicHeader";
 
 type EntryProps = {};
 
@@ -61,35 +63,40 @@ export default function (props: EntryProps) {
       </svg>
     </div>
   ) : (
-    <div className={styles.entry}>
-      <div className={styles.canvas}>
-        <div
-          className={styles.colLeft}
-          style={{
-            transform: showModal ? "translateY(-100%)" : undefined,
-            transition: "transform 0.3s ease-in",
-          }}
-        >
-          <UpcomingDays />
-        </div>
-        <div className={styles.colCenter}>
-          <PresentDay />
-        </div>
-        <div
-          className={styles.colRight}
-          style={{
-            transform: showModal ? "translateY(-100%)" : undefined,
-            transition: "transform 0.3s ease-in",
-          }}
-        >
-          {/* {todos.map((todo) => (
-            <li style={{ listStyle: "none", display: "flex" }}>
-              <div style={{ marginRight: "1em" }}>{todo.title}</div>
-            </li>
-          ))} */}
-          <PassDays todos={todos}/>
-        </div>
-      </div>
+    // <div className={styles.entry}>
+    //   <div className={styles.canvas}>
+    //     <div
+    //       className={styles.colLeft}
+    //       style={{
+    //         transform: showModal ? "translateY(-100%)" : undefined,
+    //         transition: "transform 0.3s ease-in",
+    //       }}
+    //     >
+    //       <UpcomingDays />
+    //     </div>
+    //     <div className={styles.colCenter}>
+    //       <PresentDay />
+    //     </div>
+    //     <div
+    //       className={styles.colRight}
+    //       style={{
+    //         transform: showModal ? "translateY(-100%)" : undefined,
+    //         transition: "transform 0.3s ease-in",
+    //       }}
+    //     >
+    //       {/* {todos.map((todo) => (
+    //         <li style={{ listStyle: "none", display: "flex" }}>
+    //           <div style={{ marginRight: "1em" }}>{todo.title}</div>
+    //         </li>
+    //       ))} */}
+    //       <PassDays todos={todos}/>
+    //     </div>
+    //   </div>
+    // </div>
+    <div className={styles.wrap}>
+      <BasicHeader />
+      <BasicDashboard />
+      
     </div>
   );
 }

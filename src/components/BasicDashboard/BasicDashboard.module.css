@@ -1,0 +1,19 @@
+.basicDashboardWrap {
+  width: 100%;
+
+}
+.basicDashboard {
+  display: grid;
+  margin-left: -12px;
+  margin-right: -12px;
+  grid-template-columns: repeat(6, 16.66666%);
+  min-height: 462px;
+  width: 100%;
+}
+
+.basicDashboardItem {
+  position: relative;
+  padding-top: 42px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
