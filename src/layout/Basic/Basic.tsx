@@ -16,7 +16,7 @@ export default function (props: BasicLayoutProps) {
             <img src={beraLogo} alt="logo" />
           </Link>
         </div>
-        <nav className={styles.siderNav}>
+        {/* <nav className={styles.siderNav}>
           <div className={styles.siderNavItem}>
             <div className={styles.siderNavItemIcon}></div>
             <div className={styles.siderNavItemText}>Dashboard</div>
@@ -29,7 +29,7 @@ export default function (props: BasicLayoutProps) {
             <div className={styles.siderNavItemIcon}></div>
             <div className={styles.siderNavItemText}>Goals</div>
           </div>
-        </nav>
+        </nav> */}
       </div>
       <div className={styles.mainWrap}>
         {/* <nav className={styles.nav}>

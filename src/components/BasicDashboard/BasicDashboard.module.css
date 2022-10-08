@@ -6,7 +6,7 @@
   display: grid;
   margin-left: -12px;
   margin-right: -12px;
-  grid-template-columns: repeat(6, 16.66666%);
+  grid-template-columns: repeat(5, 20%);
   min-height: 462px;
   width: 100%;
 }

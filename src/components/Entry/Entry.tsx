@@ -31,7 +31,7 @@ export default function (props: EntryProps) {
 
   // if (error) return "An error has occurred: " + (error as any).message;
 
-  return isLoading ? (
+  return !isLoading ? (
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
