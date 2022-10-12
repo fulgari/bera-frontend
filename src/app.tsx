@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { Home } from "./pages/Home/Home";
 import { Kanban } from "./pages/Kanban/Kanban";
 import Basic from "./layout/Basic/Basic";
-import Entry from "./components/Entry/Entry";
+import Main from "./components/Main/Main";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import "./styles/app.module.css";
 import { Provider } from "react-redux";
@@ -18,7 +18,7 @@ let App = () => {
   return (
     <Basic>
       {/* <Card /> */}
-      <Entry />
+      <Main />
     </Basic>
   );
 };

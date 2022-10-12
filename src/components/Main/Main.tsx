@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "react-query";
-import styles from "./Entry.module.css";
+import styles from "./Main.module.css";
 import PresentDay from "../PresentDay/PresentDay";
 import UpcomingDays from "../UpcomingDays/UpcomingDays";
 import PassDays from "../PastDays/PassDays";
 import BasicDashboard from "../BasicDashboard/BasicDashboard";
 import BasicHeader from "../BasicHeader/BasicHeader";
 
-type EntryProps = {};
+type MainProps = {};
 
-export default function (props: EntryProps) {
+export default function (props: MainProps) {
   const showModal = useSelector((state: any) => state.presentDay.toggle.showModal);
 
   const {
