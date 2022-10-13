@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./BasicDashboardItem.module.css";
 
 export const dayMap = {
@@ -10,6 +10,7 @@ export const dayMap = {
     "5": "Sat",
     "6": "Sun",
 }
+
 type BasicDashboardItemProps = {
     index: number;
 }
@@ -22,9 +23,31 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
     const itemDate = new Date(anchorMilli + index * 60 * 60 * 1000 * 24);
     const dayInMonth = itemDate.getDate();
     const month = itemDate.toLocaleString("en-GB", { month: "short" });
-    console.log("Basic", date, itemDate, dayInMonth)
+
+    const [todos, setTodos] = useState([""]);
+
+    useEffect(() => {
+        console.log('todos', todos)
+    }, [todos])
+
     return (
-        <div>{day === index ? "*" : ""} {month} {dayInMonth}, {dayMap[index]} </div>
+        <div>
+            <div className={styles.itemTitle + (day === ((index + 1) % 7) ? (" " + styles.highlight) : "")} >{month} {dayInMonth}, {dayMap[index]} </div>
+            <div className={styles.itemContentWrap}>
+                {todos.map((item, index) => {
+                    return (
+                        <input className={styles.input} onChange={e => {
+                            console.log('e.target', e)
+                            setTodos(prev => {
+                                let a = [...prev];
+                                a[index] = e.target.value || "";
+                                return a;
+                            })
+                        }} />
+                    )
+                })}
+            </div>
+        </div>
     )
 }
 
