@@ -1,0 +1,9 @@
+
+.input {
+    width: 100%;
+    border-bottom: solid 1px #d0d0d0;
+}
+
+.input:focus {
+    outline: dashed 1px #202020;
+}

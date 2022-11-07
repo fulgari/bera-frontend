@@ -9,7 +9,7 @@
     "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
     "serve:esbuild": "ts-node ./scripts/esbuild.serve.ts",
     "serve:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css  --watch --minify",
-    "dev": "npm run serve:css && npm run serve:esbuild",
+    "dev": "npm run serve:css & npm run serve:esbuild",
     "start": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

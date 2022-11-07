@@ -7,6 +7,8 @@ Bera App, a Kanban-like weekly task management application for developers.
 - React
 - ESBuild
 - Redux
+- TailwindCSS
+- CSS Modules
 
 # References
 

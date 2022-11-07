@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import TaskInput from '../TaskInput/TaskInput';
 import styles from "./BasicDashboardItem.module.css";
 
 export const dayMap = {
@@ -35,16 +36,7 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
             <div className={styles.itemTitle + (day === ((index + 1) % 7) ? (" " + styles.highlight) : "")} >{month} {dayInMonth}, {dayMap[index]} </div>
             <div className={styles.itemContentWrap}>
                 {todos.map((item, index) => {
-                    return (
-                        <input className={styles.input} onChange={e => {
-                            console.log('e.target', e)
-                            setTodos(prev => {
-                                let a = [...prev];
-                                a[index] = e.target.value || "";
-                                return a;
-                            })
-                        }} />
-                    )
+                    return (<TaskInput setTodos={setTodos} index={index} />)
                 })}
             </div>
         </div>
