@@ -1,6 +1,6 @@
 # Bera-frontend
 
-Frontend service for Bera App, a Kanban-like daily task management app for developers.
+Bera App, a Kanban-like weekly task management application for developers.
 
 # Tech Stack
 
