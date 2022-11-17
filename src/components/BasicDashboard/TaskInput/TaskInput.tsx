@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../BasicDashboardSlice';
 import styles from "./TaskInput.module.css";
 import { useEffect } from 'react';
 
 function TaskInput(props: any) {
-    const { setTodos, index, date } = props;
+    const { setTodos, path, date } = props;
 
-    const todos = useSelector((state:any) => state.basicDashboard.todos);
+    const [todoId, setTodoId] = useState<string|null>(null);
+
+    const todos = useSelector((state: any) => state.basicDashboard.todos);
     const dispatch = useDispatch();
-
+    const [value, setValue] = useState("")
 
     useEffect(() => {
         console.log("TODOS, ", todos)
@@ -17,25 +19,43 @@ function TaskInput(props: any) {
 
     return (
         <input
+            key={path}
             className={styles.input}
+            value={value}
             onChange={e => {
                 console.log('e.target', e)
-                setTodos(prev => {
-                    let a = [...prev];
-                    a[index] = e.target.value || "";
-                    return a;
-                })
+                setValue(e.target.value)
             }}
             onBlur={e => {
-                const newTodo = {
-                    title: e.target.value,
-                    description: "",
-                    state: "",
-                    date: date,
-                    priority: 1,
-                    dueDate: ""
+                if (value === "") return;
+                if (todoId) {
+                    const newTodo = {
+                        id: todoId,
+                        title: e.target.value,
+                    }
+                    dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
+                } else {
+                    const tdId = new Date().getTime().toString(32);
+                    const newTodo = {
+                        id: tdId,
+                        title: e.target.value,
+                        description: "",
+                        state: "",
+                        date: date,
+                        priority: 1,
+                        dueDate: ""
+                    }
+                    setTodoId(tdId);
+                    dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
                 }
-                dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
+
+                // if (e.target.value !== value) {
+                //     setTodos(prev => {
+                //         let a = [...prev];
+                //         a[index] = e.target.value || "";
+                //         return a;
+                //     })
+                // }
             }}
         />
     )

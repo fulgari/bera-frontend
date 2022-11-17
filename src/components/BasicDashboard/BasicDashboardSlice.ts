@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-type todoRecordType = { title: string, description: string, state: string, date: string, priority: string, dueDate: string };
+type todoRecordType = { id: string, title: string, description: string, state: string, date: string, priority: string, dueDate: string };
 
 const basicDashboardSlice = createSlice({
     name: "basicDashboard",
@@ -19,8 +19,16 @@ const basicDashboardSlice = createSlice({
             // }
             state.todos = [...state.todos, action.payload];
         },
+        updateTodo: (state, action) => {
+            const {payload} = action;
+            const todoIndex = state.todos.findIndex(todo => todo.id === payload.id);
+            if(todoIndex !== -1) {
+                const todo = state.todos[todoIndex];
+                state.todos.splice(todoIndex, 1, {...todo, ...payload});
+            }
+        }
     },
 });
 
-export const { addTodo } = basicDashboardSlice.actions;
+export const { addTodo, updateTodo } = basicDashboardSlice.actions;
 export default basicDashboardSlice.reducer;

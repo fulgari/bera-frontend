@@ -35,8 +35,8 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
         <div>
             <div className={styles.itemTitle + (day === ((index + 1) % 7) ? (" " + styles.highlight) : "")} >{month} {dayInMonth}, {dayMap[index]} </div>
             <div className={styles.itemContentWrap}>
-                {todos.map((item, index) => {
-                    return (<TaskInput setTodos={setTodos} index={index} />)
+                {todos.map((item, order) => {
+                    return (<TaskInput setTodos={setTodos} path={[index, order]} />)
                 })}
             </div>
         </div>
