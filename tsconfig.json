@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "target": "esnext",
+        "module": "commonjs",
+        "jsxFragmentFactory": "Fragment",
+        "esModuleInterop":true
+    },
+    "include": ["src/**/*", "globals.d.ts"],
+}
