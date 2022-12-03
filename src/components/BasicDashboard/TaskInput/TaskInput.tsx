@@ -7,15 +7,12 @@ import { useEffect } from 'react';
 function TaskInput(props: any) {
     const { setTodos, path, date } = props;
 
-    const [todoId, setTodoId] = useState<string|null>(null);
+    const [todoId, setTodoId] = useState<string | null>(null);
 
     const todos = useSelector((state: any) => state.basicDashboard.todos);
     const dispatch = useDispatch();
     const [value, setValue] = useState("")
 
-    useEffect(() => {
-        console.log("TODOS, ", todos)
-    }, [todos])
 
     return (
         <input
@@ -35,15 +32,19 @@ function TaskInput(props: any) {
                     }
                     dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
                 } else {
-                    const tdId = new Date().getTime().toString(32);
+                    const ts = new Date().getTime();
+                    const tdId = ts.toString(32);
                     const newTodo = {
                         id: tdId,
-                        title: e.target.value,
-                        description: "",
-                        state: "",
                         date: date,
-                        priority: 1,
-                        dueDate: ""
+                        listId: null,
+                        note: null,
+                        text: e.target.value,
+                        done: false,
+                        updatedAt: ts.toString(),
+                        createdAt: ts.toString(),
+                        isMD: null,
+                        tags: null
                     }
                     setTodoId(tdId);
                     dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
