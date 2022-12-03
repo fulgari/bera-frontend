@@ -33,8 +33,8 @@ export default function (props: MainProps) {
   ) : (
     <div className={styles.wrap}>
       <BasicHeader />
-      <BasicDashboard />
-      
+      {/* TODO: 做成动态的数据 */}
+      <BasicDashboard from={"2022-12-01"} to={"2022-12-31"} /> 
     </div>
   );
 }

@@ -27,10 +27,6 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
 
     const [todos, setTodos] = useState([""]);
 
-    useEffect(() => {
-        console.log('todos', todos)
-    }, [todos])
-
     return (
         <div>
             <div className={styles.itemTitle + (day === ((index + 1) % 7) ? (" " + styles.highlight) : "")} >

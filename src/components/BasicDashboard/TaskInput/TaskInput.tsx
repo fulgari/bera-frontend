@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../BasicDashboardSlice';
+import { addTodo, TodoRecordType } from '../BasicDashboardSlice';
 import styles from "./TaskInput.module.css";
 import { useEffect } from 'react';
 
@@ -26,15 +26,15 @@ function TaskInput(props: any) {
             onBlur={e => {
                 if (value === "") return;
                 if (todoId) {
-                    const newTodo = {
+                    const newTodo: Partial<TodoRecordType> = {
                         id: todoId,
-                        title: e.target.value,
+                        text: e.target.value as string,
                     }
                     dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
                 } else {
                     const ts = new Date().getTime();
                     const tdId = ts.toString(32);
-                    const newTodo = {
+                    const newTodo: TodoRecordType = {
                         id: tdId,
                         date: date,
                         listId: null,

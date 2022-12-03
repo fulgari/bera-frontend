@@ -1,9 +1,10 @@
+import { isSimpleDate } from "./date"
 
-function verifyTodoPayload(todo: any) {
+function verifyTodoRecord(todo: any) {
     return !!todo
         && todo.id
         && todo.date
-        && /^\d{4}-\d{2}-\d{2}$/.test(todo.date)
+        && isSimpleDate(todo.date)
         && todo.note
         && typeof todo.done !== "undefined"
         && todo.updatedAt
@@ -11,5 +12,5 @@ function verifyTodoPayload(todo: any) {
 }
 
 export {
-    verifyTodoPayload
+    verifyTodoRecord
 }

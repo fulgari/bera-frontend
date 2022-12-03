@@ -1,16 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { verifyTodoPayload } from "../../utils/verify";
+import { verifyTodoRecord } from "../../utils/verify";
 
-type todoRecordType = { id: string, title: string, description: string, state: string, date: string, priority: string, dueDate: string };
+type TodoRecordType = {
+    id: string,
+    date: string,
+    listId: string | null,
+    note: string | null,
+    text: string,
+    done: boolean,
+    updatedAt: string,
+    createdAt: string,
+    isMD: boolean | null,
+    tags: string | null
+};
 
 const basicDashboardSlice = createSlice({
     name: "basicDashboard",
     initialState: {
-        todos: [] as todoRecordType[],
+        todos: [] as TodoRecordType[],
     },
     reducers: {
+        setupTodos: (state, action) => {
+            const todos: any[] = action.payload;
+            if (todos.every(todo => verifyTodoRecord(todo))) {
+                state.todos = action.payload;
+            }
+        },
         addTodo: (state, action) => {
-            if (verifyTodoPayload(action.payload)) {
+            if (verifyTodoRecord(action.payload)) {
                 state.todos = [...state.todos, action.payload];
                 console.log("[redux] addTodo, new state: ", state.todos);
             } else {
@@ -29,5 +46,6 @@ const basicDashboardSlice = createSlice({
     },
 });
 
+export type { TodoRecordType };
 export const { addTodo, updateTodo } = basicDashboardSlice.actions;
 export default basicDashboardSlice.reducer;

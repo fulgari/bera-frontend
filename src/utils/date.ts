@@ -31,4 +31,8 @@ function substract(dt: Date, value: number, unit: "d" | "m" | "y" = "d"): string
   return `${year}-${month}-${day}`;
 }
 
-export { today, getToday, substract };
+function isSimpleDate(date) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(date);
+}
+
+export { today, getToday, substract, isSimpleDate };
