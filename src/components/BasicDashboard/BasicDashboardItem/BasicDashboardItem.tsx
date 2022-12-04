@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { simplifyDate } from '../../../utils/date';
+import { genEmptyTodoRecord } from '../../../utils/gen';
+import { TodoRecordType } from '../BasicDashboardSlice';
 import TaskInput from '../TaskInput/TaskInput';
 import styles from "./BasicDashboardItem.module.css";
 
@@ -13,29 +17,34 @@ export const dayMap = {
 }
 
 type BasicDashboardItemProps = {
-    index: number;
+    itemIndex: number;
+    itemDate: Date;
 }
 function BasicDashboardItem(props: BasicDashboardItemProps) {
-    const { index } = props;
-    const date = new Date();
-    const milli = date.getTime();
-    const day = date.getDay(); // weekday
-    const anchorMilli = milli - (day - 1) * 60 * 60 * 1000 * 24;
-    const itemDate = new Date(anchorMilli + index * 60 * 60 * 1000 * 24);
+    const { itemIndex, itemDate } = props;
+
     const dayInMonth = itemDate.getDate();
     const month = itemDate.toLocaleString("en-GB", { month: "short" });
+    const currentDateString = simplifyDate(itemDate);
 
-    const [todos, setTodos] = useState([""]);
+    const todosAtDate: TodoRecordType[] = useSelector((state: any) => {
+        const todos = state.basicDashboard.todos
+        const todosAtDate = todos.filter(todorecord => todorecord.date === currentDateString);
+        return todosAtDate;
+    });
+
+    console.log("todos", todosAtDate, currentDateString);
 
     return (
         <div>
-            <div className={styles.itemTitle + (day === ((index + 1) % 7) ? (" " + styles.highlight) : "")} >
-                {month} {dayInMonth}, {dayMap[index]}
+            <div className={styles.itemTitle + (new Date().getDay() === ((itemIndex + 1) % 7) ? (" " + styles.highlight) : "")} >
+                {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
             <div className={styles.itemContentWrap}>
-                {todos.map((item, order) => {
-                    return (<TaskInput setTodos={setTodos} date={itemDate} path={[index, order]} />)
+                {todosAtDate && todosAtDate.map((todo, todoIndex) => {
+                    return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} />)
                 })}
+                <TaskInput todo={{}} date={currentDateString} path={[itemIndex, todosAtDate.length]} isLast={true} />
             </div>
         </div>
     )

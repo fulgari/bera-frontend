@@ -35,4 +35,13 @@ function isSimpleDate(date) {
   return /^\d{4}-\d{2}-\d{2}$/.test(date);
 }
 
-export { today, getToday, substract, isSimpleDate };
+/**
+ * Transforms Date object to yyyy-MM-dd string
+ * @param date 
+ * @returns 
+ */
+function simplifyDate(date) {
+  return `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
+}
+
+export { today, getToday, substract, isSimpleDate, simplifyDate };

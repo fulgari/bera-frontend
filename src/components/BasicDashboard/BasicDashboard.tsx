@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
 import styles from "./BasicDashboard.module.css";
 import BasicDashboardItem from "./BasicDashboardItem/BasicDashboardItem";
 
@@ -11,12 +12,14 @@ type BasicDashboardProps = {
 export default function (props: BasicDashboardProps) {
   const { from, to } = props;
 
+  const dispatch = useDispatch();
+
   const {
     isLoading,
     error,
     data: todos,
     isFetching,
-  } = useQuery("gettodos", () =>
+  } = useQuery("getTodosByPeriod", () =>
     fetch(`http://127.0.0.1:9001/api/todorecord/period/${from}/${to}`, {
       method: "GET",
     })
@@ -30,18 +33,28 @@ export default function (props: BasicDashboardProps) {
   useEffect(() => {
     if (!isLoading && !error) {
       console.log("[todos] this week: ", todos)
+      dispatch({ type: "basicDashboard/setupTodos", payload: todos })
     }
   }, [todos, isLoading, error])
 
+  const date = new Date();
+  const milli = date.getTime();
+  const day = date.getDay(); // weekday
+  const anchorMilli = milli - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
+
+  const startOfWeek = new Date(anchorMilli);
+  console.log("startOfWeek", startOfWeek, day - 1)
 
   return (
     <div className={styles.basicDashboardWrap}>
       <div className={styles.basicDashboard}>
-        {new Array(7).fill(0).map((_, i) => (
-          <div className={styles.basicDashboardItem}>
-            <BasicDashboardItem index={(i) % 7} />
-          </div>
-        ))}
+        {!isLoading
+          && !error
+          && (new Array(7).fill(0).map((_, i) => (
+            <div className={styles.basicDashboardItem}>
+              <BasicDashboardItem itemIndex={(i) % 7} itemDate={new Date(anchorMilli + i * 60 * 60 * 1000 * 24)} />
+            </div>
+          )))}
       </div>
     </div>
   );

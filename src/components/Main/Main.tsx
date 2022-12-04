@@ -9,6 +9,7 @@ type MainProps = {};
 
 export default function (props: MainProps) {
 
+  // deprecated
   const {
     isLoading,
     error,
@@ -25,8 +26,6 @@ export default function (props: MainProps) {
       })
   );
 
-  // if (error) return "An error has occurred: " + (error as any).message;
-
   return isLoading ? (
     <div className={styles.dotsBars}>
     </div>
@@ -34,7 +33,7 @@ export default function (props: MainProps) {
     <div className={styles.wrap}>
       <BasicHeader />
       {/* TODO: 做成动态的数据 */}
-      <BasicDashboard from={"2022-12-01"} to={"2022-12-31"} /> 
+      <BasicDashboard from={"2022-12-01"} to={"2022-12-02"} /> 
     </div>
   );
 }

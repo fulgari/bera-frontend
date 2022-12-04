@@ -1,39 +1,38 @@
-import React, { useMemo, useState } from 'react'
+import React, { InputHTMLAttributes, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo, TodoRecordType } from '../BasicDashboardSlice';
 import styles from "./TaskInput.module.css";
 import { useEffect } from 'react';
+import { genEmptyTodoRecord } from '../../../utils/gen';
 
 function TaskInput(props: any) {
-    const { setTodos, path, date } = props;
+    const { path, date, todo, isLast } = props;
 
-    const [todoId, setTodoId] = useState<string | null>(null);
-
-    const todos = useSelector((state: any) => state.basicDashboard.todos);
+    const inputRef = useRef<any>();
     const dispatch = useDispatch();
-    const [value, setValue] = useState("")
 
+    useEffect(() => {
+        if (inputRef.current && todo.text) {
+            inputRef.current.value = todo.text;
+        }
+    }, [inputRef.current, todo.text])
 
     return (
         <input
+            ref={inputRef}
             key={path}
             className={styles.input}
-            value={value}
             onChange={e => {
                 console.log('e.target', e)
-                setValue(e.target.value)
+                if (inputRef.current) {
+                    inputRef.current.value = e.target.value;
+                }
             }}
             onBlur={e => {
-                if (value === "") return;
-                if (todoId) {
-                    const newTodo: Partial<TodoRecordType> = {
-                        id: todoId,
-                        text: e.target.value as string,
-                    }
-                    dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
-                } else {
+                if (inputRef.current?.value === "") return;
+                if (isLast) {
                     const ts = new Date().getTime();
-                    const tdId = ts.toString(32);
+                    const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
                     const newTodo: TodoRecordType = {
                         id: tdId,
                         date: date,
@@ -46,17 +45,14 @@ function TaskInput(props: any) {
                         isMD: null,
                         tags: null
                     }
-                    setTodoId(tdId);
                     dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
+                } else if (e.target.value) {
+                    const newTodo: Partial<TodoRecordType> = {
+                        id: todo.id,
+                        text: e.target.value as string,
+                    }
+                    dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
                 }
-
-                // if (e.target.value !== value) {
-                //     setTodos(prev => {
-                //         let a = [...prev];
-                //         a[index] = e.target.value || "";
-                //         return a;
-                //     })
-                // }
             }}
         />
     )

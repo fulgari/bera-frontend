@@ -5,7 +5,7 @@ function verifyTodoRecord(todo: any) {
         && todo.id
         && todo.date
         && isSimpleDate(todo.date)
-        && todo.note
+        && todo.text
         && typeof todo.done !== "undefined"
         && todo.updatedAt
         && todo.createdAt

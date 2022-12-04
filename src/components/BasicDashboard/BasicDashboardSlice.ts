@@ -22,6 +22,7 @@ const basicDashboardSlice = createSlice({
     reducers: {
         setupTodos: (state, action) => {
             const todos: any[] = action.payload;
+            console.log("setup todos",todos)
             if (todos.every(todo => verifyTodoRecord(todo))) {
                 state.todos = action.payload;
             }
