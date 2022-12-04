@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
+import { getUrl } from "../../utils/env";
 import styles from "./BasicDashboard.module.css";
 import BasicDashboardItem from "./BasicDashboardItem/BasicDashboardItem";
 
@@ -20,7 +21,7 @@ export default function (props: BasicDashboardProps) {
     data: todos,
     isFetching,
   } = useQuery("getTodosByPeriod", () =>
-    fetch(`http://127.0.0.1:9001/api/todorecord/period/${from}/${to}`, {
+    fetch(`${getUrl()}/api/todorecord/period/${from}/${to}`, {
       method: "GET",
     })
       .then((res) => res.json())

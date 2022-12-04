@@ -16,7 +16,7 @@
         "note": {
             "nullValue": null
         },
-        "updatedAt": {
+        "modifiedAt": {
             "timestampValue": "2022-10-06T15:22:16.369Z"
         },
         "text": {

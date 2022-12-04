@@ -6,7 +6,7 @@ import inlineImage from "esbuild-plugin-inline-image";
 import cssModulesPlugin from "esbuild-css-modules-plugin";
 import { lessLoader } from "esbuild-plugin-less";
 // import liveServer from "@compodoc/live-server";
-const liveServer = require("@compodoc/live-server");
+import liveServer from "@compodoc/live-server";
 
 liveServer.start({
   port: 9004,
@@ -31,6 +31,7 @@ esbuild
       ".css": "css",
       ".jpg": "file",
     },
+    define: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || "development") },
     plugins: [inlineImage(), cssModulesPlugin(), lessLoader()],
   })
   .then(() => console.log("⚡ Styles & Scripts Compiled! ⚡ "))

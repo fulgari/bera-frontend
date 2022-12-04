@@ -7,7 +7,7 @@
     "build_cli": ".\\node_modules\\.bin\\esbuild ./src/app.jsx --bundle --outdir=public/",
     "build:esbuild": "ts-node ./scripts/esbuild.build.ts",
     "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
-    "serve:esbuild": "ts-node ./scripts/esbuild.serve.ts",
+    "serve:esbuild": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ts",
     "serve:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css  --watch --minify",
     "dev": "npm run serve:css & npm run serve:esbuild",
     "start": "npm run dev",

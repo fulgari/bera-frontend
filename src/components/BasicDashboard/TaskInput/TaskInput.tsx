@@ -1,9 +1,9 @@
 import React, { InputHTMLAttributes, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo, TodoRecordType } from '../BasicDashboardSlice';
+import { addTodo, DraftTodoRecordType, TodoRecordType } from '../BasicDashboardSlice';
 import styles from "./TaskInput.module.css";
 import { useEffect } from 'react';
-import { genEmptyTodoRecord } from '../../../utils/gen';
+import { getUrl } from '../../../utils/env';
 
 function TaskInput(props: any) {
     const { path, date, todo, isLast } = props;
@@ -32,20 +32,26 @@ function TaskInput(props: any) {
                 if (inputRef.current?.value === "") return;
                 if (isLast) {
                     const ts = new Date().getTime();
-                    const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
-                    const newTodo: TodoRecordType = {
-                        id: tdId,
+                    // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
+                    const newTodo: DraftTodoRecordType = {
                         date: date,
                         listId: null,
                         note: null,
                         text: e.target.value,
                         done: false,
-                        updatedAt: ts.toString(),
+                        modifiedAt: ts.toString(),
                         createdAt: ts.toString(),
                         isMD: null,
                         tags: null
                     }
                     dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
+                    fetch(`${getUrl()}/api/todorecord`, {
+                        method: "post",
+                        body: JSON.stringify(newTodo),
+                        headers: {
+                            "content-type": "application/json",
+                        }
+                    })
                 } else if (e.target.value) {
                     const newTodo: Partial<TodoRecordType> = {
                         id: todo.id,

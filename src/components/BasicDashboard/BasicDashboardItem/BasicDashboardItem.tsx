@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { simplifyDate } from '../../../utils/date';
-import { genEmptyTodoRecord } from '../../../utils/gen';
 import { TodoRecordType } from '../BasicDashboardSlice';
 import TaskInput from '../TaskInput/TaskInput';
 import styles from "./BasicDashboardItem.module.css";
