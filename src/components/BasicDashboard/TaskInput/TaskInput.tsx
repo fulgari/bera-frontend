@@ -58,6 +58,13 @@ function TaskInput(props: any) {
                         text: e.target.value as string,
                     }
                     dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
+                    fetch(`${getUrl()}/api/todorecord/${newTodo.id}`, {
+                        method: "put",
+                        body: JSON.stringify(newTodo),
+                        headers: {
+                            "content-type": "application/json",
+                        }
+                    })
                 }
             }}
         />
