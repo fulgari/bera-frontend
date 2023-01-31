@@ -34,7 +34,7 @@ export default function (props: MainProps) {
     <div className={styles.wrap}>
       <BasicHeader />
       {/* TODO: 做成动态的数据 */}
-      <BasicDashboard from={"2022-11-28"} to={"2022-12-05"} /> 
+      <BasicDashboard from={"2023-01-29"} to={"2023-02-04"} /> 
     </div>
   );
 }

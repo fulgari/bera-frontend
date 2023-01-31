@@ -11,9 +11,10 @@ export default function (props: BasicHeaderProps) {
     <div className={styles.basicHeaderWrap}>
       <div className={styles.basicHeaderLeft}>{year} {month}</div>
       <div className={styles.basicHeaderRight}>
-        {new Array(4).fill(0).map((_, i) => (
-          <div className={styles.basicHeaderRightItem}>{i}</div>
-        ))}
+      <div className={styles.basicHeaderRightItem} onClick={() => {}}>Prev</div>
+      <div className={styles.basicHeaderRightItem} onClick={() => {}}>Cur</div>
+      <div className={styles.basicHeaderRightItem} onClick={() => {}}>Next</div>
+      <div className={styles.basicHeaderRightItem}>Setting</div>
       </div>
     </div>
   );
