@@ -14,6 +14,14 @@ export default function (props: BasicDashboardProps) {
   const { from, to } = props;
 
   const dispatch = useDispatch();
+  const date = new Date();
+  const milli = date.getTime();
+  const day = date.getDay(); // weekday
+  const anchorMilli = milli - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
+
+  const startOfWeek = new Date(anchorMilli);
+
+  console.log("startOfWeek", startOfWeek, day - 1)
 
   const {
     isLoading,
@@ -37,14 +45,6 @@ export default function (props: BasicDashboardProps) {
       dispatch({ type: "basicDashboard/setupTodos", payload: todos })
     }
   }, [todos, isLoading, error])
-
-  const date = new Date();
-  const milli = date.getTime();
-  const day = date.getDay(); // weekday
-  const anchorMilli = milli - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
-
-  const startOfWeek = new Date(anchorMilli);
-  console.log("startOfWeek", startOfWeek, day - 1)
 
   return (
     <div className={styles.basicDashboardWrap}>

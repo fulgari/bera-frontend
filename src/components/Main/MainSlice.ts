@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const oneWeek = 7 * 24 * 60 * 60 * 1000;
 
 const mainSlice = createSlice({
     name: "main",
     initialState: {
-        // 定位当前周的锚点
-        pivot: new Date()
+        // 与今天的时间差
+        dateDelta: 0
     },
     reducers: {
-        setPivot: (state, action) => {
-            const date: Date = action.payload;
-            state.pivot = date;
+        resetDelta: (state, action) => {
+            state.dateDelta = 0;
+        },
+        addDelta: (state, action) => {
+            state.dateDelta += oneWeek;
+        },
+        minusDelta: (state, action) => {
+            state.dateDelta -= oneWeek;
         },
     },
 });
 
-export const { setPivot } = mainSlice.actions;
+export const { resetDelta, addDelta, minusDelta } = mainSlice.actions;
 export default mainSlice.reducer;
