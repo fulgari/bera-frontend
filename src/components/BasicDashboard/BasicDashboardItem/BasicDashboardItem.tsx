@@ -25,6 +25,7 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
     const dayInMonth = itemDate.getDate();
     const month = itemDate.toLocaleString("en-GB", { month: "short" });
     const currentDateString = simplifyDate(itemDate);
+    const todayDateString = simplifyDate(new Date());
 
     const todosAtDate: TodoRecordType[] = useSelector((state: any) => {
         const todos = state.basicDashboard.todos
@@ -32,11 +33,9 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
         return todosAtDate;
     });
 
-    console.log("todos", todosAtDate, currentDateString);
-
     return (
         <div>
-            <div className={styles.itemTitle + (new Date().getDay() === ((itemIndex + 1) % 7) ? (" " + styles.highlight) : "")} >
+            <div className={styles.itemTitle + (todayDateString === currentDateString ? (" " + styles.highlight) : "")} >
                 {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
             <div className={styles.itemContentWrap}>
