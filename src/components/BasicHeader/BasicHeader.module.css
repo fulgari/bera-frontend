@@ -13,7 +13,8 @@
   text-transform: capitalize;
   display: flex;
   align-items: center;
-  font-family:'Times New Roman', Times, serif
+  cursor: default;
+  font-family:'Times New Roman', Times, serif;
 }
 
 .basicHeaderRight {
@@ -26,4 +27,22 @@
   height: 40px;
   margin-right: 12px;
   line-height: 42px;
+  cursor: default;
+}
+.basicHeaderRightItem:hover {
+  animation: hoverAni .5s ease-in-out;
+}
+@keyframes hoverAni {
+  0% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
