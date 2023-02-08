@@ -17,6 +17,47 @@ function TaskInput(props: any) {
         }
     }, [inputRef.current, todo.text])
 
+    const addTask = () => {
+        if (inputRef.current?.value === "") return;
+        const value = inputRef.current?.value;
+        if (isLast) {
+            const ts = new Date().getTime();
+            // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
+            const newTodo: DraftTodoRecordType = {
+                date: date,
+                listId: null,
+                note: null,
+                text: value,
+                done: false,
+                modifiedAt: ts.toString(),
+                createdAt: ts.toString(),
+                isMD: null,
+                tags: null
+            }
+            dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
+            fetch(`${getUrl()}/api/todorecord`, {
+                method: "post",
+                body: JSON.stringify(newTodo),
+                headers: {
+                    "content-type": "application/json",
+                }
+            })
+        } else if (value) {
+            const newTodo: Partial<TodoRecordType> = {
+                id: todo.id,
+                text: value as string,
+            }
+            dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
+            fetch(`${getUrl()}/api/todorecord/${newTodo.id}`, {
+                method: "put",
+                body: JSON.stringify(newTodo),
+                headers: {
+                    "content-type": "application/json",
+                }
+            })
+        }
+    }
+
     return (
         <input
             ref={inputRef}
@@ -28,43 +69,10 @@ function TaskInput(props: any) {
                     inputRef.current.value = e.target.value;
                 }
             }}
-            onBlur={e => {
-                if (inputRef.current?.value === "") return;
-                if (isLast) {
-                    const ts = new Date().getTime();
-                    // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
-                    const newTodo: DraftTodoRecordType = {
-                        date: date,
-                        listId: null,
-                        note: null,
-                        text: e.target.value,
-                        done: false,
-                        modifiedAt: ts.toString(),
-                        createdAt: ts.toString(),
-                        isMD: null,
-                        tags: null
-                    }
-                    dispatch({ type: "basicDashboard/addTodo", payload: newTodo });
-                    fetch(`${getUrl()}/api/todorecord`, {
-                        method: "post",
-                        body: JSON.stringify(newTodo),
-                        headers: {
-                            "content-type": "application/json",
-                        }
-                    })
-                } else if (e.target.value) {
-                    const newTodo: Partial<TodoRecordType> = {
-                        id: todo.id,
-                        text: e.target.value as string,
-                    }
-                    dispatch({ type: "basicDashboard/updateTodo", payload: newTodo });
-                    fetch(`${getUrl()}/api/todorecord/${newTodo.id}`, {
-                        method: "put",
-                        body: JSON.stringify(newTodo),
-                        headers: {
-                            "content-type": "application/json",
-                        }
-                    })
+            onBlur={addTask}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                    addTask();
                 }
             }}
         />
