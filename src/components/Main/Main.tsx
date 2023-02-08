@@ -9,32 +9,20 @@ import { getUrl } from "../../utils/env";
 type MainProps = {};
 
 export default function (props: MainProps) {
+  const delta: number = useSelector((state: any) => {
+    return state.main.dateDelta;
+  });
+  const dateInMs = new Date().getTime() + delta;
+  const date = new Date(dateInMs);
+  const ms = date.getTime();
+  const day = date.getDay();
+  /** start of the current showing week */
+  const anchorMs = ms - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
 
-  // deprecated
-  const {
-    isLoading,
-    error,
-    data: todos,
-    isFetching,
-  } = useQuery("gettodos", () =>
-    fetch(`${getUrl()}/api/todorecord`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res: any) => {
-        console.log("[rq] get: ", res);
-        return res;
-      })
-  );
-
-  return isLoading ? (
-    <div className={styles.dotsBars}>
-    </div>
-  ) : (
+  return  (
     <div className={styles.wrap}>
       <BasicHeader />
-      {/* TODO: 做成动态的数据 */}
-      <BasicDashboard from={"2023-01-29"} to={"2023-02-04"} /> 
+      <BasicDashboard anchorMs={anchorMs} /> 
     </div>
   );
 }
