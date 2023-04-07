@@ -9,9 +9,10 @@
     "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
     "serve:esbuild": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ts",
     "serve:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css  --watch --minify",
+    "build": "npm run build:css & npm run build:esbuild",
     "dev": "npm run serve:css & npm run serve:esbuild",
     "start": "npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:prod": "NODE_ENV=production ts-node ./scripts/bundle.serve.ts"
   },
   "repository": {
     "type": "git",
