@@ -53,7 +53,7 @@ export default function (props: BasicDashboardProps) {
         {!isLoading
           && !error
           && (new Array(7).fill(0).map((_, i) => (
-            <div className={styles.basicDashboardItem}>
+            <div className={styles.basicDashboardItem} key={i}>
               <BasicDashboardItem itemIndex={(i) % 7} itemDate={new Date(anchorMs + i * 60 * 60 * 1000 * 24)} />
             </div>
           )))}

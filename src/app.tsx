@@ -1,5 +1,6 @@
 import React from "react";
 import * as Server from "react-dom/server";
+import * as Client from "react-dom/client";
 import * as ReactDOM from "react-dom";
 import List from "./layout/List/List";
 import Card from "./components/Card/Card";
@@ -26,17 +27,17 @@ let App = () => {
 const queryClient = new QueryClient();
 
 // console.log(Server.renderToString(<Greet />))
-ReactDOM.render(
-  <Provider store={store}>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          {/* <Route path="home" element={<Home />} />
-          <Route path="kanban" element={<Kanban />} /> */}
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
-  </Provider>,
-  document.body
+const root = Client.createRoot(
+  document.getElementById('root')
 );
+root.render(<Provider store={store}>
+  <QueryClientProvider client={queryClient}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        {/* <Route path="home" element={<Home />} />
+        <Route path="kanban" element={<Kanban />} /> */}
+      </Routes>
+    </BrowserRouter>
+  </QueryClientProvider>
+</Provider>);

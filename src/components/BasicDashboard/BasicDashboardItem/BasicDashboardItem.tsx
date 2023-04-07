@@ -40,7 +40,7 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
             </div>
             <div className={styles.itemContentWrap}>
                 {todosAtDate && todosAtDate.map((todo, todoIndex) => {
-                    return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} />)
+                    return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} />)
                 })}
                 <TaskInput todo={{}} date={currentDateString} path={[itemIndex, todosAtDate.length]} isLast={true} />
             </div>
