@@ -14,4 +14,6 @@ ENV NODE_ENV=${DOCKER_ENV}
 
 RUN npm run build
 
-CMD [ "npm", "run", "start:prod" ]
+EXPOSE 9004
+
+CMD [ "npm", "run", "start:serve_koa" ]

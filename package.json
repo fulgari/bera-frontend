@@ -12,7 +12,8 @@
     "build": "npm run build:css & npm run build:esbuild",
     "dev": "npm run serve:css & npm run serve:esbuild",
     "start": "npm run dev",
-    "start:prod": "NODE_ENV=production ts-node ./scripts/bundle.serve.ts"
+    "start:serve_http": "NODE_ENV=production ts-node ./scripts/serve.http.ts",
+    "start:serve_koa": "NODE_ENV=production ts-node ./scripts/serve.koa.ts"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
     "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.8.2",
     "esbuild": "^0.14.42",
+    "koa": "^2.14.1",
+    "koa-static": "^5.0.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-query": "^3.39.1",
@@ -40,6 +43,8 @@
   },
   "devDependencies": {
     "@compodoc/live-server": "^1.2.3",
+    "@types/koa": "^2.13.6",
+    "@types/koa-static": "^4.0.2",
     "@types/react-dom": "^18.0.10",
     "esbuild-css-modules-plugin": "^2.2.16",
     "esbuild-plugin-inline-image": "^0.0.8",
