@@ -1,14 +1,15 @@
 .basicDashboardWrap {
   width: 100%;
-
+  box-shadow: 0 0 1rem 0.05rem rgba(208,208,208,.8);
+  border-radius: 1rem;
+  flex: 1;
+  margin: 3rem 0;
 }
 .basicDashboard {
   display: grid;
-  margin-left: -12px;
-  margin-right: -12px;
   grid-template-columns: repeat(5, 20%);
   min-height: 462px;
-  width: 100%;
+  margin: 0 0.8rem;
 }
 
 .basicDashboardItem {

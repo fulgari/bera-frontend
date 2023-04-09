@@ -1,23 +1,24 @@
 .client {
-  display: flex;
-  flex-direction: row;
   min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
   box-sizing: border-box;
 }
 
-.sider {
-  flex: 1;
+.notch {
+  position: fixed;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
   background-color: #fff;
-  border-right: 1px solid #e6e6e6;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 8px 10px;
   width: 80px;
 }
 

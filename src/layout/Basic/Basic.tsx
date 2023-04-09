@@ -10,7 +10,7 @@ export default function (props: BasicLayoutProps) {
   const { children } = props;
   return (
     <div className={styles.client}>
-      <div className={styles.sider}>
+      <div className={styles.notch}>
         <div className={styles.logo}>
           <Link to="/">
             <img src={beraLogo} alt="logo" />
