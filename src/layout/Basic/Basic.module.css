@@ -12,19 +12,21 @@
   transform: translateX(-50%);
   background-color: #fff;
   border-radius: 0 0 0.5rem 0.5rem;
+  border: 1px solid rgba(222, 224, 208, .8);
+  border-top: 0;
+  box-shadow: 0 0.1rem 0.2rem 0 rgba(222, 224, 208, .8);
 }
 
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 8px 10px;
-  width: 80px;
+  margin: 0.3rem 0.8rem;
 }
 
 .logo img {
-  height: 30px;
-  width: 70px;
+  height: 1.2rem;
+  width: 2.8rem;
 }
 
 .siderNav {
