@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Basic.module.css";
 import beraLogo from "../../assets/bera.jpg";
+import cx from 'classnames';
 
 type BasicLayoutProps = {
   children?: any;
 };
 export default function (props: BasicLayoutProps) {
   const { children } = props;
+  const [isEnlarged, setIsEnlarged] = useState(false)
   return (
     <div className={styles.client}>
-      <div className={styles.notch}>
-        <div className={styles.logo}>
+      <div className={cx(styles.notch, {
+        [styles.isEnlarged]: isEnlarged
+      })}
+        onMouseEnter={() => { setIsEnlarged(true) }}
+        onMouseLeave={() => { setIsEnlarged(false) }}>
+        {!isEnlarged && <div className={styles.logo}>
           <Link to="/">
             <img src={beraLogo} alt="logo" />
           </Link>
         </div>
+        }
         {/* <nav className={styles.siderNav}>
           <div className={styles.siderNavItem}>
             <div className={styles.siderNavItemIcon}></div>
