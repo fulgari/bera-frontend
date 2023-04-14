@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "react-query";
-import styles from "./Main.module.css";
+import s from "./Main.module.css";
 import BasicDashboard from "../BasicDashboard/BasicDashboard";
 import BasicHeader from "../BasicHeader/BasicHeader";
 import { getUrl } from "../../utils/env";
@@ -20,7 +20,7 @@ export default function (props: MainProps) {
   const anchorMs = ms - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
 
   return  (
-    <div className={styles.wrap}>
+    <div className={s.wrap}>
       <BasicHeader />
       <BasicDashboard anchorMs={anchorMs} /> 
     </div>

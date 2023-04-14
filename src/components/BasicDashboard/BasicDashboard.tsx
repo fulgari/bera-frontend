@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { simplifyDate } from "../../utils/date";
 import { getUrl } from "../../utils/env";
-import styles from "./BasicDashboard.module.css";
+import s from "./BasicDashboard.module.css";
 import BasicDashboardItem from "./BasicDashboardItem/BasicDashboardItem";
 
 type BasicDashboardProps = {
@@ -44,16 +44,16 @@ export default function (props: BasicDashboardProps) {
   }, [todos, isLoading, error])
 
   return (
-    <div className={styles.basicDashboardWrap}>
-      <div className={styles.basicDashboard}>
+    <div className={s.basicDashboardWrap}>
+      <div className={s.basicDashboard}>
         {isLoading && (
-          <div className={styles.dotsBars}>
+          <div className={s.dotsBars}>
           </div>
         )}
         {!isLoading
           && !error
           && (new Array(7).fill(0).map((_, i) => (
-            <div className={styles.basicDashboardItem} key={i}>
+            <div className={s.basicDashboardItem} key={i}>
               <BasicDashboardItem itemIndex={(i) % 7} itemDate={new Date(anchorMs + i * 60 * 60 * 1000 * 24)} />
             </div>
           )))}

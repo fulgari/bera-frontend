@@ -1,7 +1,7 @@
 import React, { InputHTMLAttributes, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo, DraftTodoRecordType, TodoRecordType } from '../BasicDashboardSlice';
-import styles from "./TaskInput.module.css";
+import s from "./TaskInput.module.css";
 import { useEffect } from 'react';
 import { getUrl } from '../../../utils/env';
 
@@ -62,7 +62,7 @@ function TaskInput(props: any) {
         <input
             ref={inputRef}
             key={path}
-            className={styles.input}
+            className={s.input}
             onChange={e => {
                 console.log('e.target', e)
                 if (inputRef.current) {

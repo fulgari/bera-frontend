@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { simplifyDate } from '../../../utils/date';
 import { TodoRecordType } from '../BasicDashboardSlice';
 import TaskInput from '../TaskInput/TaskInput';
-import styles from "./BasicDashboardItem.module.css";
+import s from "./BasicDashboardItem.module.css";
 
 export const dayMap = {
     "0": "Mon",
@@ -35,10 +35,10 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
 
     return (
         <div>
-            <div className={styles.itemTitle + (todayDateString === currentDateString ? (" " + styles.highlight) : "")} >
+            <div className={s.itemTitle + (todayDateString === currentDateString ? (" " + s.highlight) : "")} >
                 {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
-            <div className={styles.itemContentWrap}>
+            <div className={s.itemContentWrap}>
                 {todosAtDate && todosAtDate.map((todo, todoIndex) => {
                     return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} />)
                 })}
