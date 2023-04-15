@@ -10,7 +10,7 @@ import liveServer from "@compodoc/live-server";
 
 liveServer.start({
   port: 9004,
-  host: "localhost",
+  host: "127.0.0.1",
   root: "public",
   open: true,
   ignore: "node_modules",
@@ -25,7 +25,7 @@ async function run() {
     minify: true,
     bundle: true,
     watch: true,
-    metafile: true,
+    // metafile: true,
     loader: {
       ".js": "jsx",
       ".tsx": "tsx",
@@ -41,7 +41,7 @@ async function run() {
   }
 
   console.log("⚡ Styles & Scripts Compiled! ⚡ ");
-  fs.writeFileSync('meta.json', JSON.stringify(res.metafile))
+  res.metafile && fs.writeFileSync('meta.json', JSON.stringify(res.metafile))
 }
 
 run()
