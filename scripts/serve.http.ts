@@ -1,4 +1,4 @@
-/** 暂时用于 deploy 的原生 server 实现，静态资源缺少完备的 mime，图片路径加载不出来，后续改为用 nginx */
+/** 暂时用于 deploy 的原生 server 实现，静态资源缺少完备的 mime，图片路径加载不出来，后续改为用 serve.koa.ts 了 */
 import http from "http";
 import path from "path";
 import fs from "fs";

@@ -5,7 +5,7 @@ import esbuild from "esbuild";
 import inlineImage from "esbuild-plugin-inline-image";
 import cssModulesPlugin from "esbuild-css-modules-plugin";
 import { lessLoader } from "esbuild-plugin-less";
-// import liveServer from "@compodoc/live-server";
+import fs from 'node:fs'
 import liveServer from "@compodoc/live-server";
 
 liveServer.start({
@@ -17,14 +17,15 @@ liveServer.start({
   wait: 0,
 });
 
-esbuild
-  .build({
+async function run() {
+  const res = await esbuild.build({
     entryPoints: ["./src/app.tsx"],
     // outfile: "./public/js/app.js",
     outdir: "./public",
     minify: true,
     bundle: true,
     watch: true,
+    metafile: true,
     loader: {
       ".js": "jsx",
       ".tsx": "tsx",
@@ -34,8 +35,17 @@ esbuild
     define: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || "development") },
     plugins: [inlineImage(), cssModulesPlugin(), lessLoader()],
   })
-  .then(() => console.log("⚡ Styles & Scripts Compiled! ⚡ "))
-  .catch(() => process.exit(1));
+
+  if (res.errors.length > 0) {
+    process.exit(1)
+  }
+
+  console.log("⚡ Styles & Scripts Compiled! ⚡ ");
+  fs.writeFileSync('meta.json', JSON.stringify(res.metafile))
+}
+
+run()
+
 
 // esbuild
 //   .serve(
