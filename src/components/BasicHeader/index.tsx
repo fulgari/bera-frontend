@@ -29,10 +29,10 @@ export default function (props: BasicHeaderProps) {
         name: "Next",
         onClick: () => { dispatch({ type: "main/addDelta", payload: {} }); }
       },
-      {
-        name: "Setting",
-        onClick: () => { dispatch({ type: "", payload: {} }); }
-      }
+      // {
+      //   name: "Setting",
+      //   onClick: () => { dispatch({ type: "", payload: {} }); }
+      // }
     ];
     return btns.map((item, index) => {
       return (
@@ -43,7 +43,7 @@ export default function (props: BasicHeaderProps) {
 
   return (
     <div className={"flex justify-between items-center w-full p-3"}>
-      <div className={"text-4xl leading-9 tracking-tighter capitalize flex items-center cursor-default font-mono"}>{year} {month}</div>
+      <div className={"text-4xl leading-9 tracking-tighter capitalize flex items-center cursor-default font-serif"}>{year} {month}</div>
       <div className={"flex items-center"}>
         {renderBtns()}
       </div>
