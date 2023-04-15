@@ -36,14 +36,14 @@ export default function (props: BasicHeaderProps) {
     ];
     return btns.map((item, index) => {
       return (
-        <div key={index} className={cx("w-10 h-10 mr-3 leading-10 cursor-default select-none font-mono text-green-600 hover:drop-shadow-md hover:text-green-400")} onClick={item.onClick}>{item.name}</div>
+        <div key={index} className={cx("w-10 h-10 mr-3 leading-10 cursor-default select-none font-mono text-neutral-400 hover:text-shadow-lg hover:text-emerald-400")} onClick={item.onClick}>{item.name}</div>
       )
     })
   }
 
   return (
     <div className={"flex justify-between items-center w-full p-3"}>
-      <div className={"text-4xl leading-9 tracking-tighter capitalize flex items-center cursor-default font-serif"}>{year} {month}</div>
+      <div className={"text-4xl leading-9 tracking-tighter capitalize flex items-center cursor-default font-serif dark:text-zinc-100"}>{year} {month}</div>
       <div className={"flex items-center"}>
         {renderBtns()}
       </div>

@@ -6,7 +6,8 @@ const mainSlice = createSlice({
     name: "main",
     initialState: {
         // 与今天的时间差
-        dateDelta: 0
+        dateDelta: 0,
+        isDarkMode: localStorage.theme === 'dark'
     },
     reducers: {
         resetDelta: (state, action) => {
@@ -18,6 +19,9 @@ const mainSlice = createSlice({
         minusDelta: (state, action) => {
             state.dateDelta -= oneWeek;
         },
+        toggleDarkMode: (state, action) => {
+            state.isDarkMode = action.payload;
+        }
     },
 });
 

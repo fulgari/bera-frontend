@@ -34,7 +34,7 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
 
     return (
         <div>
-            <div className={`font-mono ${todayDateString === currentDateString ? "underline text-emerald-400" : ``}`  } >
+            <div className={`font-mono ${todayDateString === currentDateString ? "underline text-emerald-400" : `dark:text-slate-200`}`  } >
                 {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
             <div className={""}>

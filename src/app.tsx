@@ -1,7 +1,5 @@
 import React from "react";
-import * as Server from "react-dom/server";
 import * as Client from "react-dom/client";
-import * as ReactDOM from "react-dom";
 import List from "./layout/List";
 import Card from "./components/Card";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -18,7 +16,6 @@ import { store } from "./store";
 let App = () => {
   return (
     <Basic>
-      {/* <Card /> */}
       <Main />
     </Basic>
   );
@@ -26,7 +23,6 @@ let App = () => {
 
 const queryClient = new QueryClient();
 
-// console.log(Server.renderToString(<Greet />))
 const root = Client.createRoot(
   document.getElementById('root')
 );
