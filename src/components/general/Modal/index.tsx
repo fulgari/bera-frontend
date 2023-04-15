@@ -13,7 +13,7 @@ type ModalProps = {
 export default function Modal(props: ModalProps) {
   const { children, type = "default", className, style, ...rest } = props;
   return (
-    <div className={`${styles[type]} ${s.button} ${className}`} style={style} {...rest}>
+    <div className={`${s[type]} ${s.button} ${className}`} style={style} {...rest}>
       {children}
     </div>
   );

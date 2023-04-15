@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { minusDelta } from "../Main/MainSlice";
-import s from "./BasicHeader.module.css";
 import cx from "classnames";
 
 type BasicHeaderProps = {};
@@ -37,15 +36,15 @@ export default function (props: BasicHeaderProps) {
     ];
     return btns.map((item, index) => {
       return (
-        <div key={index} className={cx(s.basicHeaderRightItem, "text-green-600")} onClick={item.onClick}>{item.name}</div>
+        <div key={index} className={cx("w-10 h-10 mr-3 leading-10 cursor-default select-none font-mono text-green-600 hover:drop-shadow-md hover:text-green-400")} onClick={item.onClick}>{item.name}</div>
       )
     })
   }
 
   return (
-    <div className={s.basicHeaderWrap}>
-      <div className={s.basicHeaderLeft}>{year} {month}</div>
-      <div className={s.basicHeaderRight}>
+    <div className={"flex justify-between items-center w-full p-3"}>
+      <div className={"text-4xl leading-9 tracking-tighter capitalize flex items-center cursor-default font-mono"}>{year} {month}</div>
+      <div className={"flex items-center"}>
         {renderBtns()}
       </div>
     </div>

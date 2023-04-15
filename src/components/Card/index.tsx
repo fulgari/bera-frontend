@@ -1,12 +1,11 @@
 import React from "react";
-import s from "./Card.module.css";
 
 type CardProps = {};
 
 export default function (props: CardProps) {
   return (
-    <div className={s.cardWrap}>
-      <div className={s.card}></div>
+    <div className={"w-24 h-24 bg-orange-400"}>
+      <div className={"w-3 h-3 bg-red-300"}></div>
     </div>
   );
 }

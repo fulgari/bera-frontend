@@ -1,6 +1,5 @@
 import React from "react";
-import Basic from "../../layout/Basic/Basic";
-import s from "./Home.module.css";
+import Basic from "../layout/Basic";
 
 export const Home = (props) => {
   return (

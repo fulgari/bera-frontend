@@ -1,5 +1,5 @@
 import React from "react";
-import Basic from "../../layout/Basic/Basic";
+import Basic from "../layout/Basic";
 import s from "./Kanban.module.css";
 
 export const Kanban = (props) => {

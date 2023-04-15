@@ -13,7 +13,7 @@ type ButtonProps = {
 export default function Button(props: ButtonProps) {
   const { children, type = "primary", className, style, ...rest } = props;
   return (
-    <div className={`${styles[type]} ${s.button} ${className}`} style={style} {...rest}>
+    <div className={`${s[type]} ${s.button} ${className}`} style={style} {...rest}>
       {children}
     </div>
   );

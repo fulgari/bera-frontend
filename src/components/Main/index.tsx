@@ -1,9 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useQuery } from "react-query";
-import s from "./Main.module.css";
-import BasicDashboard from "../BasicDashboard/BasicDashboard";
-import BasicHeader from "../BasicHeader/BasicHeader";
+import s from "./index.module.css";
+import BasicDashboard from "../BasicDashboard";
+import BasicHeader from "../BasicHeader";
 import { getUrl } from "../../utils/env";
 
 type MainProps = {};
@@ -20,7 +19,7 @@ export default function (props: MainProps) {
   const anchorMs = ms - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
 
   return  (
-    <div className={s.wrap}>
+    <div className={"flex flex-col flex-nowrap items-center w-full h-full px-8 py-2"}>
       <BasicHeader />
       <BasicDashboard anchorMs={anchorMs} /> 
     </div>
