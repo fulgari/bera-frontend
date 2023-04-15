@@ -7,7 +7,7 @@ type ListLayoutProps = {
 }
 export default function (props: ListLayoutProps) {
   const { children } = props;
-  return (<div className={s.listWrap}>
+  return (<div className={"flex flex-col items-center justify-center w-full h-full px-4 overflow-hidden box-border"}>
     {children}
   </div>)
 }

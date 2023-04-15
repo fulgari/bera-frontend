@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import s from "./Basic.module.css";
 import beraLogo from "../../assets/bera.jpg";
 import cx from 'classnames';
 
@@ -11,39 +10,20 @@ export default function (props: BasicLayoutProps) {
   const { children } = props;
   const [isEnlarged, setIsEnlarged] = useState(false)
   return (
-    <div className={s.client}>
-      <div className={cx(s.notch, {
-        [s.isEnlarged]: isEnlarged
+    <div className={"min-h-screen h-screen max-h-screen box-border"}>
+      <div className={cx("fixed left-1/2 top-0 -translate-x-1/2 bg-white rounded-bl-lg rounded-br-lg border-slate-400 border-t-0 drop-shadow-lg z-[1]", {
+        " w-72 h-40": isEnlarged
       })}
         onMouseEnter={() => { setIsEnlarged(true) }}
         onMouseLeave={() => { setIsEnlarged(false) }}>
-        {!isEnlarged && <div className={s.logo}>
+        {!isEnlarged && <div className={"flex justify-center items-center my-1 mx-3"}>
           <Link to="/">
-            <img src={beraLogo} alt="logo" />
+            <img className="h-5 w-11" src={beraLogo} alt="logo" />
           </Link>
         </div>
         }
-        {/* <nav className={s.siderNav}>
-          <div className={s.siderNavItem}>
-            <div className={s.siderNavItemIcon}></div>
-            <div className={s.siderNavItemText}>Dashboard</div>
-          </div>
-          <div className={s.siderNavItem}>
-            <div className={s.siderNavItemIcon}></div>
-            <div className={s.siderNavItemText}>My Kanbans</div>
-          </div>
-          <div className={s.siderNavItem}>
-            <div className={s.siderNavItemIcon}></div>
-            <div className={s.siderNavItemText}>Goals</div>
-          </div>
-        </nav> */}
       </div>
-      <div className={s.mainWrap}>
-        {/* <nav className={s.nav}>
-          <Link to="/">Bera</Link>
-          <Link to="/home">Home</Link>
-          <Link to="/kanban">Kanban</Link>
-        </nav> */}
+      <div className={"flex flex-col items-center justify-center w-full h-full overflow-auto relative"}>
         {children}
       </div>
     </div>
