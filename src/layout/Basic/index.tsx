@@ -41,7 +41,7 @@ export default function (props: BasicLayoutProps) {
       DARK: '☾'
     }
     return <>
-      <div className="w-5 h-5 cursor-default" onClick={toggleDarkMode}>{isDarkMode ? icons.DARK : icons.LIGHT}</div>
+      <div className="w-5 h-5 cursor-default" onClick={toggleDarkMode}>{isDarkMode ? icons.LIGHT : icons.DARK}</div>
     </>
   }
 
