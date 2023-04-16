@@ -37,7 +37,7 @@ function BasicDashboardItem(props: BasicDashboardItemProps) {
             <div className={`font-mono ${todayDateString === currentDateString ? "underline text-emerald-400" : `dark:text-slate-200`}`  } >
                 {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
-            <div className={""}>
+            <div>
                 {todosAtDate && todosAtDate.map((todo, todoIndex) => {
                     return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} />)
                 })}

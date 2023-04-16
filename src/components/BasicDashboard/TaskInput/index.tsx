@@ -61,7 +61,7 @@ function TaskInput(props: any) {
         <input
             ref={inputRef}
             key={path}
-            className={"relative w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400"}
+            className={"relative w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:bg-[#313a47] dark:text-slate-200"}
             onChange={e => {
                 console.log('e.target', e)
                 if (inputRef.current) {
