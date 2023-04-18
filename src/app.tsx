@@ -26,6 +26,7 @@ const queryClient = new QueryClient();
 const root = Client.createRoot(
   document.getElementById('root')
 );
+
 root.render(<Provider store={store}>
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
@@ -36,4 +37,8 @@ root.render(<Provider store={store}>
       </Routes>
     </BrowserRouter>
   </QueryClientProvider>
-</Provider>);
+  </Provider>);
+
+export {
+  App
+}

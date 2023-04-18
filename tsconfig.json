@@ -3,7 +3,15 @@
         "jsx": "react",
         "target": "esnext",
         "module": "commonjs",
-        "esModuleInterop":true
+        "esModuleInterop": true,
+        "paths": {
+            "src": [
+                "./src"
+            ]
+        }
     },
-    "include": ["src/**/*", "globals.d.ts"],
+    "include": [
+        "src/**/*",
+        "globals.d.ts"
+    ],
 }

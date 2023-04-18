@@ -22,7 +22,6 @@ export default function (props: BasicLayoutProps) {
   }, [isDarkMode])
 
   const toggleDarkMode = () => {
-    console.log("first", isDarkMode)
     if (isDarkMode) {
       // Whenever the user explicitly chooses light mode
       localStorage.theme = 'light'
