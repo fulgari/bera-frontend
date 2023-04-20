@@ -10,7 +10,7 @@ import { lessLoader } from "esbuild-plugin-less";
 
 esbuild
   .build({
-    entryPoints: ["./src/app.tsx"],
+    entryPoints: ["./src/entryClient.tsx"],
     outdir: "./public/",
     minify: true,
     bundle: true,

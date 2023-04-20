@@ -8,7 +8,7 @@
     "build:esbuild": "ts-node ./scripts/esbuild.build.ts",
     "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
     "serve:esbuild": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ts",
-    "start:serve_ssr": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ssr.ts",
+    "start:serve_ssr": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ssr.tsx",
     "serve:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css  --watch --minify",
     "build": "npm run build:css & npm run build:esbuild",
     "dev": "npm run serve:css & npm run serve:esbuild",
@@ -45,13 +45,13 @@
     "@types/koa": "^2.13.6",
     "@types/koa-static": "^4.0.2",
     "@types/react-dom": "^18.0.10",
+    "esbuild": "^0.14.42",
     "esbuild-css-modules-plugin": "^2.2.16",
     "esbuild-plugin-inline-image": "^0.0.8",
     "esbuild-plugin-less": "^1.1.7",
-    "tailwindcss": "^3.1.6",
-    "ts-node": "^10.8.1",
-    "esbuild": "^0.14.42",
     "koa": "^2.14.1",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "tailwindcss": "^3.1.6",
+    "ts-node": "^10.8.1"
   }
 }

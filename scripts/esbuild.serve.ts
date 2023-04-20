@@ -19,7 +19,7 @@ liveServer.start({
 
 async function run() {
   const res = await esbuild.build({
-    entryPoints: ["./src/app.tsx"],
+    entryPoints: ["./src/entryClient.tsx"],
     // outfile: "./public/js/app.js",
     outdir: "./public",
     minify: true,
@@ -55,7 +55,7 @@ run()
 //       servedir: "public",
 //     },
 //     {
-//       entryPoints: ["./src/app.tsx"],
+//       entryPoints: ["./src/entryClient.tsx"],
 //       outfile: "./public/js/app.js",
 //       minify: true,
 //       bundle: true,

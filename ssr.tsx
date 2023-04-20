@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server'
-import { App } from '../entryClient'
+import { App } from './src/entryClient'
 
 const renderHtml = () => {
+  return "<html>1</html>"
     console.log("renderToString:start")
     const html = ReactDOMServer.renderToString(<App />);
     console.log("renderToString", html)

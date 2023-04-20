@@ -6,21 +6,15 @@ import inlineImage from "esbuild-plugin-inline-image";
 import cssModulesPlugin from "esbuild-css-modules-plugin";
 import { lessLoader } from "esbuild-plugin-less";
 import fs from 'node:fs'
-import liveServer from "@compodoc/live-server";
-import { renderHtml } from "../src/utils/ssr";
-
-liveServer.start({
-  port: 9004,
-  host: "127.0.0.1",
-  root: "public",
-  open: true,
-  ignore: "node_modules",
-  wait: 0,
-});
+import path from 'node:path'
+import Koa from 'koa';
+import koaStatic from 'koa-static'
+import ReactDOMServer from "react-dom/server";
+import React from "react";
 
 async function run() {
   const res = await esbuild.build({
-    entryPoints: ["./src/app.tsx"],
+    entryPoints: ["./src/entryServer.tsx"],
     // outfile: "./public/js/app.js",
     outdir: "./public",
     minify: true,
@@ -41,12 +35,7 @@ async function run() {
     process.exit(1)
   }
 
-  console.log("⚡ Styles & Scripts Compiled! ⚡ ");
-  res.metafile && fs.writeFileSync('meta.json', JSON.stringify(res.metafile))
-
-  fs.rmSync('../public/index.html');
-  const html = renderHtml();
-  fs.writeFileSync('../public/index.html', html);
+  console.log("⚡ entryServer Compiled! ⚡ ");
 }
 
 run()
@@ -60,7 +49,7 @@ run()
 //       servedir: "public",
 //     },
 //     {
-//       entryPoints: ["./src/app.tsx"],
+//       entryPoints: ["./src/entryClient.tsx"],
 //       outfile: "./public/js/app.js",
 //       minify: true,
 //       bundle: true,
