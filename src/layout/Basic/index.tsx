@@ -3,6 +3,8 @@ import beraLogo from "../../assets/bera.jpg";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+const storage = typeof window !== "undefined" ? localStorage : { theme: null };
+
 type BasicLayoutProps = {
   children?: any;
 };
@@ -14,7 +16,7 @@ export default function (props: BasicLayoutProps) {
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    if (storage.theme === 'dark' || (!('theme' in storage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
@@ -24,11 +26,11 @@ export default function (props: BasicLayoutProps) {
   const toggleDarkMode = () => {
     if (isDarkMode) {
       // Whenever the user explicitly chooses light mode
-      localStorage.theme = 'light'
+      storage.theme = 'light'
       dispatch({ type: 'main/toggleDarkMode', payload: false })
     } else {
       // Whenever the user explicitly chooses dark mode
-      localStorage.theme = 'dark'
+      storage.theme = 'dark'
       dispatch({ type: 'main/toggleDarkMode', payload: true })
     }
   }

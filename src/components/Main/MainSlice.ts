@@ -7,7 +7,7 @@ const mainSlice = createSlice({
     initialState: {
         // 与今天的时间差
         dateDelta: 0,
-        isDarkMode: localStorage.theme === 'dark'
+        isDarkMode: typeof window !== 'undefined' ? localStorage.theme === 'dark' : false
     },
     reducers: {
         resetDelta: (state, action) => {

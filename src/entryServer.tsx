@@ -1,5 +1,4 @@
 import React from "react";
-import * as Client from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Basic from "./layout/Basic";
 import Main from "./components/Main";
@@ -19,33 +18,30 @@ let App = () => {
   );
 };
 
-// const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
-// const root = Client.createRoot(
-//   document.getElementById('root')
-// );
-
-// root.render(<Provider store={store}>
-//   <QueryClientProvider client={queryClient}>
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<App />} />
-//         {/* <Route path="home" element={<Home />} />
-//         <Route path="kanban" element={<Kanban />} /> */}
-//       </Routes>
-//     </BrowserRouter>
-//   </QueryClientProvider>
-// </Provider>);
+const WrappedApp = () => (<Provider store={store}>
+  <QueryClientProvider client={queryClient}>
+    {/* <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+      </Routes>
+    </BrowserRouter> */}
+    <App />
+  </QueryClientProvider>
+</Provider>);
 
 
 const koa = new Koa();
 
-koa.use(koaStatic(process.cwd() + '/public'))
+koa.use(koaStatic(process.cwd()))
 
 koa.use((ctx, next) => {
   const { req } = ctx;
   if (req.url === '/') {
-    const body = renderToString(React.createElement(App));
+    console.log("renderToString:start")
+    const body = renderToString(React.createElement(WrappedApp));
+    console.log("renderToString:body", body)
     const html = `
     <html lang="en">
     <head>

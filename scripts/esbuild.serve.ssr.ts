@@ -9,8 +9,7 @@ import { lessLoader } from "esbuild-plugin-less";
 async function run() {
   const res = await esbuild.build({
     entryPoints: ["./src/entryServer.tsx"],
-    // outfile: "./public/js/app.js",
-    outdir: "./public",
+    outfile: "./public/js/server.js",
     bundle: true,
     // metafile: true,
     target: 'node12',
@@ -22,7 +21,7 @@ async function run() {
       ".jpg": "file",
     },
     define: { 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || "development") },
-    plugins: [inlineImage(), cssModulesPlugin(), lessLoader()],
+    plugins: [inlineImage()],
   })
 
   if (res.errors.length > 0) {
