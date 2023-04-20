@@ -19,23 +19,23 @@ let App = () => {
   );
 };
 
-const queryClient = new QueryClient();
+// const queryClient = new QueryClient();
 
-const root = Client.createRoot(
-  document.getElementById('root')
-);
+// const root = Client.createRoot(
+//   document.getElementById('root')
+// );
 
-root.render(<Provider store={store}>
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        {/* <Route path="home" element={<Home />} />
-        <Route path="kanban" element={<Kanban />} /> */}
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
-</Provider>);
+// root.render(<Provider store={store}>
+//   <QueryClientProvider client={queryClient}>
+//     <BrowserRouter>
+//       <Routes>
+//         <Route path="/" element={<App />} />
+//         {/* <Route path="home" element={<Home />} />
+//         <Route path="kanban" element={<Kanban />} /> */}
+//       </Routes>
+//     </BrowserRouter>
+//   </QueryClientProvider>
+// </Provider>);
 
 
 const koa = new Koa();
@@ -63,9 +63,3 @@ koa.use((ctx, next) => {
 
 koa.listen(9004);
 console.log("listening on port 9004");
-
-
-
-export {
-  App,
-}

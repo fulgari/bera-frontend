@@ -5,22 +5,16 @@ import esbuild from "esbuild";
 import inlineImage from "esbuild-plugin-inline-image";
 import cssModulesPlugin from "esbuild-css-modules-plugin";
 import { lessLoader } from "esbuild-plugin-less";
-import fs from 'node:fs'
-import path from 'node:path'
-import Koa from 'koa';
-import koaStatic from 'koa-static'
-import ReactDOMServer from "react-dom/server";
-import React from "react";
 
 async function run() {
   const res = await esbuild.build({
     entryPoints: ["./src/entryServer.tsx"],
     // outfile: "./public/js/app.js",
     outdir: "./public",
-    minify: true,
     bundle: true,
-    watch: true,
     // metafile: true,
+    target: 'node12',
+    platform: 'node',
     loader: {
       ".js": "jsx",
       ".tsx": "tsx",

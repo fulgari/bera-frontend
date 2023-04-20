@@ -8,7 +8,7 @@
     "build:esbuild": "ts-node ./scripts/esbuild.build.ts",
     "build:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css --minify",
     "serve:esbuild": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ts",
-    "start:serve_ssr": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ssr.tsx",
+    "start:serve_ssr": "NODE_ENV=development ts-node ./scripts/esbuild.serve.ssr.ts",
     "serve:css": "npx tailwindcss -i ./src/styles/app.module.css -o ./public/app.css  --watch --minify",
     "build": "npm run build:css & npm run build:esbuild",
     "dev": "npm run serve:css & npm run serve:esbuild",
