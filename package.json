@@ -15,7 +15,7 @@
     "start:serve_http": "NODE_ENV=production ts-node ./scripts/serve.http.ts",
     "start:serve_koa": "NODE_ENV=production ts-node ./scripts/serve.koa.ts",
     "ssr:build": "NODE_ENV=development ts-node ./scripts/esbuild.build.ssr.ts",
-    "ssr:serve": "node public/js/server.js"
+    "ssr:serve": "node public/ssr/index.js"
   },
   "repository": {
     "type": "git",

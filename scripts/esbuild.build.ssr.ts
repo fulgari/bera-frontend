@@ -9,7 +9,7 @@ import { lessLoader } from "esbuild-plugin-less";
 async function run() {
   const res = await esbuild.build({
     entryPoints: ["./src/entryServer.tsx"],
-    outfile: "./public/js/server.js",
+    outfile: "./public/ssr/index.js",
     bundle: true,
     // metafile: true,
     target: 'node12',

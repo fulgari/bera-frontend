@@ -1,0 +1,14 @@
+/* src/styles/app.module.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: rgb(55, 53, 47);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}

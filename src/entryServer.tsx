@@ -45,7 +45,7 @@ koa.use((ctx, next) => {
     const html = `
     <html lang="en">
     <head>
-        <script src="app.js" async defer></script>
+        <script src="index.js" async defer></script>
     </head>
     <body>
         <div id="root">${body}</div>
