@@ -1,7 +1,7 @@
 
 const urlMap = {
     development: "http://127.0.0.1:9001",
-    production: "http://127.0.0.1:9001", // TODO: add production api url
+    production: "https://bera-backend.vercel.app/",
 }
 
 function getUrl() {
