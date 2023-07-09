@@ -1,7 +1,7 @@
 
 const urlMap = {
     development: "http://127.0.0.1:9001",
-    production: "https://bera-backend.vercel.app/",
+    production: "https://bera-backend.vercel.app",
 }
 
 function getUrl() {
