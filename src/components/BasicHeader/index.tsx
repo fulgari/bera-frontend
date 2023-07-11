@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { minusDelta } from "../Main/MainSlice";
 import cx from "classnames";
+import { useMutation, useQueryClient } from "react-query";
 
 type BasicHeaderProps = {};
 
@@ -11,6 +12,13 @@ export default function (props: BasicHeaderProps) {
     return new Date().getTime() + state.main.dateDelta;
   });
 
+  const queryClient = useQueryClient()
+  const mutation = useMutation({
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: "getTodosByPeriod" })
+    }
+  })
+
   const date = new Date(dateInMs);
   const year = date.toLocaleString("en-GB", { year: "numeric" });
   const month = date.toLocaleString("en-GB", { month: "short" });
@@ -19,15 +27,15 @@ export default function (props: BasicHeaderProps) {
     const btns = [
       {
         name: "Prev",
-        onClick: () => { dispatch({ type: "main/minusDelta", payload: {} }); }
+        onClick: () => { mutation.mutate(); dispatch({ type: "main/minusDelta", payload: {} }); }
       },
       {
         name: "Cur",
-        onClick: () => { dispatch({ type: "main/resetDelta", payload: {} }); }
+        onClick: () => { mutation.mutate();dispatch({ type: "main/resetDelta", payload: {} }); }
       },
       {
         name: "Next",
-        onClick: () => { dispatch({ type: "main/addDelta", payload: {} }); }
+        onClick: () => { mutation.mutate(); dispatch({ type: "main/addDelta", payload: {} }); }
       },
       // {
       //   name: "Setting",
