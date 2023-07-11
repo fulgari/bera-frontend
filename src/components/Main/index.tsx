@@ -18,7 +18,7 @@ export default function (props: MainProps) {
   const anchorMs = ms - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
 
   return  (
-    <div className={"flex flex-col flex-nowrap items-center w-full h-full px-8 py-2 bg-slate-50 dark:bg-gray-800"}>
+    <div className={"flex flex-col flex-nowrap items-center overflow-auto w-full h-full px-8 py-2 bg-slate-50 dark:bg-gray-800"}>
       <BasicHeader />
       <BasicDashboard anchorMs={anchorMs} /> 
     </div>

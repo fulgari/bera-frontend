@@ -47,7 +47,7 @@ export default function (props: BasicDashboardProps) {
   }, [todos, isLoading, error])
 
   return (
-    <div className={"w-full shadow-lg rounded-2xl flex-1 my-7 bg-white dark:bg-[rgba(255,255,255,.08)]"}>
+    <div className={"w-full shadow-lg rounded-2xl flex-1 my-7 pb-3 bg-white dark:bg-[rgba(255,255,255,.08)]"}>
       <div className={"grid grid-cols-5 min-h-full mx-3"}>
         {isLoading && (
           <div className="absolute left-1/2 top-1/2 translate-y-[-50%] translate-x-[-50%] flex justify-center items-center">
