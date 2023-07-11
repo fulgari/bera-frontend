@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import cx from "classnames";
 
 type BasicHeaderProps = {
-  onChangePeriod: () => void;
 };
 
 export default function (props: BasicHeaderProps) {
-  const { onChangePeriod } = props;
   const dispatch = useDispatch();
   const dateInMs: number = useSelector((state: any) => {
     return new Date().getTime() + state.main.dateDelta;
@@ -21,15 +19,15 @@ export default function (props: BasicHeaderProps) {
     const btns = [
       {
         name: "Prev",
-        onClick: () => { onChangePeriod(); dispatch({ type: "main/minusDelta", payload: {} }); }
+        onClick: () => { dispatch({ type: "main/minusDelta", payload: {} }); }
       },
       {
         name: "Cur",
-        onClick: () => { onChangePeriod(); dispatch({ type: "main/resetDelta", payload: {} }); }
+        onClick: () => { dispatch({ type: "main/resetDelta", payload: {} }); }
       },
       {
         name: "Next",
-        onClick: () => { onChangePeriod(); dispatch({ type: "main/addDelta", payload: {} }); }
+        onClick: () => { dispatch({ type: "main/addDelta", payload: {} }); }
       },
       // {
       //   name: "Setting",

@@ -1,17 +1,16 @@
-import React, { useEffect, forwardRef } from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { simplifyDate } from "../../utils/date";
 import { getUrl } from "../../utils/env";
 import s from "./index.module.css";
 import BasicDashboardItem from "./BasicDashboardItem";
-import { useImperativeHandle } from "react";
 
 type BasicDashboardProps = {
   anchorMs: number,
 };
 
-export default forwardRef(function (props: BasicDashboardProps, ref) {
+export default function (props: BasicDashboardProps) {
   const { anchorMs } = props;
 
   const dispatch = useDispatch();
@@ -26,8 +25,7 @@ export default forwardRef(function (props: BasicDashboardProps, ref) {
     error,
     data: todos,
     isFetching,
-    refetch
-  } = useQuery("getTodosByPeriod", () =>
+  } = useQuery(["getTodosByPeriod", anchorMs], () =>
     fetch(`${getUrl()}/api/todorecord/period/${from}/${to}`, {
       method: "GET",
     })
@@ -37,10 +35,6 @@ export default forwardRef(function (props: BasicDashboardProps, ref) {
         return res;
       })
   );
-
-  useImperativeHandle(ref, () => ({
-    refetch
-  }));
 
   useEffect(() => {
     if (!isLoading && !error) {
@@ -70,4 +64,4 @@ export default forwardRef(function (props: BasicDashboardProps, ref) {
       </div>
     </div>
   );
-})
+}
