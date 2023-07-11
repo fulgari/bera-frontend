@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useQuery } from "react-query";
 import { useDispatch } from "react-redux";
 import { simplifyDate } from "../../utils/date";
@@ -15,10 +15,13 @@ export default function (props: BasicDashboardProps) {
 
   const dispatch = useDispatch();
 
-  const startOfWeek = new Date(anchorMs);
-  const endOfWeek = new Date(anchorMs + 7 * 60 * 60 * 1000 * 24);
-  const from = simplifyDate(startOfWeek);
-  const to = simplifyDate(endOfWeek);
+  const [from, to] = useMemo(() => {
+    const startOfWeek = new Date(anchorMs);
+    const endOfWeek = new Date(anchorMs + 7 * 60 * 60 * 1000 * 24);
+    const from = simplifyDate(startOfWeek);
+    const to = simplifyDate(endOfWeek);
+    return [from, to];
+  }, [anchorMs]);
 
   const {
     isLoading,
