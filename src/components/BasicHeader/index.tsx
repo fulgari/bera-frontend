@@ -1,23 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { minusDelta } from "../Main/MainSlice";
 import cx from "classnames";
-import { useMutation, useQueryClient } from "react-query";
 
-type BasicHeaderProps = {};
+type BasicHeaderProps = {
+  onChangePeriod: () => void;
+};
 
 export default function (props: BasicHeaderProps) {
+  const { onChangePeriod } = props;
   const dispatch = useDispatch();
   const dateInMs: number = useSelector((state: any) => {
     return new Date().getTime() + state.main.dateDelta;
   });
-
-  const queryClient = useQueryClient()
-  const mutation = useMutation({
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: "getTodosByPeriod" })
-    }
-  })
 
   const date = new Date(dateInMs);
   const year = date.toLocaleString("en-GB", { year: "numeric" });
@@ -27,15 +21,15 @@ export default function (props: BasicHeaderProps) {
     const btns = [
       {
         name: "Prev",
-        onClick: () => { mutation.mutate(); dispatch({ type: "main/minusDelta", payload: {} }); }
+        onClick: () => { onChangePeriod(); dispatch({ type: "main/minusDelta", payload: {} }); }
       },
       {
         name: "Cur",
-        onClick: () => { mutation.mutate();dispatch({ type: "main/resetDelta", payload: {} }); }
+        onClick: () => { onChangePeriod(); dispatch({ type: "main/resetDelta", payload: {} }); }
       },
       {
         name: "Next",
-        onClick: () => { mutation.mutate(); dispatch({ type: "main/addDelta", payload: {} }); }
+        onClick: () => { onChangePeriod(); dispatch({ type: "main/addDelta", payload: {} }); }
       },
       // {
       //   name: "Setting",

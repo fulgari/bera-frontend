@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicDashboard from "../BasicDashboard";
 import BasicHeader from "../BasicHeader";
@@ -17,10 +17,16 @@ export default function (props: MainProps) {
   /** start of the current showing week */
   const anchorMs = ms - (day === 0 ? 6 : day - 1) * 60 * 60 * 1000 * 24;
 
+  const dashboardRef = useRef<{refetch: () => void}>();
+
   return  (
     <div className={"flex flex-col flex-nowrap items-center w-full h-full px-8 py-2 bg-slate-50 dark:bg-gray-800"}>
-      <BasicHeader />
-      <BasicDashboard anchorMs={anchorMs} /> 
+      <BasicHeader onChangePeriod={() => {
+        if (dashboardRef?.current) {
+          dashboardRef.current.refetch()
+        }
+      }} />
+      <BasicDashboard ref={dashboardRef} anchorMs={anchorMs} /> 
     </div>
   );
 }
