@@ -12,14 +12,7 @@ import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import "./styles/app.module.css";
 import { Provider } from "react-redux";
 import { store } from "./store";
-
-let App = () => {
-  return (
-    <Basic>
-      <Main />
-    </Basic>
-  );
-};
+import { App } from "./pages/App";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +31,3 @@ root.render(<Provider store={store}>
     </BrowserRouter>
   </QueryClientProvider>
   </Provider>);
-
-export {
-  App,
-}

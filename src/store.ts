@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import basicDashboardReducer from "./components/BasicDashboard/BasicDashboardSlice"
 import mainReducer from "./components/Main/MainSlice"
+import unloginModalReducer from "./components/UnloginModal/UnloginModalSlice"
 
 export const store = configureStore({
   reducer: {
     // todos: todoReducer,
     basicDashboard: basicDashboardReducer,
-    main: mainReducer
+    main: mainReducer,
+    unloginModal: unloginModalReducer
   },
 });
 
