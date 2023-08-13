@@ -13,6 +13,7 @@ import "./styles/app.module.css";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import { App } from "./pages/App";
+import { Unlogin } from "./pages/Unlogin";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ root.render(<Provider store={store}>
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<Unlogin />} />
         <Route path="/" element={<App />} />
         {/* <Route path="home" element={<Home />} />
         <Route path="kanban" element={<Kanban />} /> */}
