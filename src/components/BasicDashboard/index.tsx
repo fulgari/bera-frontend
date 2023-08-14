@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { useQuery } from 'react-query'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { simplifyDate } from '../../utils/date'
 import { getUrl } from '../../utils/env'
 import s from './index.module.css'
@@ -13,6 +13,9 @@ interface BasicDashboardProps {
 export default function BasicDashboard (props: BasicDashboardProps) {
   const { anchorMs } = props
 
+  const authorization: string = useSelector((state: any) => {
+    return `JWT ${state.main.authToken}`
+  })
   const dispatch = useDispatch()
 
   const [from, to] = useMemo(() => {
@@ -30,7 +33,11 @@ export default function BasicDashboard (props: BasicDashboardProps) {
     isFetching
   } = useQuery(['getTodosByPeriod', anchorMs], async () =>
     await fetch(`${getUrl()}/api/todorecord/period/${from}/${to}`, {
-      method: 'GET'
+      method: 'get',
+      headers: {
+        'content-type': 'application/json',
+        authorization
+      }
     })
       .then(async (res) => await res.json())
       .then((res: any) => {

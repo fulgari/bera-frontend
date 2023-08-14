@@ -7,7 +7,8 @@ const mainSlice = createSlice({
   initialState: {
     // 与今天的时间差
     dateDelta: 0,
-    isDarkMode: typeof window !== 'undefined' ? localStorage.theme === 'dark' : false
+    isDarkMode: typeof window !== 'undefined' ? localStorage.theme === 'dark' : false,
+    authToken: ''
   },
   reducers: {
     resetDelta: (state, action) => {
@@ -21,6 +22,9 @@ const mainSlice = createSlice({
     },
     toggleDarkMode: (state, action) => {
       state.isDarkMode = action.payload
+    },
+    setAuthToken: (state, action) => {
+      state.authToken = action.payload
     }
   }
 })

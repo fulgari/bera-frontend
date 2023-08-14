@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Button from '../general/Button'
 import { getUrl } from '../../utils/env'
+import { useNavigate } from 'react-router-dom'
 
 export default function UnloginModal () {
   const { email, password } = useSelector((state: any) => {
@@ -9,6 +10,7 @@ export default function UnloginModal () {
   })
 
   const dispatch = useDispatch()
+  const nav = useNavigate()
 
   const handleRegister = async () => {
     await fetch(`${getUrl()}/auth/register`, {
@@ -33,7 +35,12 @@ export default function UnloginModal () {
       headers: {
         'content-type': 'application/json'
       }
-    }).then(res => { console.log(res) }).catch(e => { console.error(e) })
+    }).then(async res => await res.json()).then(res => {
+      console.log(res)
+      const { token } = res || {}
+      dispatch({ type: 'main/setAuthToken', payload: token })
+      nav('/')
+    }).catch(e => { console.error(e) })
   }
 
   return (
@@ -47,7 +54,7 @@ export default function UnloginModal () {
         dispatch({ type: 'unloginModal/setPassword', payload: e.target.value })
       } />
       <div className="flex justify-center items-center mt-4">
-        <Button type='primary' className="">Register</Button>
+        <Button type='primary' className="" onClick={() => { void handleRegister() }}>Register</Button>
         <Button type='primary' className="" onClick={() => { void handleSignIn() }}>Log in</Button>
       </div>
     </div>

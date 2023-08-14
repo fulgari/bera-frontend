@@ -1,11 +1,14 @@
 import React, { InputHTMLAttributes, useMemo, useRef, useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
 
 function TaskInput (props: any) {
   const { path, date, todo, isLast } = props
 
+  const authorization: string = useSelector((state: any) => {
+    return `JWT ${state.main.authToken}`
+  })
   const inputRef = useRef<any>()
   const dispatch = useDispatch()
 
@@ -37,7 +40,8 @@ function TaskInput (props: any) {
         method: 'post',
         body: JSON.stringify(newTodo),
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          authorization
         }
       }).catch(e => { console.error(e) })
     } else if (value) {
@@ -50,7 +54,8 @@ function TaskInput (props: any) {
         method: 'put',
         body: JSON.stringify(newTodo),
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          authorization
         }
       }).catch(e => { console.error(e) })
     }
