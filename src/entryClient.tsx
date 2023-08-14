@@ -16,8 +16,9 @@ import { Unlogin } from './pages/Unlogin'
 
 const queryClient = new QueryClient()
 
+const rootEl = document.getElementById('root') ?? document.body
 const root = Client.createRoot(
-  document.getElementById('root')
+  rootEl
 )
 
 root.render(<Provider store={store}>

@@ -15,7 +15,7 @@ function TaskInput (props: any) {
     }
   }, [inputRef.current, todo.text])
 
-  const addTask = () => {
+  const addTask = async () => {
     if (inputRef.current?.value === '') return
     const value = inputRef.current?.value
     if (isLast) {
@@ -33,26 +33,26 @@ function TaskInput (props: any) {
         tags: null
       }
       dispatch({ type: 'basicDashboard/addTodo', payload: newTodo })
-      fetch(`${getUrl()}/api/todorecord`, {
+      await fetch(`${getUrl()}/api/todorecord`, {
         method: 'post',
         body: JSON.stringify(newTodo),
         headers: {
           'content-type': 'application/json'
         }
-      })
+      }).catch(e => { console.error(e) })
     } else if (value) {
       const newTodo: Partial<TodoRecordType> = {
         id: todo.id,
         text: value as string
       }
       dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
-      fetch(`${getUrl()}/api/todorecord/${newTodo.id}`, {
+      await fetch(`${getUrl()}/api/todorecord/${newTodo.id ?? ''}`, {
         method: 'put',
         body: JSON.stringify(newTodo),
         headers: {
           'content-type': 'application/json'
         }
-      })
+      }).catch(e => { console.error(e) })
     }
   }
 
@@ -67,10 +67,10 @@ function TaskInput (props: any) {
                 inputRef.current.value = e.target.value
               }
             }}
-            onBlur={addTask}
+            onBlur={() => { void addTask() }}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
-                addTask()
+                void addTask()
               }
             }}
         />
