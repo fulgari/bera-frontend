@@ -5,12 +5,12 @@ const oneWeek = 7 * 24 * 60 * 60 * 1000
 const unloginModalSlice = createSlice({
   name: 'unloginModal',
   initialState: {
-    username: '',
+    email: '',
     password: ''
   },
   reducers: {
-    setUsername: (state, action) => {
-      state.username = action.payload
+    setEmail: (state, action) => {
+      state.email = action.payload
     },
     setPassword: (state, action) => {
       state.password = action.payload
@@ -18,5 +18,5 @@ const unloginModalSlice = createSlice({
   }
 })
 
-export const { setUsername, setPassword } = unloginModalSlice.actions
+export const { setEmail, setPassword } = unloginModalSlice.actions
 export default unloginModalSlice.reducer

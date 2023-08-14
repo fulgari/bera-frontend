@@ -1,6 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
-import s from './Modal.module.css'
+import s from './index.module.css'
 
 interface ModalProps {
   children: any
