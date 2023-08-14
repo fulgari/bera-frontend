@@ -12,6 +12,7 @@ liveServer.start({
   port: 9004,
   host: "127.0.0.1",
   root: "public",
+  file: "index.html", // When set, serve this file (server root relative) for every 404 (useful for single-page applications)
   open: true,
   ignore: "node_modules",
   wait: 0,

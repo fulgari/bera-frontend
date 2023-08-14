@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const oneWeek = 7 * 24 * 60 * 60 * 1000
 
 const unloginModalSlice = createSlice({
-  name: 'unlogin',
+  name: 'unloginModal',
   initialState: {
     username: '',
     password: ''

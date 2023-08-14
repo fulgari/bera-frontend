@@ -25,8 +25,8 @@ root.render(<Provider store={store}>
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Unlogin />} />
         <Route path="/" element={<App />} />
+        <Route path="login" element={<Unlogin />} />
         {/* <Route path="home" element={<Home />} />
         <Route path="kanban" element={<Kanban />} /> */}
       </Routes>

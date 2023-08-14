@@ -5,7 +5,7 @@ interface UnloginModalProps {}
 
 export default function UnloginModal (props: UnloginModalProps) {
   const { username, password } = useSelector((state: any) => {
-    return state.unlogin
+    return state.unloginModal
   })
 
   const dispatch = useDispatch()

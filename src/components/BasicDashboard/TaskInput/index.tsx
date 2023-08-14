@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useMemo, useRef, useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addTodo, type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
 

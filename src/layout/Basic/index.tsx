@@ -7,7 +7,7 @@ const storage = typeof window !== 'undefined' ? localStorage : { theme: null }
 interface BasicLayoutProps {
   children?: any
 }
-export default function (props: BasicLayoutProps) {
+export default function Basic (props: BasicLayoutProps) {
   const { children } = props
   const [isOpenNotch, setIsOpenNotch] = useState(false)
   const isDarkMode = useSelector((state: any) => state.main.isDarkMode)
