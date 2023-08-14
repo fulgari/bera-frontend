@@ -6,7 +6,7 @@ import { getUrl } from '../../utils/env'
 
 interface MainProps {}
 
-export default function (props: MainProps) {
+export default function Main (props: MainProps) {
   const delta: number = useSelector((state: any) => {
     return state.main.dateDelta
   })

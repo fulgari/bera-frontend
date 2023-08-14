@@ -5,7 +5,7 @@ import cx from 'classnames'
 interface BasicHeaderProps {
 }
 
-export default function (props: BasicHeaderProps) {
+export default function BasicHeader (props: BasicHeaderProps) {
   const dispatch = useDispatch()
   const dateInMs: number = useSelector((state: any) => {
     return new Date().getTime() + state.main.dateDelta

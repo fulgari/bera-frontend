@@ -10,7 +10,7 @@ interface BasicDashboardProps {
   anchorMs: number
 }
 
-export default function (props: BasicDashboardProps) {
+export default function BasicDashboard (props: BasicDashboardProps) {
   const { anchorMs } = props
 
   const dispatch = useDispatch()

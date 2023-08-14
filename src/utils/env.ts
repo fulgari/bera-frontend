@@ -3,8 +3,8 @@ const urlMap = {
   production: 'https://bera-backend.vercel.app'
 }
 
-function getUrl () {
-  const env = process.env.NODE_ENV || 'development'
+function getUrl (): string {
+  const env = process.env.NODE_ENV ?? 'development'
   console.log('ENV', env, process.env.NODE_ENV)
   return urlMap[env]
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 import s from './Modal.module.css'
 
 interface ModalProps {
@@ -13,7 +14,7 @@ interface ModalProps {
 export default function Modal (props: ModalProps) {
   const { children, type = 'default', className, style, ...rest } = props
   return (
-    <div className={`${s[type]} ${s.button} ${className}`} style={style} {...rest}>
+    <div className={cx(s[type], s.button, className)} style={style} {...rest}>
       {children}
     </div>
   )

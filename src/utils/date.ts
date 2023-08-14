@@ -2,8 +2,8 @@ const today = () => new Date()
 
 function getToday (): string {
   const dt = today()
-  const day = new String(dt.getDate()).padStart(2, '0')
-  const month = new String(dt.getMonth() + 1).padStart(2, '0')
+  const day = `${dt.getDate()}`.padStart(2, '0')
+  const month = `${dt.getMonth() + 1}`.padStart(2, '0')
   const year = dt.getFullYear()
   return `${year}-${month}-${day}`
 }
@@ -25,8 +25,8 @@ function subtract (dt: Date, value: number, unit: 'd' | 'm' | 'y' = 'd'): string
       dt.setTime(time - value * 24 * 60 * 60 * 1000)
       break
   }
-  const day = new String(dt.getDate()).padStart(2, '0')
-  const month = new String(dt.getMonth() + 1).padStart(2, '0')
+  const day = `${dt.getDate()}`.padStart(2, '0')
+  const month = `${dt.getMonth() + 1}`.padStart(2, '0')
   const year = dt.getFullYear()
   return `${year}-${month}-${day}`
 }
@@ -40,7 +40,7 @@ function isSimpleDate (date: string): boolean {
  * @param date
  * @returns
  */
-function simplifyDate (date: Date): boolean {
+function simplifyDate (date: Date): string {
   return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`
 }
 

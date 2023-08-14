@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 interface UnloginModalProps {}
 
-export default function (props: UnloginModalProps) {
+export default function UnloginModal (props: UnloginModalProps) {
   const { username, password } = useSelector((state: any) => {
     return state.unlogin
   })

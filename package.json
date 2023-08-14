@@ -16,7 +16,7 @@
     "start:serve_koa": "NODE_ENV=production ts-node ./scripts/serve.koa.ts",
     "ssr:build": "NODE_ENV=development ts-node ./scripts/esbuild.build.ssr.ts",
     "ssr:serve": "node public/ssr/index.js",
-    "lint": "eslint --fix --ext '.js,.jsx,.ts,.tsx' ."
+    "lint": "eslint --fix --ext '.jsx,.ts,.tsx' ."
   },
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "@compodoc/live-server": "^1.2.3",
     "@types/koa": "^2.13.6",
     "@types/koa-static": "^4.0.2",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "esbuild": "^0.14.42",

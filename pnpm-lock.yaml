@@ -25,7 +25,7 @@ dependencies:
     version: registry.npmmirror.com/react-query@3.39.1(react-dom@18.1.0)(react@18.1.0)
   react-redux:
     specifier: ^8.0.2
-    version: registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0)
+    version: registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(@types/react@18.2.20)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0)
   react-router-dom:
     specifier: ^6.3.0
     version: registry.npmmirror.com/react-router-dom@6.3.0(react-dom@18.1.0)(react@18.1.0)
@@ -43,6 +43,9 @@ devDependencies:
   '@types/koa-static':
     specifier: ^4.0.2
     version: registry.npmmirror.com/@types/koa-static@4.0.2
+  '@types/react':
+    specifier: ^18.2.20
+    version: registry.npmmirror.com/@types/react@18.2.20
   '@types/react-dom':
     specifier: ^18.0.10
     version: registry.npmmirror.com/@types/react-dom@18.0.10
@@ -404,7 +407,7 @@ packages:
     dependencies:
       immer: registry.npmmirror.com/immer@9.0.21
       react: registry.npmmirror.com/react@18.1.0
-      react-redux: registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0)
+      react-redux: registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(@types/react@18.2.20)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0)
       redux: registry.npmmirror.com/redux@4.2.0
       redux-thunk: registry.npmmirror.com/redux-thunk@2.4.2(redux@4.2.0)
       reselect: registry.npmmirror.com/reselect@4.1.8
@@ -503,7 +506,7 @@ packages:
     name: '@types/hoist-non-react-statics'
     version: 3.3.1
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react@18.2.18
+      '@types/react': registry.npmmirror.com/@types/react@18.2.20
       hoist-non-react-statics: registry.npmmirror.com/hoist-non-react-statics@3.3.2
     dev: false
 
@@ -623,12 +626,12 @@ packages:
     name: '@types/react-dom'
     version: 18.0.10
     dependencies:
-      '@types/react': registry.npmmirror.com/@types/react@18.2.18
+      '@types/react': registry.npmmirror.com/@types/react@18.2.20
 
-  registry.npmmirror.com/@types/react@18.2.18:
-    resolution: {integrity: sha512-da4NTSeBv/P34xoZPhtcLkmZuJ+oYaCxHmyHzwaDQo9RQPBeXV+06gEk2FpqEcsX9XrnNLvRpVh6bdavDSjtiQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react/-/react-18.2.18.tgz}
+  registry.npmmirror.com/@types/react@18.2.20:
+    resolution: {integrity: sha512-WKNtmsLWJM/3D5mG4U84cysVY31ivmyw85dE84fOCk5Hx78wezB/XEjVPWl2JTZ5FkEeaTJf+VgUAUn3PE7Isw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/react/-/react-18.2.20.tgz}
     name: '@types/react'
-    version: 18.2.18
+    version: 18.2.20
     dependencies:
       '@types/prop-types': registry.npmmirror.com/@types/prop-types@15.7.5
       '@types/scheduler': registry.npmmirror.com/@types/scheduler@0.16.3
@@ -3949,7 +3952,7 @@ packages:
       react-dom: registry.npmmirror.com/react-dom@18.1.0(react@18.1.0)
     dev: false
 
-  registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0):
+  registry.npmmirror.com/react-redux@8.0.2(@types/react-dom@18.0.10)(@types/react@18.2.20)(react-dom@18.1.0)(react@18.1.0)(redux@4.2.0):
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-redux/-/react-redux-8.0.2.tgz}
     id: registry.npmmirror.com/react-redux/8.0.2
     name: react-redux
@@ -3975,6 +3978,7 @@ packages:
     dependencies:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime@7.22.6
       '@types/hoist-non-react-statics': registry.npmmirror.com/@types/hoist-non-react-statics@3.3.1
+      '@types/react': registry.npmmirror.com/@types/react@18.2.20
       '@types/react-dom': registry.npmmirror.com/@types/react-dom@18.0.10
       '@types/use-sync-external-store': registry.npmmirror.com/@types/use-sync-external-store@0.0.3
       hoist-non-react-statics: registry.npmmirror.com/hoist-non-react-statics@3.3.2
