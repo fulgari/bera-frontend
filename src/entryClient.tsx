@@ -1,25 +1,24 @@
-import React from "react";
-import * as Client from "react-dom/client";
-import List from "./layout/List";
-import Card from "./components/Card";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
-import { Home } from "./pages/Home";
-import { Kanban } from "./pages/Kanban";
-import Basic from "./layout/Basic";
-import Main from "./components/Main";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import "./styles/app.module.css";
-import { Provider } from "react-redux";
-import { store } from "./store";
-import { App } from "./pages/App";
-import { Unlogin } from "./pages/Unlogin";
+import React, { useEffect } from 'react'
+import * as Client from 'react-dom/client'
+import List from './layout/List'
+import Card from './components/Card'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Home } from './pages/Home'
+import { Kanban } from './pages/Kanban'
+import Basic from './layout/Basic'
+import Main from './components/Main'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import './styles/app.module.css'
+import { Provider } from 'react-redux'
+import { store } from './store'
+import { App } from './pages/App'
+import { Unlogin } from './pages/Unlogin'
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 const root = Client.createRoot(
   document.getElementById('root')
-);
+)
 
 root.render(<Provider store={store}>
   <QueryClientProvider client={queryClient}>
@@ -32,4 +31,4 @@ root.render(<Provider store={store}>
       </Routes>
     </BrowserRouter>
   </QueryClientProvider>
-  </Provider>);
+  </Provider>)

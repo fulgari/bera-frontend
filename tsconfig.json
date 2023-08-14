@@ -4,6 +4,7 @@
         "target": "esnext",
         "module": "commonjs",
         "esModuleInterop": true,
+        "strictNullChecks": true,
         "paths": {
             "src": [
                 "./src"

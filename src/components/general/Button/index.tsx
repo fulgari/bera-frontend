@@ -1,20 +1,20 @@
-import React from "react";
-import s from "./Button.module.css";
+import React from 'react'
+import s from './Button.module.css'
 
-type ButtonProps = {
-  children: any;
-  type?: "primary" | "secondary" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "default";
-  onClick?: (e: React.MouseEvent) => void;
-  className?: string;
-  style?: React.CSSProperties;
-  [key: string]: any;
-};
+interface ButtonProps {
+  children: any
+  type?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'default'
+  onClick?: (e: React.MouseEvent) => void
+  className?: string
+  style?: React.CSSProperties
+  [key: string]: any
+}
 
-export default function Button(props: ButtonProps) {
-  const { children, type = "primary", className, style, ...rest } = props;
+export default function Button (props: ButtonProps) {
+  const { children, type = 'primary', className, style, ...rest } = props
   return (
     <div className={`${s[type]} ${s.button} ${className}`} style={style} {...rest}>
       {children}
     </div>
-  );
+  )
 }
