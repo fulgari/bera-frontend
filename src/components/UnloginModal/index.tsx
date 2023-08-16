@@ -13,34 +13,45 @@ export default function UnloginModal () {
   const nav = useNavigate()
 
   const handleRegister = async () => {
-    await fetch(`${getUrl()}/auth/register`, {
-      method: 'post',
-      body: JSON.stringify({
-        email,
-        password
-      }),
-      headers: {
-        'content-type': 'application/json'
-      }
-    }).then(res => { console.log(res) }).catch(e => { console.error(e) })
+    try {
+      const res = await fetch(`${getUrl()}/auth/register`, {
+        method: 'post',
+        body: JSON.stringify({
+          email,
+          password
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      const json = await res.json()
+      console.log('[handleRegister] register', json)
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const handleSignIn = async () => {
-    await fetch(`${getUrl()}/auth/sign_in`, {
-      method: 'post',
-      body: JSON.stringify({
-        email,
-        password
-      }),
-      headers: {
-        'content-type': 'application/json'
+    try {
+      const res = await fetch(`${getUrl()}/auth/sign_in`, {
+        method: 'post',
+        body: JSON.stringify({
+          email,
+          password
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      const json = await res.json()
+      if (json.token) {
+        const { token } = json || {}
+        dispatch({ type: 'main/setAuthToken', payload: token })
+        nav('/')
       }
-    }).then(async res => await res.json()).then(res => {
-      console.log(res)
-      const { token } = res || {}
-      dispatch({ type: 'main/setAuthToken', payload: token })
-      nav('/')
-    }).catch(e => { console.error(e) })
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return (
