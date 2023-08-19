@@ -23,7 +23,7 @@ export default class BaseService {
         return status < 400
       }
     })
-    return res.data
+    return res?.data
   }
 
   async get (params: IReqParams) {
@@ -35,7 +35,7 @@ export default class BaseService {
         return status < 400
       }
     })
-    return res.data
+    return res?.data
   }
 
   async put (params: IReqParams) {
@@ -47,6 +47,6 @@ export default class BaseService {
         return status < 400
       }
     })
-    return res.data
+    return res?.data
   }
 }

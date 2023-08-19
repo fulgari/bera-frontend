@@ -16,7 +16,7 @@ export default function UnloginModal () {
 
   const handleRegister = async () => {
     try {
-      const res = service.post({
+      await service.post({
         url: `${getUrl()}/auth/register`,
         data: JSON.stringify({
           email,
@@ -26,8 +26,7 @@ export default function UnloginModal () {
           'content-type': 'application/json'
         }
       })
-
-      console.log('[handleRegister] register', res)
+      console.log('[handleRegister] register')
     } catch (e) {
       console.error(e)
     }
