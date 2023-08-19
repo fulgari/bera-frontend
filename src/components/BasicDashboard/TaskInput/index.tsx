@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useMemo, useRef, useState, useEffect } from
 import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
+import { useService } from '../../../service/ServiceProvider'
 
 function TaskInput (props: any) {
   const { path, date, todo, isLast } = props
@@ -11,6 +12,7 @@ function TaskInput (props: any) {
   })
   const inputRef = useRef<any>()
   const dispatch = useDispatch()
+  const service = useService()
 
   useEffect(() => {
     if (inputRef.current && todo.text) {
@@ -21,43 +23,48 @@ function TaskInput (props: any) {
   const addTask = async () => {
     if (inputRef.current?.value === '') return
     const value = inputRef.current?.value
-    if (isLast) {
-      const ts = new Date().getTime()
-      // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
-      const newTodo: DraftTodoRecordType = {
-        date,
-        listId: null,
-        note: null,
-        text: value,
-        done: false,
-        modifiedAt: ts.toString(),
-        createdAt: ts.toString(),
-        isMD: null,
-        tags: null
-      }
-      dispatch({ type: 'basicDashboard/addTodo', payload: newTodo })
-      await fetch(`${getUrl()}/api/todorecord`, {
-        method: 'post',
-        body: JSON.stringify(newTodo),
-        headers: {
-          'content-type': 'application/json',
-          authorization
+    try {
+      if (isLast) {
+        const ts = new Date().getTime()
+        // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
+        const newTodo: DraftTodoRecordType = {
+          date,
+          listId: null,
+          note: null,
+          text: value,
+          done: false,
+          modifiedAt: ts.toString(),
+          createdAt: ts.toString(),
+          isMD: null,
+          tags: null
         }
-      }).catch(e => { console.error(e) })
-    } else if (value) {
-      const newTodo: Partial<TodoRecordType> = {
-        id: todo.id,
-        text: value as string
-      }
-      dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
-      await fetch(`${getUrl()}/api/todorecord/${newTodo.id ?? ''}`, {
-        method: 'put',
-        body: JSON.stringify(newTodo),
-        headers: {
-          'content-type': 'application/json',
-          authorization
+        dispatch({ type: 'basicDashboard/addTodo', payload: newTodo })
+        await service.post({
+          url: `${getUrl()}/api/todorecord`,
+          data: JSON.stringify(newTodo),
+          headers: {
+            'content-type': 'application/json',
+            authorization
+          }
+        })
+      } else if (value) {
+        const newTodo: Partial<TodoRecordType> = {
+          id: todo.id,
+          text: value as string
         }
-      }).catch(e => { console.error(e) })
+        dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
+
+        await service.put({
+          url: `${getUrl()}/api/todorecord`,
+          data: JSON.stringify(newTodo),
+          headers: {
+            'content-type': 'application/json',
+            authorization
+          }
+        })
+      }
+    } catch (e) {
+      console.error('error: ', e)
     }
   }
 

@@ -13,6 +13,8 @@ import { Provider } from 'react-redux'
 import { store } from './store'
 import { App } from './pages/App'
 import { Unlogin } from './pages/Unlogin'
+import { ServiceProvider } from './service/ServiceProvider'
+import service from './service'
 
 const queryClient = new QueryClient()
 
@@ -21,15 +23,19 @@ const root = Client.createRoot(
   rootEl
 )
 
-root.render(<Provider store={store}>
-  <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="login" element={<Unlogin />} />
-        {/* <Route path="home" element={<Home />} />
+root.render(
+  <Provider store={store}>
+    <ServiceProvider value={{ service }}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="login" element={<Unlogin />} />
+            {/* <Route path="home" element={<Home />} />
         <Route path="kanban" element={<Kanban />} /> */}
-      </Routes>
-    </BrowserRouter>
-  </QueryClientProvider>
-  </Provider>)
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </ServiceProvider>
+  </Provider>
+)

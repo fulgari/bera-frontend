@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { useQuery } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { simplifyDate } from '../../utils/date'
 import { getUrl } from '../../utils/env'
 import s from './index.module.css'
 import BasicDashboardItem from './BasicDashboardItem'
+import { useService } from '../../service/ServiceProvider'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -17,6 +18,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
     return `JWT ${state.main.authToken}`
   })
   const dispatch = useDispatch()
+  const service = useService()
 
   const [from, to] = useMemo(() => {
     const startOfWeek = new Date(anchorMs)
@@ -31,20 +33,17 @@ export default function BasicDashboard (props: BasicDashboardProps) {
     error,
     data: todos,
     isFetching
-  } = useQuery(['getTodosByPeriod', anchorMs], async () =>
-    await fetch(`${getUrl()}/api/todorecord/period/${from}/${to}`, {
-      method: 'get',
+  } = useQuery(['getTodosByPeriod', anchorMs], async () => {
+    const res = await service.get({
+      url: `${getUrl()}/api/todorecord/period/${from}/${to}`,
       headers: {
         'content-type': 'application/json',
         authorization
       }
     })
-      .then(async (res) => await res.json())
-      .then((res: any) => {
-        console.log('[period] get: ', res)
-        return res
-      })
-  )
+    console.log('[period] get: ', res)
+    return res
+  })
 
   useEffect(() => {
     if (!isLoading && !error) {

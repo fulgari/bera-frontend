@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import Button from '../general/Button'
 import { getUrl } from '../../utils/env'
 import { useNavigate } from 'react-router-dom'
+import { useService } from '../../service/ServiceProvider'
 
 export default function UnloginModal () {
   const { email, password } = useSelector((state: any) => {
     return state.unloginModal
   })
 
+  const service = useService()
   const dispatch = useDispatch()
   const nav = useNavigate()
 
   const handleRegister = async () => {
     try {
-      const res = await fetch(`${getUrl()}/auth/register`, {
-        method: 'post',
-        body: JSON.stringify({
+      const res = service.post({
+        url: `${getUrl()}/auth/register`,
+        data: JSON.stringify({
           email,
           password
         }),
@@ -24,8 +26,8 @@ export default function UnloginModal () {
           'content-type': 'application/json'
         }
       })
-      const json = await res.json()
-      console.log('[handleRegister] register', json)
+
+      console.log('[handleRegister] register', res)
     } catch (e) {
       console.error(e)
     }
@@ -33,9 +35,9 @@ export default function UnloginModal () {
 
   const handleSignIn = async () => {
     try {
-      const res = await fetch(`${getUrl()}/auth/sign_in`, {
-        method: 'post',
-        body: JSON.stringify({
+      const res = await service.post({
+        url: `${getUrl()}/auth/sign_in`,
+        data: JSON.stringify({
           email,
           password
         }),
@@ -43,9 +45,9 @@ export default function UnloginModal () {
           'content-type': 'application/json'
         }
       })
-      const json = await res.json()
-      if (json.token) {
-        const { token } = json || {}
+
+      if (res.token) {
+        const { token } = res || {}
         dispatch({ type: 'main/setAuthToken', payload: token })
         nav('/')
       }
