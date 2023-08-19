@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addTodo, type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
+import { log } from '../../../utils/logger'
 
 function TaskInput (props: any) {
   const { path, date, todo, isLast } = props
@@ -74,7 +75,7 @@ function TaskInput (props: any) {
             key={path}
             className={'relative w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:bg-[#313a47] dark:text-slate-200'}
             onChange={e => {
-              console.log('e.target', e)
+              log('e.target', e)
               if (inputRef.current) {
                 inputRef.current.value = e.target.value
               }

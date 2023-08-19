@@ -9,6 +9,7 @@ import { store } from './store'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
 import { renderToString } from 'react-dom/server'
+import { log } from './utils/logger'
 
 const App = () => {
   return (
@@ -38,9 +39,9 @@ koa.use(koaStatic(process.cwd()))
 koa.use((ctx, next) => {
   const { req } = ctx
   if (req.url === '/') {
-    console.log('renderToString:start')
+    log('renderToString:start')
     const body = renderToString(React.createElement(WrappedApp))
-    console.log('renderToString:body', body)
+    log('renderToString:body', body)
     const html = `
     <html lang="en">
     <head>
@@ -57,4 +58,4 @@ koa.use((ctx, next) => {
 })
 
 koa.listen(9004)
-console.log('listening on port 9004')
+log('listening on port 9004')

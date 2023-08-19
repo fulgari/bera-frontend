@@ -4,6 +4,7 @@ import Button from '../general/Button'
 import { getUrl } from '../../utils/env'
 import { useNavigate } from 'react-router-dom'
 import { useService } from '../../service/ServiceProvider'
+import { log } from '../../utils/logger'
 
 export default function UnloginModal () {
   const { email, password } = useSelector((state: any) => {
@@ -26,7 +27,7 @@ export default function UnloginModal () {
           'content-type': 'application/json'
         }
       })
-      console.log('[handleRegister] register')
+      log('[handleRegister] register')
     } catch (e) {
       console.error(e)
     }

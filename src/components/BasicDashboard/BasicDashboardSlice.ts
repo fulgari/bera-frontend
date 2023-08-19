@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { verifyDraftTodoRecord, verifyTodoRecord } from '../../utils/verify'
+import { log } from '../../utils/logger'
 
 interface TodoRecordType {
   id: string
@@ -24,7 +25,7 @@ const basicDashboardSlice = createSlice({
   reducers: {
     setupTodos: (state, action) => {
       const todos: any[] = action.payload
-      console.log('setup todos', todos)
+      log('setup todos', todos)
       if (todos.every(todo => verifyTodoRecord(todo))) {
         state.todos = action.payload
       }
@@ -32,7 +33,7 @@ const basicDashboardSlice = createSlice({
     addTodo: (state, action) => {
       if (verifyDraftTodoRecord(action.payload)) {
         state.todos = [...state.todos, action.payload]
-        console.log('[redux] addTodo, new state: ', state.todos)
+        log('[redux] addTodo, new state: ', state.todos)
       } else {
         console.error('[FAILED] addTodo() got invalid todo payload: ', action.payload)
       }
@@ -43,7 +44,7 @@ const basicDashboardSlice = createSlice({
       if (todoIndex !== -1) {
         const todo = state.todos[todoIndex]
         state.todos.splice(todoIndex, 1, { ...todo, ...payload })
-        console.log('[redux] updateTodo, from: ', todo, ' to: ', payload, state.todos)
+        log('[redux] updateTodo, from: ', todo, ' to: ', payload, state.todos)
       }
     }
   }

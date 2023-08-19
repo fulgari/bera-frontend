@@ -6,6 +6,7 @@ import { getUrl } from '../../utils/env'
 import s from './index.module.css'
 import BasicDashboardItem from './BasicDashboardItem'
 import { useService } from '../../service/ServiceProvider'
+import { log } from '../../utils/logger'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -41,13 +42,13 @@ export default function BasicDashboard (props: BasicDashboardProps) {
         authorization
       }
     })
-    console.log('[period] get: ', res)
+    log('[period] get: ', res)
     return res
   })
 
   useEffect(() => {
     if (!isLoading && !error) {
-      console.log('[todos] this week: ', todos)
+      log('[todos] this week: ', todos)
       dispatch({ type: 'basicDashboard/setupTodos', payload: todos })
     }
   }, [todos, isLoading, error])
