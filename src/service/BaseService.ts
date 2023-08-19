@@ -7,6 +7,12 @@ interface IReqParams {
   errorHandler?: () => void
 }
 
+axios.interceptors.response.use(response => response, error => {
+  if (error.response.status === 401) {
+    window.location.href = '/login'
+  }
+})
+
 export default class BaseService {
   async post (params: IReqParams) {
     const { url, data, headers } = params
