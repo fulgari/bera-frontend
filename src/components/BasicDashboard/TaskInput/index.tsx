@@ -56,7 +56,7 @@ function TaskInput (props: any) {
         dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
 
         await service.put({
-          url: `${getUrl()}/api/todorecord`,
+          url: `${getUrl()}/api/todorecord/${todo.id}`,
           data: JSON.stringify(newTodo),
           headers: {
             'content-type': 'application/json',
