@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useQuery } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { simplifyDate } from '../../utils/date'
@@ -16,7 +16,8 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   const { anchorMs } = props
 
   const authorization: string = useSelector((state: any) => {
-    return `JWT ${state.main.authToken}`
+    const token: string = state.main.authToken
+    return `JWT ${token}`
   })
   const dispatch = useDispatch()
   const service = useService()
@@ -32,8 +33,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   const {
     isLoading,
     error,
-    data: todos,
-    isFetching
+    data: todos
   } = useQuery(['getTodosByPeriod', anchorMs], async () => {
     const res = await service.get({
       url: `${getUrl()}/api/todorecord/period/${from}/${to}`,

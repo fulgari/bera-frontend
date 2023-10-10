@@ -1,15 +1,23 @@
-import React, { InputHTMLAttributes, useMemo, useRef, useState, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addTodo, type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
+import { type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'
 
-function TaskInput (props: any) {
-  const { path, date, todo, isLast } = props
+interface TaskInputProps {
+  path: string
+  date: string
+  todo: TodoRecordType
+  isLast: boolean
+}
+
+function TaskInput (props: TaskInputProps) {
+  const { path, date, todo, isLast } = props || {}
 
   const authorization: string = useSelector((state: any) => {
-    return `JWT ${state.main.authToken}`
+    const token: string = state.main.authToken
+    return `JWT ${token}`
   })
   const inputRef = useRef<any>()
   const dispatch = useDispatch()
@@ -48,7 +56,7 @@ function TaskInput (props: any) {
             authorization
           }
         })
-      } else if (value) {
+      } else if (Boolean(value) && Boolean(todo.id)) {
         const newTodo: Partial<TodoRecordType> = {
           id: todo.id,
           text: value as string
