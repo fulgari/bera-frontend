@@ -1,4 +1,5 @@
 {
+  "rewrites": [{ "source": "/:route", "destination": "/" }],
   "headers": [
     {
       "source": "/(.*)",
