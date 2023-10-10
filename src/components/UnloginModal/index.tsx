@@ -5,6 +5,7 @@ import { getUrl } from '../../utils/env'
 import { useNavigate } from 'react-router-dom'
 import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
+import { setCookie } from '../../utils/cookie'
 
 export default function UnloginModal () {
   const { email, password } = useSelector((state: any) => {
@@ -48,7 +49,7 @@ export default function UnloginModal () {
 
       if (res.token) {
         const { token } = res || {}
-        dispatch({ type: 'main/setAuthToken', payload: token })
+        setCookie('authorization', token)
         nav('/')
       }
     } catch (e) {

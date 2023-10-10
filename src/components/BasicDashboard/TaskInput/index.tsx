@@ -4,6 +4,7 @@ import { type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboard
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'
+import { getCookie } from '../../../utils/cookie'
 
 interface TaskInputProps {
   path: string
@@ -15,10 +16,8 @@ interface TaskInputProps {
 function TaskInput (props: TaskInputProps) {
   const { path, date, todo, isLast } = props || {}
 
-  const authorization: string = useSelector((state: any) => {
-    const token: string = state.main.authToken
-    return `JWT ${token}`
-  })
+  const authorization: string = `JWT ${getCookie('authorization')}`
+
   const inputRef = useRef<any>()
   const dispatch = useDispatch()
   const service = useService()
