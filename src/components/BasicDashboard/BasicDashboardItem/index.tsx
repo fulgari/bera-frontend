@@ -41,7 +41,7 @@ function BasicDashboardItem (props: BasicDashboardItemProps) {
                 {todosAtDate?.map((todo, todoIndex) => {
                   return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} />)
                 })}
-                <TaskInput todo={{}} date={currentDateString} path={[itemIndex, todosAtDate.length]} isLast={true} />
+                <TaskInput todo={undefined} date={currentDateString} path={[itemIndex, todosAtDate.length]} isLast={true} />
             </div>
         </div>
   )
