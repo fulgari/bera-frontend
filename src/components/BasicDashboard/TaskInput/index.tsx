@@ -80,7 +80,7 @@ function TaskInput (props: TaskInputProps) {
 
   const toggleCheckTask = throttle(async () => {
     if (!todo?.id) {
-      alert('Checked failed')
+      alert('Checkbox empty, failed')
       return
     }
     const newTodo = {
@@ -103,7 +103,7 @@ function TaskInput (props: TaskInputProps) {
 
   return (
     <div className={'flex justify-center items-center'}>
-        <Checkbox isChecked={todo?.done} className='' onClick={toggleCheckTask}/>
+        <Checkbox isChecked={todo?.done} onClick={toggleCheckTask}/>
         <input
             ref={inputRef}
             key={path.toString()}
