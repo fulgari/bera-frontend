@@ -5,6 +5,7 @@ import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'
 import { getCookie } from '../../../utils/cookie'
+import Checkbox from '../../general/Checkbox'
 
 interface TaskInputProps {
   path: string
@@ -77,6 +78,8 @@ function TaskInput (props: TaskInputProps) {
   }
 
   return (
+    <div className={'flex justify-center items-center'}>
+        <Checkbox isChecked={todo.done} className=''/>
         <input
             ref={inputRef}
             key={path}
@@ -94,6 +97,7 @@ function TaskInput (props: TaskInputProps) {
               }
             }}
         />
+        </div>
   )
 }
 
