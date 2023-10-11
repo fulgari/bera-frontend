@@ -23,6 +23,7 @@ function TaskInput (props: TaskInputProps) {
   const inputRef = useRef<any>()
   const dispatch = useDispatch()
   const service = useService()
+  const isDarkMode = useSelector((state: any) => state.main.isDarkMode)
 
   useEffect(() => {
     if (inputRef.current && todo?.text) {
@@ -103,7 +104,7 @@ function TaskInput (props: TaskInputProps) {
 
   return (
     <div className={'flex justify-center items-center'}>
-        {todo ? <Checkbox isChecked={todo?.done} onClick={toggleCheckTask}/> : null}
+        {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#000'}onClick={toggleCheckTask}/> : null}
         <input
             ref={inputRef}
             key={path.toString()}
