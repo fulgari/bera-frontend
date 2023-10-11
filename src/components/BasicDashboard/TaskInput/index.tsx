@@ -108,6 +108,10 @@ function TaskInput (props: TaskInputProps) {
             ref={inputRef}
             key={path.toString()}
             className={'relative w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:bg-[#313a47] dark:text-slate-200'}
+            style={{
+              textDecoration: todo?.done ? 'line-through' : '',
+              color: todo?.done ? '#d0d0d0' : ''
+            }}
             onChange={e => {
               log('e.target', e)
               if (inputRef.current) {
