@@ -103,7 +103,7 @@ function TaskInput (props: TaskInputProps) {
 
   return (
     <div className={'flex justify-center items-center'}>
-        <Checkbox isChecked={todo?.done} onClick={toggleCheckTask}/>
+        {todo ? <Checkbox isChecked={todo?.done} onClick={toggleCheckTask}/> : null}
         <input
             ref={inputRef}
             key={path.toString()}
