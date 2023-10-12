@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, type MutableRefObject } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
@@ -11,12 +11,13 @@ import { throttle } from '../../../utils/debounce'
 interface TaskInputProps {
   path: number[]
   date: string
+  colonRef: HTMLDivElement
   todo?: TodoRecordType
   isLast?: boolean
 }
 
 function TaskInput (props: TaskInputProps) {
-  const { path, date, todo, isLast } = props || {}
+  const { path, date, todo, colonRef, isLast } = props || {}
 
   const authorization: string = `JWT ${getCookie('authorization')}`
 
@@ -102,6 +103,15 @@ function TaskInput (props: TaskInputProps) {
     })
   }, 100)
 
+  const addAndMoveNext = async () => {
+    await addTask()
+    const index = path[path.length - 1]
+    const colon = colonRef
+    const nextEl = colon?.children[index + 1]
+    const nextInput = nextEl?.querySelector('input')
+    nextInput?.focus()
+  }
+
   return (
     <div className={'flex justify-center items-center'}>
         {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#000'}onClick={toggleCheckTask}/> : null}
@@ -120,9 +130,11 @@ function TaskInput (props: TaskInputProps) {
               }
             }}
             onBlur={() => { void addTask() }}
-            onKeyDown={(e) => {
+            onKeyDown={ (e) => {
               if (e.key === 'Enter') {
-                void addTask()
+                e.preventDefault()
+                e.stopPropagation()
+                void addAndMoveNext()
               }
             }}
         />

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { simplifyDate } from '../../../utils/date'
 import { type TodoRecordType } from '../BasicDashboardSlice'
@@ -31,17 +31,18 @@ function BasicDashboardItem (props: BasicDashboardItemProps) {
     const todosAtDate = todos.filter(todorecord => todorecord.date === currentDateString)
     return todosAtDate
   })
+  const colonRef = useRef(null)
 
   return (
         <div>
             <div className={`font-mono transition ease-in delay-100 ${todayDateString === currentDateString ? 'underline text-emerald-400' : 'dark:text-slate-200'}` } >
                 {month} {dayInMonth}, {dayMap[itemIndex]}
             </div>
-            <div>
+            <div ref={colonRef}>
                 {todosAtDate?.map((todo, todoIndex) => {
-                  return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} />)
+                  return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} colonRef={colonRef.current}/>)
                 })}
-                <TaskInput todo={undefined} date={currentDateString} path={[itemIndex, todosAtDate.length]} isLast={true} />
+                <TaskInput todo={undefined} date={currentDateString} path={[itemIndex, todosAtDate.length]} colonRef={colonRef.current} isLast={true} />
             </div>
         </div>
   )
