@@ -114,29 +114,29 @@ function TaskInput (props: TaskInputProps) {
 
   return (
     <div className={'flex justify-center items-center'}>
-        {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#000'}onClick={toggleCheckTask}/> : null}
+        {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#d0d0d0'} onClick={toggleCheckTask} /> : null}
         <input
-            ref={inputRef}
-            key={path.toString()}
-            className={'relative bg-transparent w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] transition ease-in focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:text-slate-200'}
-            style={{
-              textDecoration: todo?.done ? 'line-through' : '',
-              color: todo?.done ? '#d0d0d0' : ''
-            }}
-            onChange={e => {
-              log('e.target', e)
-              if (inputRef.current) {
-                inputRef.current.value = e.target.value
-              }
-            }}
-            onBlur={() => { void addTask() }}
-            onKeyDown={ (e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault()
-                e.stopPropagation()
-                void addAndMoveNext()
-              }
-            }}
+          ref={inputRef}
+          key={path.toString()}
+          className={'relative bg-transparent w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] transition ease-in focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:text-slate-200'}
+          style={{
+            textDecoration: todo?.done ? 'line-through' : '',
+            color: todo?.done ? '#d0d0d0' : ''
+          }}
+          onChange={e => {
+            log('e.target', e)
+            if (inputRef.current) {
+              inputRef.current.value = e.target.value
+            }
+          }}
+          onBlur={() => { void addTask() }}
+          onKeyDown={ (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              e.stopPropagation()
+              void addAndMoveNext()
+            }
+          }}
         />
         </div>
   )
