@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, type MutableRefObject } from 'react'
+import React, { useRef, useEffect, type MutableRefObject, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
@@ -26,14 +26,28 @@ function TaskInput (props: TaskInputProps) {
   const service = useService()
   const isDarkMode = useSelector((state: any) => state.main.isDarkMode)
 
+  const [oldText, setOldText] = useState('')
+
   useEffect(() => {
     if (inputRef.current && todo?.text) {
       inputRef.current.value = todo?.text
     }
   }, [inputRef.current, todo?.text])
 
-  const addTask = async () => {
-    if (inputRef.current?.value === '') return
+  const handleBlur = async () => {
+    if (inputRef.current?.value === '' && !isLast && todo?.id) {
+      await service.delete({
+        url: `${getUrl()}/api/todorecord/${todo?.id}`,
+        headers: {
+          'content-type': 'application/json',
+          authorization
+        }
+      })
+      return
+    }
+    if (inputRef.current?.value === oldText) {
+      return
+    }
     const value = inputRef.current?.value
     try {
       if (isLast) {
@@ -104,7 +118,7 @@ function TaskInput (props: TaskInputProps) {
   }, 100)
 
   const addAndMoveNext = async () => {
-    await addTask()
+    await handleBlur()
     const index = path[path.length - 1]
     const colon = colonRef
     const nextEl = colon?.children[index + 1]
@@ -114,31 +128,34 @@ function TaskInput (props: TaskInputProps) {
 
   return (
     <div className={'flex justify-center items-center'}>
-        {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#d0d0d0'} onClick={toggleCheckTask} /> : null}
-        <input
-          ref={inputRef}
-          key={path.toString()}
-          className={'relative bg-transparent w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] transition ease-in focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:text-slate-200'}
-          style={{
-            textDecoration: todo?.done ? 'line-through' : '',
-            color: todo?.done ? '#d0d0d0' : ''
-          }}
-          onChange={e => {
-            log('e.target', e)
-            if (inputRef.current) {
-              inputRef.current.value = e.target.value
-            }
-          }}
-          onBlur={() => { void addTask() }}
-          onKeyDown={ (e) => {
-            if (e.key === 'Enter') {
-              e.preventDefault()
-              e.stopPropagation()
-              void addAndMoveNext()
-            }
-          }}
-        />
-        </div>
+      {todo ? <Checkbox isChecked={todo?.done} fillColor={isDarkMode ? '#fff' : '#d0d0d0'} onClick={toggleCheckTask} /> : null}
+      <input
+        ref={inputRef}
+        key={path.toString()}
+        className={'relative bg-transparent w-full py-1 px-2 mb-1 border-b-slate-300 border-b-[.01rem] transition ease-in focus:rounded-sm focus:outline-dashed focus:outline-1 focus:outline-neutral-400 dark:text-slate-200'}
+        style={{
+          textDecoration: todo?.done ? 'line-through' : '',
+          color: todo?.done ? '#d0d0d0' : ''
+        }}
+        onChange={e => {
+          log('e.target', e)
+          if (inputRef.current) {
+            inputRef.current.value = e.target.value
+          }
+        }}
+        onFocus={(e) => {
+          setOldText(e.target.value)
+        }}
+        onBlur={() => { void handleBlur() }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault()
+            e.stopPropagation()
+            void addAndMoveNext()
+          }
+        }}
+      />
+    </div>
   )
 }
 

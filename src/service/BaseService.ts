@@ -49,4 +49,16 @@ export default class BaseService {
     })
     return res?.data
   }
+
+  async delete (params: IReqParams) {
+    const { url, headers } = params
+    const res = await axios.delete(url, {
+      headers,
+      timeout: 5000,
+      validateStatus: (status) => {
+        return status < 400
+      }
+    })
+    return res?.data
+  }
 }
