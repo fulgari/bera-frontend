@@ -36,13 +36,17 @@ function TaskInput (props: TaskInputProps) {
 
   const handleBlur = async () => {
     if (inputRef.current?.value === '' && !isLast && todo?.id) {
-      await service.delete({
+      const res = await service.delete({
         url: `${getUrl()}/api/todorecord/${todo?.id}`,
         headers: {
           'content-type': 'application/json',
           authorization
         }
       })
+      const { success } = res || {}
+      if (success) {
+        dispatch({ type: 'basicDashboard/removeTodo', payload: todo })
+      }
       return
     }
     if (inputRef.current?.value === oldText) {
@@ -64,8 +68,7 @@ function TaskInput (props: TaskInputProps) {
           isMD: null,
           tags: null
         }
-        dispatch({ type: 'basicDashboard/addTodo', payload: newTodo })
-        await service.post({
+        const res = await service.post({
           url: `${getUrl()}/api/todorecord`,
           data: JSON.stringify(newTodo),
           headers: {
@@ -73,6 +76,9 @@ function TaskInput (props: TaskInputProps) {
             authorization
           }
         })
+        const { result } = res || {}
+        const { id } = result || {}
+        dispatch({ type: 'basicDashboard/addTodo', payload: { ...newTodo, id } })
       } else if (Boolean(value) && todo?.id) {
         const newTodo: Partial<TodoRecordType> = {
           id: todo?.id,

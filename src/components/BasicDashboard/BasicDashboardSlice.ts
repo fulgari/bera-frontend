@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { verifyDraftTodoRecord, verifyTodoRecord } from '../../utils/verify'
+import { verifyTodoRecord } from '../../utils/verify'
 import { log } from '../../utils/logger'
 
 interface TodoRecordType {
@@ -31,7 +31,7 @@ const basicDashboardSlice = createSlice({
       }
     },
     addTodo: (state, action) => {
-      if (verifyDraftTodoRecord(action.payload)) {
+      if (verifyTodoRecord(action.payload)) {
         state.todos = [...state.todos, action.payload]
         log('[redux] addTodo, new state: ', state.todos)
       } else {
@@ -45,6 +45,14 @@ const basicDashboardSlice = createSlice({
         const todo = state.todos[todoIndex]
         state.todos.splice(todoIndex, 1, { ...todo, ...payload })
         log('[redux] updateTodo, from: ', todo, ' to: ', payload, state.todos)
+      }
+    },
+    removeTodo: (state, action) => {
+      const { payload } = action
+      const todoIndex = state.todos.findIndex(todo => todo.id === payload.id)
+      if (todoIndex !== -1) {
+        state.todos.splice(todoIndex, 1)
+        log('[redux] removeTodo, ', payload, state.todos)
       }
     }
   }

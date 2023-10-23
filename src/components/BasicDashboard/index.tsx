@@ -41,7 +41,9 @@ export default function BasicDashboard (props: BasicDashboardProps) {
       }
     })
     log('[period] get: ', res)
-    return res
+    const { success, result } = res || {}
+    if (!success) return []
+    return result?.records
   })
 
   useEffect(() => {
