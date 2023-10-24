@@ -76,17 +76,18 @@ function TaskInput (props: TaskInputProps) {
             authorization
           }
         })
-        const { result } = res || {}
+        const { success, result } = res || {}
         const { id } = result || {}
-        dispatch({ type: 'basicDashboard/addTodo', payload: { ...newTodo, id } })
+        if (success) {
+          dispatch({ type: 'basicDashboard/addTodo', payload: { ...newTodo, id } })
+        }
       } else if (Boolean(value) && todo?.id) {
         const newTodo: Partial<TodoRecordType> = {
           id: todo?.id,
           text: value as string
         }
-        dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
 
-        await service.put({
+        const res = await service.put({
           url: `${getUrl()}/api/todorecord/${todo?.id}`,
           data: JSON.stringify(newTodo),
           headers: {
@@ -94,6 +95,9 @@ function TaskInput (props: TaskInputProps) {
             authorization
           }
         })
+        if (res?.success) {
+          dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
+        }
       }
     } catch (e) {
       console.error('error: ', e)
@@ -109,11 +113,7 @@ function TaskInput (props: TaskInputProps) {
       ...todo,
       done: !todo.done
     }
-    dispatch({
-      type: 'basicDashboard/updateTodo',
-      payload: newTodo
-    })
-    await service.put({
+    const res = await service.put({
       url: `${getUrl()}/api/todorecord/${todo.id}`,
       data: JSON.stringify(newTodo),
       headers: {
@@ -121,6 +121,12 @@ function TaskInput (props: TaskInputProps) {
         authorization
       }
     })
+    if (res?.success) {
+      dispatch({
+        type: 'basicDashboard/updateTodo',
+        payload: newTodo
+      })
+    }
   }, 100)
 
   const addAndMoveNext = async () => {
