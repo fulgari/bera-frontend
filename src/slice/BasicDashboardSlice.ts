@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { verifyTodoRecord } from '../../utils/verify'
-import { log } from '../../utils/logger'
+import { verifyTodoRecord } from '../utils/verify'
+import { log } from '../utils/logger'
 
 interface TodoRecordType {
   id: string

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { simplifyDate } from '../../../utils/date'
-import { type TodoRecordType } from '../BasicDashboardSlice'
+import { type TodoRecordType } from '../../../slice/BasicDashboardSlice'
 import TaskInput from '../TaskInput'
 
 export const dayMap = {

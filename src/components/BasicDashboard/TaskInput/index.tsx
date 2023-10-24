@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, type MutableRefObject, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { type DraftTodoRecordType, type TodoRecordType } from '../BasicDashboardSlice'
+import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/BasicDashboardSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import basicDashboardReducer from './components/BasicDashboard/BasicDashboardSlice'
-import mainReducer from './components/Main/MainSlice'
-import unloginModalReducer from './components/UnloginModal/UnloginModalSlice'
+import basicDashboardReducer from './slice/BasicDashboardSlice'
+import mainReducer from './slice/MainSlice'
+import unloginModalReducer from './slice/UnloginModalSlice'
 
 export const store = configureStore({
   reducer: {
