@@ -5,7 +5,6 @@ import unloginModalReducer from './slice/UnloginModalSlice'
 
 export const store = configureStore({
   reducer: {
-    // todos: todoReducer,
     todoRecord: todoRecordReducer,
     main: mainReducer,
     unloginModal: unloginModalReducer

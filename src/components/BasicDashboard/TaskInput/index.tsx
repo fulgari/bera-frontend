@@ -56,7 +56,6 @@ function TaskInput (props: TaskInputProps) {
     try {
       if (isLast) {
         const ts = new Date().getTime()
-        // const tdId = ts.toString(32) + Math.floor(Math.random() * 1000);
         const newTodo: DraftTodoRecordType = {
           date,
           listId: null,

@@ -3,9 +3,7 @@ import { useSelector } from 'react-redux'
 import BasicDashboard from '../BasicDashboard'
 import BasicHeader from '../BasicHeader'
 
-interface MainProps {}
-
-export default function Main (props: MainProps) {
+export default function Main () {
   const delta: number = useSelector((state: any) => {
     return state.main.dateDelta
   })

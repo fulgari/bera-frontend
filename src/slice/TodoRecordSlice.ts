@@ -20,7 +20,8 @@ type DraftTodoRecordType = Omit<TodoRecordType, 'id'>
 const todoRecordSlice = createSlice({
   name: 'todoRecord',
   initialState: {
-    todos: [] as TodoRecordType[]
+    todos: [] as TodoRecordType[],
+    draftTodos: [] as TodoRecordType[]
   },
   reducers: {
     setupTodos: (state, action) => {
