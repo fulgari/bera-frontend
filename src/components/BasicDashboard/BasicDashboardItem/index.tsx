@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { simplifyDate } from '../../../utils/date'
-import { type TodoRecordType } from '../../../slice/BasicDashboardSlice'
+import { type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import TaskInput from '../TaskInput'
 
 export const dayMap = {
@@ -27,24 +27,24 @@ function BasicDashboardItem (props: BasicDashboardItemProps) {
   const todayDateString = simplifyDate(new Date())
 
   const todosAtDate: TodoRecordType[] = useSelector((state: any) => {
-    const todos = state.basicDashboard.todos
+    const todos = state.todoRecord.todos
     const todosAtDate = todos.filter(todorecord => todorecord.date === currentDateString)
     return todosAtDate
   })
   const colonRef = useRef(null)
 
   return (
-        <div>
-            <div className={`font-mono transition ease-in delay-100 ${todayDateString === currentDateString ? 'underline text-emerald-400' : 'dark:text-slate-200'}` } >
-                {month} {dayInMonth}, {dayMap[itemIndex]}
-            </div>
-            <div ref={colonRef}>
-                {todosAtDate?.map((todo, todoIndex) => {
-                  return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} colonRef={colonRef.current}/>)
-                })}
-                <TaskInput todo={undefined} date={currentDateString} path={[itemIndex, todosAtDate.length]} colonRef={colonRef.current} isLast={true} />
-            </div>
-        </div>
+    <div>
+      <div className={`font-mono transition ease-in delay-100 ${todayDateString === currentDateString ? 'underline text-emerald-400' : 'dark:text-slate-200'}`} >
+        {month} {dayInMonth}, {dayMap[itemIndex]}
+      </div>
+      <div ref={colonRef}>
+        {todosAtDate?.map((todo, todoIndex) => {
+          return (<TaskInput todo={todo} date={currentDateString} path={[itemIndex, todoIndex]} key={todoIndex} colonRef={colonRef.current} />)
+        })}
+        <TaskInput todo={undefined} date={currentDateString} path={[itemIndex, todosAtDate.length]} colonRef={colonRef.current} isLast={true} />
+      </div>
+    </div>
   )
 }
 

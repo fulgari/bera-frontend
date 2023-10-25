@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, type MutableRefObject, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/BasicDashboardSlice'
+import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'
@@ -11,7 +11,7 @@ import { throttle } from '../../../utils/debounce'
 interface TaskInputProps {
   path: number[]
   date: string
-  colonRef: HTMLDivElement
+  colonRef: HTMLDivElement | null
   todo?: TodoRecordType
   isLast?: boolean
 }
@@ -45,7 +45,7 @@ function TaskInput (props: TaskInputProps) {
       })
       const { success } = res || {}
       if (success) {
-        dispatch({ type: 'basicDashboard/removeTodo', payload: todo })
+        dispatch({ type: 'todoRecord/removeTodo', payload: todo })
       }
       return
     }
@@ -79,7 +79,7 @@ function TaskInput (props: TaskInputProps) {
         const { success, result } = res || {}
         const { id } = result || {}
         if (success) {
-          dispatch({ type: 'basicDashboard/addTodo', payload: { ...newTodo, id } })
+          dispatch({ type: 'todoRecord/addTodo', payload: { ...newTodo, id } })
         }
       } else if (Boolean(value) && todo?.id) {
         const newTodo: Partial<TodoRecordType> = {
@@ -96,7 +96,7 @@ function TaskInput (props: TaskInputProps) {
           }
         })
         if (res?.success) {
-          dispatch({ type: 'basicDashboard/updateTodo', payload: newTodo })
+          dispatch({ type: 'todoRecord/updateTodo', payload: newTodo })
         }
       }
     } catch (e) {
@@ -123,7 +123,7 @@ function TaskInput (props: TaskInputProps) {
     })
     if (res?.success) {
       dispatch({
-        type: 'basicDashboard/updateTodo',
+        type: 'todoRecord/updateTodo',
         payload: newTodo
       })
     }
@@ -132,8 +132,7 @@ function TaskInput (props: TaskInputProps) {
   const addAndMoveNext = async () => {
     await handleBlur()
     const index = path[path.length - 1]
-    const colon = colonRef
-    const nextEl = colon?.children[index + 1]
+    const nextEl = colonRef?.children?.[index + 1]
     const nextInput = nextEl?.querySelector('input')
     nextInput?.focus()
   }

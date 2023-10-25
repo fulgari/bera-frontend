@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import basicDashboardReducer from './slice/BasicDashboardSlice'
+import todoRecordReducer from './slice/TodoRecordSlice'
 import mainReducer from './slice/MainSlice'
 import unloginModalReducer from './slice/UnloginModalSlice'
 
 export const store = configureStore({
   reducer: {
     // todos: todoReducer,
-    basicDashboard: basicDashboardReducer,
+    todoRecord: todoRecordReducer,
     main: mainReducer,
     unloginModal: unloginModalReducer
   }

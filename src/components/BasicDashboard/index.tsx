@@ -49,7 +49,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   useEffect(() => {
     if (!isLoading && !error) {
       log('[todos] this week: ', todos)
-      dispatch({ type: 'basicDashboard/setupTodos', payload: todos })
+      dispatch({ type: 'todoRecord/setupTodos', payload: todos })
     }
   }, [todos, isLoading, error])
 

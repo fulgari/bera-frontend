@@ -17,8 +17,8 @@ interface TodoRecordType {
 
 type DraftTodoRecordType = Omit<TodoRecordType, 'id'>
 
-const basicDashboardSlice = createSlice({
-  name: 'basicDashboard',
+const todoRecordSlice = createSlice({
+  name: 'todoRecord',
   initialState: {
     todos: [] as TodoRecordType[]
   },
@@ -59,5 +59,5 @@ const basicDashboardSlice = createSlice({
 })
 
 export type { TodoRecordType, DraftTodoRecordType }
-export const { addTodo, updateTodo } = basicDashboardSlice.actions
-export default basicDashboardSlice.reducer
+export const { addTodo, updateTodo } = todoRecordSlice.actions
+export default todoRecordSlice.reducer

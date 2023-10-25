@@ -1,8 +1,7 @@
 import React, { useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import BasicDashboard from '../BasicDashboard'
 import BasicHeader from '../BasicHeader'
-import { getUrl } from '../../utils/env'
 
 interface MainProps {}
 
