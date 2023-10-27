@@ -1,6 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import { useAppDispatch, useAppSelector } from '../../store'
+import { addDelta, minusDelta, resetDelta } from '../../action'
 
 export default function BasicHeader () {
   const dispatch = useAppDispatch()
@@ -16,19 +17,19 @@ export default function BasicHeader () {
     const btns = [
       {
         name: 'Prev',
-        onClick: () => { dispatch({ type: 'main/minusDelta', payload: {} }) }
+        onClick: () => { dispatch(minusDelta()) }
       },
       {
         name: 'Cur',
-        onClick: () => { dispatch({ type: 'main/resetDelta', payload: {} }) }
+        onClick: () => { dispatch(resetDelta()) }
       },
       {
         name: 'Next',
-        onClick: () => { dispatch({ type: 'main/addDelta', payload: {} }) }
+        onClick: () => { dispatch(addDelta()) }
       }
       // {
       //   name: "Setting",
-      //   onClick: () => { dispatch({ type: "", payload: {} }); }
+      //   onClick: () => { dispatch({ type: ""}); }
       // }
     ]
     return btns.map((item, index) => {

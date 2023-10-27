@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import beraLogo from '../../assets/bera.jpg'
 import { useAppSelector, useAppDispatch } from '../../store'
+import { toggleDarkMode } from '../../action'
 
 const storage = typeof window !== 'undefined' ? localStorage : { theme: null }
 
@@ -22,15 +23,15 @@ export default function Basic (props: BasicLayoutProps) {
     }
   }, [isDarkMode])
 
-  const toggleDarkMode = () => {
+  const toggleDark = () => {
     if (isDarkMode) {
       // Whenever the user explicitly chooses light mode
       storage.theme = 'light'
-      dispatch({ type: 'main/toggleDarkMode', payload: false })
+      dispatch(toggleDarkMode(false))
     } else {
       // Whenever the user explicitly chooses dark mode
       storage.theme = 'dark'
-      dispatch({ type: 'main/toggleDarkMode', payload: true })
+      dispatch(toggleDarkMode(true))
     }
   }
 
@@ -40,7 +41,7 @@ export default function Basic (props: BasicLayoutProps) {
       DARK: '☾'
     }
     return <>
-      <div className="w-5 h-5 cursor-default" onClick={toggleDarkMode}>{isDarkMode ? icons.LIGHT : icons.DARK}</div>
+      <div className="w-5 h-5 cursor-default" onClick={toggleDark}>{isDarkMode ? icons.LIGHT : icons.DARK}</div>
     </>
   }
 

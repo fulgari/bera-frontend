@@ -8,6 +8,7 @@ import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
 import { getCookie } from '../../utils/cookie'
 import { useAppDispatch } from '../../store'
+import { setupTodos } from '../../action'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -49,7 +50,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   useEffect(() => {
     if (!isLoading && !error) {
       log('[todos] this week: ', todos)
-      dispatch({ type: 'todoRecord/setupTodos', payload: todos })
+      dispatch(setupTodos(todos))
     }
   }, [todos, isLoading, error])
 

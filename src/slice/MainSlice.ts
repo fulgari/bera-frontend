@@ -10,13 +10,13 @@ const mainSlice = createSlice({
     isDarkMode: typeof window !== 'undefined' ? localStorage.theme === 'dark' : false
   },
   reducers: {
-    resetDelta: (state, action) => {
+    resetDelta: (state) => {
       state.dateDelta = 0
     },
-    addDelta: (state, action) => {
+    addDelta: (state) => {
       state.dateDelta += oneWeek
     },
-    minusDelta: (state, action) => {
+    minusDelta: (state) => {
       state.dateDelta -= oneWeek
     },
     toggleDarkMode: (state, action) => {

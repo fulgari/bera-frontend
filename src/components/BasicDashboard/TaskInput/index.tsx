@@ -7,6 +7,7 @@ import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
 import { useAppDispatch, useAppSelector } from '../../../store'
+import { addTodo, removeTodo, updateTodo } from '../../../action'
 
 interface TaskInputProps {
   path: number[]
@@ -45,7 +46,7 @@ function TaskInput (props: TaskInputProps) {
       })
       const { success } = res || {}
       if (success) {
-        dispatch({ type: 'todoRecord/removeTodo', payload: todo })
+        dispatch(removeTodo(todo))
       }
       return
     }
@@ -78,11 +79,11 @@ function TaskInput (props: TaskInputProps) {
         const { success, result } = res || {}
         const { id } = result || {}
         if (success) {
-          dispatch({ type: 'todoRecord/addTodo', payload: { ...newTodo, id } })
+          dispatch(addTodo({ ...newTodo, id }))
         }
       } else if (Boolean(value) && todo?.id) {
         const newTodo: Partial<TodoRecordType> = {
-          id: todo?.id,
+          id: todo.id,
           text: value as string
         }
 
@@ -95,7 +96,7 @@ function TaskInput (props: TaskInputProps) {
           }
         })
         if (res?.success) {
-          dispatch({ type: 'todoRecord/updateTodo', payload: newTodo })
+          dispatch(updateTodo(newTodo))
         }
       }
     } catch (e) {
