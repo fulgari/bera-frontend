@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import beraLogo from '../../assets/bera.jpg'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppSelector, useAppDispatch } from '../../store'
 
 const storage = typeof window !== 'undefined' ? localStorage : { theme: null }
 
@@ -10,8 +10,8 @@ interface BasicLayoutProps {
 export default function Basic (props: BasicLayoutProps) {
   const { children } = props
   const [isOpenNotch, setIsOpenNotch] = useState(false)
-  const isDarkMode = useSelector((state: any) => state.main.isDarkMode)
-  const dispatch = useDispatch()
+  const isDarkMode = useAppSelector((state) => state.main.isDarkMode)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     // On page load or when changing themes, best to add inline in `head` to avoid FOUC

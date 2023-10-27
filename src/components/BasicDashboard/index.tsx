@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo } from 'react'
 import { useQuery } from 'react-query'
-import { useDispatch } from 'react-redux'
 import { simplifyDate } from '../../utils/date'
 import { getUrl } from '../../utils/env'
 import s from './index.module.css'
@@ -8,6 +7,7 @@ import BasicDashboardItem from './BasicDashboardItem'
 import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
 import { getCookie } from '../../utils/cookie'
+import { useAppDispatch } from '../../store'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -17,7 +17,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   const { anchorMs } = props
 
   const authorization: string = `JWT ${getCookie('authorization')}`
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const service = useService()
 
   const [from, to] = useMemo(() => {

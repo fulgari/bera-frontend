@@ -1,10 +1,10 @@
-import React, { useRef } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 import BasicDashboard from '../BasicDashboard'
 import BasicHeader from '../BasicHeader'
+import { useAppSelector } from '../../store'
 
 export default function Main () {
-  const delta: number = useSelector((state: any) => {
+  const delta = useAppSelector((state) => {
     return state.main.dateDelta
   })
   const dateInMs = new Date().getTime() + delta

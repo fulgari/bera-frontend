@@ -1,13 +1,10 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import cx from 'classnames'
+import { useAppDispatch, useAppSelector } from '../../store'
 
-interface BasicHeaderProps {
-}
-
-export default function BasicHeader (props: BasicHeaderProps) {
-  const dispatch = useDispatch()
-  const dateInMs: number = useSelector((state: any) => {
+export default function BasicHeader () {
+  const dispatch = useAppDispatch()
+  const dateInMs: number = useAppSelector((state) => {
     return new Date().getTime() + state.main.dateDelta
   })
 

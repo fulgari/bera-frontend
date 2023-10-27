@@ -1,19 +1,19 @@
-import React, { useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
 import Button from '../general/Button'
 import { getUrl } from '../../utils/env'
 import { useNavigate } from 'react-router-dom'
 import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
 import { setCookie } from '../../utils/cookie'
+import { useAppSelector, useAppDispatch } from '../../store'
 
 export default function UnloginModal () {
-  const { email, password } = useSelector((state: any) => {
+  const { email, password } = useAppSelector((state) => {
     return state.unloginModal
   })
 
   const service = useService()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const nav = useNavigate()
 
   const handleRegister = async () => {

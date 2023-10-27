@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import { useSelector } from 'react-redux'
 import { simplifyDate } from '../../../utils/date'
 import { type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import TaskInput from '../TaskInput'
+import { useAppSelector } from '../../../store'
 
 export const dayMap = {
   0: 'Mon',
@@ -26,7 +26,7 @@ function BasicDashboardItem (props: BasicDashboardItemProps) {
   const currentDateString = simplifyDate(itemDate)
   const todayDateString = simplifyDate(new Date())
 
-  const todosAtDate: TodoRecordType[] = useSelector((state: any) => {
+  const todosAtDate: TodoRecordType[] = useAppSelector((state: any) => {
     const todos = state.todoRecord.todos
     const todosAtDate = todos.filter(todorecord => todorecord.date === currentDateString)
     return todosAtDate

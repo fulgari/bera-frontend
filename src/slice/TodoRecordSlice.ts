@@ -21,7 +21,7 @@ const todoRecordSlice = createSlice({
   name: 'todoRecord',
   initialState: {
     todos: [] as TodoRecordType[],
-    draftTodos: [] as TodoRecordType[]
+    isSyncing: false
   },
   reducers: {
     setupTodos: (state, action) => {
@@ -55,6 +55,12 @@ const todoRecordSlice = createSlice({
         state.todos.splice(todoIndex, 1)
         log('[redux] removeTodo, ', payload, state.todos)
       }
+    },
+    startSyncing: (state) => {
+      state.isSyncing = true
+    },
+    endSyncing: (state) => {
+      state.isSyncing = false
     }
   }
 })

@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, type MutableRefObject, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
@@ -7,6 +6,7 @@ import { log } from '../../../utils/logger'
 import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
+import { useAppDispatch, useAppSelector } from '../../../store'
 
 interface TaskInputProps {
   path: number[]
@@ -22,9 +22,9 @@ function TaskInput (props: TaskInputProps) {
   const authorization: string = `JWT ${getCookie('authorization')}`
 
   const inputRef = useRef<any>()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const service = useService()
-  const isDarkMode = useSelector((state: any) => state.main.isDarkMode)
+  const isDarkMode = useAppSelector((state) => state.main.isDarkMode)
 
   const [oldText, setOldText] = useState('')
 
