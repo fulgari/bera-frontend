@@ -118,6 +118,7 @@ function TaskInput (props: TaskInputProps) {
   }
 
   const toggleCheckTask = throttle(async () => {
+    if (isSyncing) return
     if (!todo?.id) {
       alert('Checkbox empty, failed')
       return
@@ -137,7 +138,10 @@ function TaskInput (props: TaskInputProps) {
     if (res?.success) {
       dispatch({
         type: 'todoRecord/updateTodo',
-        payload: newTodo
+        payload: {
+          newTodo,
+          id: newTodo.id
+        }
       })
     }
   }, 100)
