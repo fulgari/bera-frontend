@@ -41,10 +41,11 @@ const todoRecordSlice = createSlice({
     },
     updateTodo: (state, action) => {
       const { payload } = action
-      const todoIndex = state.todos.findIndex(todo => todo.id === payload.id)
+      const { id, newTodo } = payload || {}
+      const todoIndex = state.todos.findIndex(todo => todo.id === id)
       if (todoIndex !== -1) {
         const todo = state.todos[todoIndex]
-        state.todos.splice(todoIndex, 1, { ...todo, ...payload })
+        state.todos.splice(todoIndex, 1, { ...todo, ...newTodo })
         log('[redux] updateTodo, from: ', todo, ' to: ', payload, state.todos)
       }
     },
@@ -59,7 +60,9 @@ const todoRecordSlice = createSlice({
     startSyncing: (state) => {
       state.isSyncing = true
     },
-    endSyncing: (state) => {
+    endSyncing: (state, action) => {
+      const { finishCb } = action?.payload || {}
+      finishCb?.()
       state.isSyncing = false
     }
   }

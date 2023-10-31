@@ -7,7 +7,8 @@ import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
 import { useAppDispatch, useAppSelector } from '../../../store'
-import { addTodo, removeTodo, updateTodo } from '../../../action'
+import { addTodo, endSyncing, removeTodo, startSyncing, updateTodo } from '../../../action'
+import { DRAFT_TODO_RECORD_ID } from '../../../constants'
 
 interface TaskInputProps {
   path: number[]
@@ -26,6 +27,7 @@ function TaskInput (props: TaskInputProps) {
   const dispatch = useAppDispatch()
   const service = useService()
   const isDarkMode = useAppSelector((state) => state.main.isDarkMode)
+  const isSyncing = useAppSelector((state) => state.todoRecord.isSyncing)
 
   const [oldText, setOldText] = useState('')
 
@@ -36,7 +38,10 @@ function TaskInput (props: TaskInputProps) {
   }, [inputRef.current, todo?.text])
 
   const handleBlur = async () => {
+    if (isSyncing) return
     if (inputRef.current?.value === '' && !isLast && todo?.id) {
+      dispatch(startSyncing())
+      dispatch(removeTodo(todo))
       const res = await service.delete({
         url: `${getUrl()}/api/todorecord/${todo?.id}`,
         headers: {
@@ -45,9 +50,11 @@ function TaskInput (props: TaskInputProps) {
         }
       })
       const { success } = res || {}
-      if (success) {
-        dispatch(removeTodo(todo))
-      }
+      dispatch(endSyncing(() => {
+        if (!success) {
+          dispatch(addTodo(todo))
+        }
+      }))
       return
     }
     if (inputRef.current?.value === oldText) {
@@ -68,6 +75,8 @@ function TaskInput (props: TaskInputProps) {
           isMD: null,
           tags: null
         }
+        dispatch(startSyncing())
+        dispatch(addTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
         const res = await service.post({
           url: `${getUrl()}/api/todorecord`,
           data: JSON.stringify(newTodo),
@@ -78,11 +87,15 @@ function TaskInput (props: TaskInputProps) {
         })
         const { success, result } = res || {}
         const { id } = result || {}
-        if (success) {
-          dispatch(addTodo({ ...newTodo, id }))
-        }
+        dispatch(endSyncing(() => {
+          if (success) {
+            dispatch(updateTodo({ newTodo: { ...newTodo, id }, id: DRAFT_TODO_RECORD_ID }))
+          } else {
+            dispatch(removeTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
+          }
+        }))
       } else if (Boolean(value) && todo?.id) {
-        const newTodo: Partial<TodoRecordType> = {
+        const newTodo = {
           id: todo.id,
           text: value as string
         }
@@ -96,7 +109,7 @@ function TaskInput (props: TaskInputProps) {
           }
         })
         if (res?.success) {
-          dispatch(updateTodo(newTodo))
+          dispatch(updateTodo({ newTodo, id: newTodo.id }))
         }
       }
     } catch (e) {
