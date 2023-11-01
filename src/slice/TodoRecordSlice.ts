@@ -39,7 +39,7 @@ const todoRecordSlice = createSlice({
         console.error('[FAILED] addTodo() got invalid todo payload: ', action.payload)
       }
     },
-    updateTodo: (state, action: PayloadAction<{ id: string, newTodo: TodoRecordType }>) => {
+    updateTodo: (state, action: PayloadAction<{ id: string, newTodo: Partial<TodoRecordType> }>) => {
       const { payload } = action
       const { id, newTodo } = payload || {}
       const todoIndex = state.todos.findIndex(todo => todo.id === id)
