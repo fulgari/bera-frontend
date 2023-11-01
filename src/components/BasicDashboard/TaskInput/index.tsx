@@ -7,7 +7,7 @@ import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
 import { useAppDispatch, useAppSelector } from '../../../store'
-import { addTodo, endSyncing, removeTodo, startSyncing, updateTodo } from '../../../action'
+import { addTodo, endSyncing, removeTodo, startSyncing, updateTodo } from '../../../slice/TodoRecordSlice'
 import { DRAFT_TODO_RECORD_ID } from '../../../constants'
 
 interface TaskInputProps {
@@ -50,11 +50,10 @@ function TaskInput (props: TaskInputProps) {
         }
       })
       const { success } = res || {}
-      dispatch(endSyncing(() => {
-        if (!success) {
-          dispatch(addTodo(todo))
-        }
-      }))
+      if (!success) {
+        dispatch(addTodo(todo))
+      }
+      dispatch(endSyncing())
       return
     }
     if (inputRef.current?.value === oldText) {
@@ -87,13 +86,12 @@ function TaskInput (props: TaskInputProps) {
         })
         const { success, result } = res || {}
         const { id } = result || {}
-        dispatch(endSyncing(() => {
-          if (success) {
-            dispatch(updateTodo({ newTodo: { ...newTodo, id }, id: DRAFT_TODO_RECORD_ID }))
-          } else {
-            dispatch(removeTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
-          }
-        }))
+        if (success) {
+          dispatch(updateTodo({ newTodo: { ...newTodo, id }, id: DRAFT_TODO_RECORD_ID }))
+        } else {
+          dispatch(removeTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
+        }
+        dispatch(endSyncing())
       } else if (Boolean(value) && todo?.id) {
         const newTodo = {
           id: todo.id,
@@ -166,16 +164,19 @@ function TaskInput (props: TaskInputProps) {
           color: todo?.done ? '#d0d0d0' : ''
         }}
         onChange={e => {
+          if (isSyncing) return
           log('e.target', e)
           if (inputRef.current) {
             inputRef.current.value = e.target.value
           }
         }}
         onFocus={(e) => {
+          if (isSyncing) return
           setOldText(e.target.value)
         }}
         onBlur={() => { void handleBlur() }}
         onKeyDown={(e) => {
+          if (isSyncing) return
           if (e.key === 'Enter') {
             e.preventDefault()
             e.stopPropagation()

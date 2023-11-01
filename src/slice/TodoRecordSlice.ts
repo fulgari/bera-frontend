@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { verifyTodoRecord } from '../utils/verify'
 import { log } from '../utils/logger'
 
@@ -24,14 +24,14 @@ const todoRecordSlice = createSlice({
     isSyncing: false
   },
   reducers: {
-    setupTodos: (state, action) => {
-      const todos: any[] = action.payload
+    setupTodos: (state, action: PayloadAction<TodoRecordType[]>) => {
+      const todos = action.payload
       log('setup todos', todos)
       if (todos.every(todo => verifyTodoRecord(todo))) {
         state.todos = action.payload
       }
     },
-    addTodo: (state, action) => {
+    addTodo: (state, action: PayloadAction<TodoRecordType>) => {
       if (verifyTodoRecord(action.payload)) {
         state.todos = [...state.todos, action.payload]
         log('[redux] addTodo, new state: ', state.todos)
@@ -39,7 +39,7 @@ const todoRecordSlice = createSlice({
         console.error('[FAILED] addTodo() got invalid todo payload: ', action.payload)
       }
     },
-    updateTodo: (state, action) => {
+    updateTodo: (state, action: PayloadAction<{ id: string, newTodo: TodoRecordType }>) => {
       const { payload } = action
       const { id, newTodo } = payload || {}
       const todoIndex = state.todos.findIndex(todo => todo.id === id)
@@ -49,7 +49,7 @@ const todoRecordSlice = createSlice({
         log('[redux] updateTodo, from: ', todo, ' to: ', payload, state.todos)
       }
     },
-    removeTodo: (state, action) => {
+    removeTodo: (state, action: PayloadAction<TodoRecordType>) => {
       const { payload } = action
       const todoIndex = state.todos.findIndex(todo => todo.id === payload.id)
       if (todoIndex !== -1) {
@@ -60,14 +60,12 @@ const todoRecordSlice = createSlice({
     startSyncing: (state) => {
       state.isSyncing = true
     },
-    endSyncing: (state, action) => {
-      const { finishCb } = action?.payload || {}
-      finishCb?.()
+    endSyncing: (state) => {
       state.isSyncing = false
     }
   }
 })
 
 export type { TodoRecordType, DraftTodoRecordType }
-export const { addTodo, updateTodo } = todoRecordSlice.actions
+export const { setupTodos, addTodo, updateTodo, removeTodo, startSyncing, endSyncing } = todoRecordSlice.actions
 export default todoRecordSlice.reducer

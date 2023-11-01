@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import beraLogo from '../../assets/bera.jpg'
 import { useAppSelector, useAppDispatch } from '../../store'
-import { toggleDarkMode } from '../../action'
+import { toggleDarkMode } from '../../slice/MainSlice'
 
 const storage = typeof window !== 'undefined' ? localStorage : { theme: null }
 

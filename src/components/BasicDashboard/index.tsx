@@ -8,7 +8,7 @@ import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
 import { getCookie } from '../../utils/cookie'
 import { useAppDispatch } from '../../store'
-import { setupTodos } from '../../action'
+import { type TodoRecordType, setupTodos } from '../../slice/TodoRecordSlice'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -33,7 +33,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
     isLoading,
     error,
     data: todos
-  } = useQuery(['getTodosByPeriod', anchorMs], async () => {
+  } = useQuery<TodoRecordType[]>(['getTodosByPeriod', anchorMs], async () => {
     const res = await service.get({
       url: `${getUrl()}/api/todorecord/period/${from}/${to}`,
       headers: {
@@ -48,7 +48,7 @@ export default function BasicDashboard (props: BasicDashboardProps) {
   })
 
   useEffect(() => {
-    if (!isLoading && !error) {
+    if (!isLoading && !error && todos) {
       log('[todos] this week: ', todos)
       dispatch(setupTodos(todos))
     }

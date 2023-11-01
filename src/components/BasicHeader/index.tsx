@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import { useAppDispatch, useAppSelector } from '../../store'
-import { addDelta, minusDelta, resetDelta } from '../../action'
+import { addDelta, minusDelta, resetDelta } from '../../slice/MainSlice'
 
 export default function BasicHeader () {
   const dispatch = useAppDispatch()

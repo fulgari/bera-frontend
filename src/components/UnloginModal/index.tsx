@@ -6,7 +6,7 @@ import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
 import { setCookie } from '../../utils/cookie'
 import { useAppSelector, useAppDispatch } from '../../store'
-import { setEmail, setPassword } from '../../action'
+import { setEmail, setPassword } from '../../slice/UnloginModalSlice'
 
 export default function UnloginModal () {
   const { email, password } = useAppSelector((state) => {

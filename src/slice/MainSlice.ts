@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const oneWeek = 7 * 24 * 60 * 60 * 1000
 
@@ -19,11 +19,11 @@ const mainSlice = createSlice({
     minusDelta: (state) => {
       state.dateDelta -= oneWeek
     },
-    toggleDarkMode: (state, action) => {
+    toggleDarkMode: (state, action: PayloadAction<boolean>) => {
       state.isDarkMode = action.payload
     }
   }
 })
 
-export const { resetDelta, addDelta, minusDelta } = mainSlice.actions
+export const { resetDelta, addDelta, minusDelta, toggleDarkMode } = mainSlice.actions
 export default mainSlice.reducer
