@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, type MutableRefObject, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import { getUrl } from '../../../utils/env'
 import { useService } from '../../../service/ServiceProvider'
@@ -7,8 +7,7 @@ import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
 import { useAppDispatch, useAppSelector } from '../../../store'
-import { addTodo, endSyncing, removeTodo, startSyncing, updateTodo } from '../../../slice/TodoRecordSlice'
-import { DRAFT_TODO_RECORD_ID } from '../../../constants'
+import { addTodo, removeTodo, updateTodo } from '../../../slice/TodoRecordSlice'
 
 interface TaskInputProps {
   path: number[]
@@ -27,7 +26,6 @@ function TaskInput (props: TaskInputProps) {
   const dispatch = useAppDispatch()
   const service = useService()
   const isDarkMode = useAppSelector((state) => state.main.isDarkMode)
-  const isSyncing = useAppSelector((state) => state.todoRecord.isSyncing)
 
   const [oldText, setOldText] = useState('')
 
@@ -38,10 +36,7 @@ function TaskInput (props: TaskInputProps) {
   }, [inputRef.current, todo?.text])
 
   const handleBlur = async () => {
-    if (isSyncing) return
     if (inputRef.current?.value === '' && !isLast && todo?.id) {
-      dispatch(startSyncing())
-      dispatch(removeTodo(todo))
       const res = await service.delete({
         url: `${getUrl()}/api/todorecord/${todo?.id}`,
         headers: {
@@ -50,10 +45,9 @@ function TaskInput (props: TaskInputProps) {
         }
       })
       const { success } = res || {}
-      if (!success) {
-        dispatch(addTodo(todo))
+      if (success) {
+        dispatch(removeTodo(todo))
       }
-      dispatch(endSyncing())
       return
     }
     if (inputRef.current?.value === oldText) {
@@ -74,8 +68,6 @@ function TaskInput (props: TaskInputProps) {
           isMD: null,
           tags: null
         }
-        dispatch(startSyncing())
-        dispatch(addTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
         const res = await service.post({
           url: `${getUrl()}/api/todorecord`,
           data: JSON.stringify(newTodo),
@@ -87,11 +79,8 @@ function TaskInput (props: TaskInputProps) {
         const { success, result } = res || {}
         const { id } = result || {}
         if (success) {
-          dispatch(updateTodo({ newTodo: { ...newTodo, id }, id: DRAFT_TODO_RECORD_ID }))
-        } else {
-          dispatch(removeTodo({ ...newTodo, id: DRAFT_TODO_RECORD_ID }))
+          dispatch(addTodo({ ...newTodo, id }))
         }
-        dispatch(endSyncing())
       } else if (Boolean(value) && todo?.id) {
         const newTodo = {
           id: todo.id,
@@ -116,7 +105,6 @@ function TaskInput (props: TaskInputProps) {
   }
 
   const toggleCheckTask = throttle(async () => {
-    if (isSyncing) return
     if (!todo?.id) {
       alert('Checkbox empty, failed')
       return
@@ -164,19 +152,16 @@ function TaskInput (props: TaskInputProps) {
           color: todo?.done ? '#d0d0d0' : ''
         }}
         onChange={e => {
-          if (isSyncing) return
           log('e.target', e)
           if (inputRef.current) {
             inputRef.current.value = e.target.value
           }
         }}
         onFocus={(e) => {
-          if (isSyncing) return
           setOldText(e.target.value)
         }}
         onBlur={() => { void handleBlur() }}
         onKeyDown={(e) => {
-          if (isSyncing) return
           if (e.key === 'Enter') {
             e.preventDefault()
             e.stopPropagation()

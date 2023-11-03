@@ -20,8 +20,7 @@ type DraftTodoRecordType = Omit<TodoRecordType, 'id'>
 const todoRecordSlice = createSlice({
   name: 'todoRecord',
   initialState: {
-    todos: [] as TodoRecordType[],
-    isSyncing: false
+    todos: [] as TodoRecordType[]
   },
   reducers: {
     setupTodos: (state, action: PayloadAction<TodoRecordType[]>) => {
@@ -56,16 +55,10 @@ const todoRecordSlice = createSlice({
         state.todos.splice(todoIndex, 1)
         log('[redux] removeTodo, ', payload, state.todos)
       }
-    },
-    startSyncing: (state) => {
-      state.isSyncing = true
-    },
-    endSyncing: (state) => {
-      state.isSyncing = false
     }
   }
 })
 
 export type { TodoRecordType, DraftTodoRecordType }
-export const { setupTodos, addTodo, updateTodo, removeTodo, startSyncing, endSyncing } = todoRecordSlice.actions
+export const { setupTodos, addTodo, updateTodo, removeTodo } = todoRecordSlice.actions
 export default todoRecordSlice.reducer
