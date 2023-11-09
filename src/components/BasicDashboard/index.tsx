@@ -35,16 +35,17 @@ export default function BasicDashboard (props: BasicDashboardProps) {
     data: todos
   } = useQuery<TodoRecordType[]>(['getTodosByPeriod', anchorMs], async () => {
     const res = await service.get({
-      url: `${getUrl()}/api/todorecord/period/${from}/${to}`,
+      // url: `${getUrl()}/api/todorecord/period/${from}/${to}`,
+      url: `${getUrl()}/api/todorecord`,
       headers: {
         'content-type': 'application/json',
         authorization
       }
     })
     log('[period] get: ', res)
-    const { success, result } = res || {}
-    if (!success) return []
-    return result?.records
+    const { docContent } = res || {}
+    if (!docContent) return []
+    return docContent
   })
 
   useEffect(() => {

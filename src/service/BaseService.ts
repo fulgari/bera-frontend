@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { camelizeKeys, decamelizeKeys } from 'humps'
 
 interface IReqParams {
   url: string
@@ -11,6 +12,17 @@ axios.interceptors.response.use(response => response, error => {
   if (error?.response?.status === 401) {
     window.location.href = '/login'
   }
+})
+
+axios.interceptors.response.use(response => {
+  if (
+    response.data &&
+    response.headers['content-type'].indexOf('application/json') > -1
+  ) {
+    response.data = camelizeKeys(response.data)
+  }
+
+  return response
 })
 
 export default class BaseService {
