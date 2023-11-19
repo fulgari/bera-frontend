@@ -25,7 +25,7 @@ const todoRecordSlice = createSlice({
   reducers: {
     setupTodos: (state, action: PayloadAction<TodoRecordType[]>) => {
       const todos = action.payload
-      log('setup todos', todos)
+      log('setup todos', todos, todos.every(todo => verifyTodoRecord(todo)))
       if (todos.every(todo => verifyTodoRecord(todo))) {
         state.todos = action.payload
       }

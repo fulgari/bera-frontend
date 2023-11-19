@@ -26,7 +26,7 @@ function BasicDashboardItem (props: BasicDashboardItemProps) {
   const currentDateString = simplifyDate(itemDate)
   const todayDateString = simplifyDate(new Date())
 
-  const todosAtDate: TodoRecordType[] = useAppSelector((state: any) => {
+  const todosAtDate: TodoRecordType[] = useAppSelector((state) => {
     const todos = state.todoRecord.todos
     const todosAtDate = todos.filter(todorecord => todorecord.date === currentDateString)
     return todosAtDate

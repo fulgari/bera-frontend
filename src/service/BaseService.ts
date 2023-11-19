@@ -16,7 +16,7 @@ axios.interceptors.response.use(response => response, error => {
 
 axios.interceptors.response.use(response => {
   if (
-    response.data &&
+    response?.data &&
     response.headers['content-type'].indexOf('application/json') > -1
   ) {
     response.data = camelizeKeys(response.data)
@@ -28,6 +28,7 @@ axios.interceptors.response.use(response => {
 export default class BaseService {
   async post (params: IReqParams) {
     const { url, data, headers } = params
+    console.log('first1111')
     const res = await axios.post(url, data, {
       headers,
       timeout: 5000,
@@ -35,6 +36,7 @@ export default class BaseService {
         return status < 400
       }
     })
+    console.log('first1111-2', res)
     return res?.data
   }
 

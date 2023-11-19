@@ -1,14 +1,9 @@
-import React, { useEffect, useMemo } from 'react'
-import { useQuery } from 'react-query'
-import { simplifyDate } from '../../utils/date'
-import { getUrl } from '../../utils/env'
-import s from './index.module.css'
+import React, { useEffect } from 'react'
 import BasicDashboardItem from './BasicDashboardItem'
-import { useService } from '../../service/ServiceProvider'
 import { log } from '../../utils/logger'
-import { getCookie } from '../../utils/cookie'
 import { useAppDispatch } from '../../store'
-import { type TodoRecordType, setupTodos } from '../../slice/TodoRecordSlice'
+import { setupTodos } from '../../slice/TodoRecordSlice'
+import { useGetTodos } from '../../common/hooks/useGetTodos'
 
 interface BasicDashboardProps {
   anchorMs: number
@@ -17,36 +12,12 @@ interface BasicDashboardProps {
 export default function BasicDashboard (props: BasicDashboardProps) {
   const { anchorMs } = props
 
-  const authorization: string = `JWT ${getCookie('authorization')}`
   const dispatch = useAppDispatch()
-  const service = useService()
-
-  const [from, to] = useMemo(() => {
-    const startOfWeek = new Date(anchorMs)
-    const endOfWeek = new Date(anchorMs + 7 * 60 * 60 * 1000 * 24)
-    const from = simplifyDate(startOfWeek)
-    const to = simplifyDate(endOfWeek)
-    return [from, to]
-  }, [anchorMs])
-
   const {
     isLoading,
     error,
     data: todos
-  } = useQuery<TodoRecordType[]>(['getTodosByPeriod', anchorMs], async () => {
-    const res = await service.get({
-      // url: `${getUrl()}/api/todorecord/period/${from}/${to}`,
-      url: `${getUrl()}/api/todorecord`,
-      headers: {
-        'content-type': 'application/json',
-        authorization
-      }
-    })
-    log('[period] get: ', res)
-    const { docContent } = res || {}
-    if (!docContent) return []
-    return docContent
-  })
+  } = useGetTodos()
 
   useEffect(() => {
     if (!isLoading && !error && todos) {
