@@ -6,18 +6,20 @@ const hostname = {
 }
 
 const protocol = {
+  HTTP: 'http',
   HTTPS: 'https',
+  WSS: 'wss',
   WS: 'ws'
 }
 
 const urlMap = {
-  development: `${protocol.HTTPS}://${hostname.development}`,
+  development: `${protocol.HTTP}://${hostname.development}`,
   production: `${protocol.HTTPS}://${hostname.production}`
 }
 
 const urlWSSMap = {
   development: `${protocol.WS}://${hostname.development}`,
-  production: `${protocol.WS}://${hostname.production}`
+  production: `${protocol.WSS}://${hostname.production}`
 }
 
 function getUrl (): string {
