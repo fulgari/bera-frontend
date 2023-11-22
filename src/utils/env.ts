@@ -2,7 +2,7 @@ import { log } from './logger'
 
 const hostname = {
   development: '127.0.0.1:9001',
-  production: 'bera-backend.vercel.app'
+  production: '35.160.120.126'
 }
 
 const protocol = {
