@@ -1,6 +1,8 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { verifyTodoRecord } from '../utils/verify'
 import { log } from '../utils/logger'
+import connection from '../connection'
+import { TEST_DOC_ID } from '../constants'
 
 interface TodoRecordType {
   id: string
@@ -20,14 +22,15 @@ type DraftTodoRecordType = Omit<TodoRecordType, 'id'>
 const todoRecordSlice = createSlice({
   name: 'todoRecord',
   initialState: {
-    todos: [] as TodoRecordType[]
+    todos: [] as TodoRecordType[],
+    queryTrigger: 0
   },
   reducers: {
     setupTodos: (state, action: PayloadAction<TodoRecordType[]>) => {
       const todos = action.payload
       log('setup todos', todos, todos.every(todo => verifyTodoRecord(todo)))
       if (todos.every(todo => verifyTodoRecord(todo))) {
-        state.todos = action.payload
+        state.todos = [...action.payload]
       }
     },
     addTodo: (state, action: PayloadAction<TodoRecordType>) => {

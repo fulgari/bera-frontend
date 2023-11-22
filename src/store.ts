@@ -3,12 +3,20 @@ import todoRecordReducer from './slice/TodoRecordSlice'
 import mainReducer from './slice/MainSlice'
 import unloginModalReducer from './slice/UnloginModalSlice'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { fetchTodoApi } from './api/thunk'
 
 export const store = configureStore({
   reducer: {
     todoRecord: todoRecordReducer,
     main: mainReducer,
     unloginModal: unloginModalReducer
+  },
+  middleware (getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      thunk: {
+        extraArgument: { fetchTodoApi }
+      }
+    })
   }
 })
 

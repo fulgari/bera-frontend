@@ -1,16 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { setupTodos, type DraftTodoRecordType, type TodoRecordType } from '../../../slice/TodoRecordSlice'
-import { getUrl } from '../../../utils/env'
+import { type DraftTodoRecordType, type TodoRecordType } from '../../../slice/TodoRecordSlice'
 import { useService } from '../../../service/ServiceProvider'
 import { log } from '../../../utils/logger'
 import { getCookie } from '../../../utils/cookie'
 import Checkbox from '../../general/Checkbox'
 import { throttle } from '../../../utils/debounce'
-import { useAppSelector } from '../../../store'
-import { addTodo, removeTodo, updateTodo } from '../../../slice/TodoRecordSlice'
-import { useGetTodos } from '../../../common/hooks/useGetTodos'
+import { useAppDispatch, useAppSelector } from '../../../store'
 import connection from '../../../connection'
-import { createTodo } from '../../../sharedb/actions'
+import { createTodo, updateTodo, deleteTodo } from '../../../sharedb/actions'
+import { fetchSetupTodos } from '../../../api/thunk'
 
 interface TaskInputProps {
   path: number[]
@@ -23,6 +21,7 @@ interface TaskInputProps {
 function TaskInput (props: TaskInputProps) {
   const { path, date, todo, colonRef, isLast } = props || {}
 
+  const dispatch = useAppDispatch()
   const authorization: string = `JWT ${getCookie('authorization')}`
 
   const inputRef = useRef<any>()
@@ -30,8 +29,6 @@ function TaskInput (props: TaskInputProps) {
   const isDarkMode = useAppSelector((state) => state.main.isDarkMode)
 
   const [oldText, setOldText] = useState('')
-
-  const { refetch } = useGetTodos()
 
   useEffect(() => {
     if (inputRef.current && todo?.text) {
@@ -41,17 +38,8 @@ function TaskInput (props: TaskInputProps) {
 
   const handleBlur = async () => {
     if (inputRef.current?.value === '' && !isLast && todo?.id) {
-      const res = await service.delete({
-        url: `${getUrl()}/api/todorecord/${todo?.id}`,
-        headers: {
-          'content-type': 'application/json',
-          authorization
-        }
-      })
-      const { success } = res || {}
-      if (success) {
-        void refetch()
-      }
+      deleteTodo(connection, todo)
+      void dispatch(fetchSetupTodos())
       return
     }
     if (inputRef.current?.value === oldText) {
@@ -72,38 +60,15 @@ function TaskInput (props: TaskInputProps) {
           isMD: null,
           tags: null
         }
-        console.log('first', 0)
-
         createTodo(connection, newTodo)
-        // const res = await service.post({
-        //   url: `${getUrl()}/api/todorecord`,
-        //   data: JSON.stringify(newTodo),
-        //   headers: {
-        //     'content-type': 'application/json',
-        //     authorization
-        //   }
-        // })
-        // console.log('first2', res)
-        // if (res) {
-        //   void refetch()
-        // }
+        void dispatch(fetchSetupTodos())
       } else if (Boolean(value) && todo?.id) {
         const newTodo = {
           id: todo.id,
           text: value as string
         }
-
-        const res = await service.put({
-          url: `${getUrl()}/api/todorecord/${todo?.id}`,
-          data: JSON.stringify(newTodo),
-          headers: {
-            'content-type': 'application/json',
-            authorization
-          }
-        })
-        if (res) {
-          void refetch()
-        }
+        updateTodo(connection, newTodo)
+        void dispatch(fetchSetupTodos())
       }
     } catch (e) {
       console.error('error: ', e)
@@ -119,17 +84,8 @@ function TaskInput (props: TaskInputProps) {
       ...todo,
       done: !todo.done
     }
-    const res = await service.put({
-      url: `${getUrl()}/api/todorecord/${todo.id}`,
-      data: JSON.stringify(newTodo),
-      headers: {
-        'content-type': 'application/json',
-        authorization
-      }
-    })
-    if (res) {
-      void refetch()
-    }
+    updateTodo(connection, newTodo)
+    void dispatch(fetchSetupTodos())
   }, 100)
 
   const addAndMoveNext = async () => {
