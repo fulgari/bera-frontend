@@ -1,5 +1,6 @@
 import ReconnectingWebSocket from 'reconnecting-websocket'
 import sharedb from 'sharedb/lib/client'
+import { getWsUrl } from './utils/env'
 
 // Expose a singleton WebSocket connection to ShareDB server
 // const socket = new ReconnectingWebSocket('ws://localhost:8080/', [], {
@@ -8,8 +9,7 @@ import sharedb from 'sharedb/lib/client'
 //   maxEnqueuedMessages: 0
 // })
 
-const socket = new WebSocket('ws://127.0.0.1:9001')
+const socket = new WebSocket(getWsUrl())
 const connection = new sharedb.Connection(socket)
-connection.debug = true
 
 export default connection
